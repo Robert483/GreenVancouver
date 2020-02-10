@@ -1,3 +1,11 @@
 <resources>
+    <!-- maps main -->
     <string name="app_name">GreenVancouver</string>
+    <string name="title_activity_maps">Map</string>
+
+    <!--Settings-->
+    <string name="enable_location">Enable Location</string>
+    <string name="appearance">Dark Appearance</string>
+    <string name="tos">Terms of Service</string>
+    <string name="about_us">About Us</string>
 </resources>

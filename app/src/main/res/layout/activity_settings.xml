@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity">
+
+    <!-- enable location -->
+
+    <Switch
+        android:id="@+id/location_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/enable_location"
+        android:textSize="18sp" />
+
+    <!-- appearance -->
+
+    <Switch
+        android:id="@+id/appearance_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/location_switch"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:text="@string/appearance" />
+    <TextView
+        android:id="@+id/tos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:text="@string/tos"
+        android:layout_alignBottom="@+id/about_us"/>
+    <TextView
+        android:id="@+id/about_us"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:padding="10dp"
+        android:textSize="18sp"
+        android:text="@string/about_us"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
