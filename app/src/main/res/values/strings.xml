@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">GreenVancouver</string>
+    <string name="splash_city">City</string>
+    <string name="splash_car">Car</string>
+    <string name="splash_textlogo">Text logo</string>
+    <string name="splash_copyright">© Parasinos 2020\nSponsored by City of Vancouver</string>
 </resources>
