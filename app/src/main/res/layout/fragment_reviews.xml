@@ -1,8 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ReviewsFragment">
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="100dp"
+            android:paddingTop="20dp"
+            android:paddingEnd="100dp"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/txtv_averagerating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="5.0"
+                android:textSize="75sp" />
+
+            <TextView
+                android:id="@+id/txtv_totalvotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/txtv_averagerating"
+                android:layout_toEndOf="@id/txtv_averagerating"
+                android:text="(100)"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <com.willy.ratingbar.BaseRatingBar
+                android:id="@+id/simpleRatingBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtv_averagerating"
+                android:layout_centerHorizontal="true"
+                app:srb_clearRatingEnabled="false"
+                app:srb_clickable="false"
+                app:srb_drawableEmpty="@drawable/leaf_empty"
+                app:srb_drawableFilled="@drawable/leaf_filled"
+                app:srb_numStars="5"
+                app:srb_rating="3.5"
+                app:srb_scrollable="false"
+                app:srb_starHeight="35dp"
+                app:srb_starPadding="0dp"
+                app:srb_starWidth="35dp"
+                app:srb_stepSize="0.5" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+</ScrollView>
