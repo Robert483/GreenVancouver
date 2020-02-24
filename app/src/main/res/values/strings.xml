@@ -4,4 +4,10 @@
     <string name="splash_car">Car</string>
     <string name="splash_textlogo">Text logo</string>
     <string name="splash_copyright">© Parasinos 2020\nSponsored by City of Vancouver</string>
+
+    <string-array name="projectinfo_tabs">
+        <item>Details</item>
+        <item>Reviews</item>
+        <item>Volunteering</item>
+    </string-array>
 </resources>
