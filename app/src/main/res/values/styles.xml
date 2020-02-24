@@ -19,6 +19,7 @@
 
     <style name="FragmentLayouts">
         <item name="android:layout_margin">@dimen/frag_margin</item>
+        <item name="android:textSize">@dimen/label_size</item>
     </style>
 
 </resources>

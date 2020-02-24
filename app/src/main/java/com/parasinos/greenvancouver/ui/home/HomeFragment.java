@@ -1,9 +1,11 @@
 package com.parasinos.greenvancouver.ui.home;
 
 import android.os.Bundle;
+import android.service.autofill.OnClickAction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -31,5 +33,8 @@ public class HomeFragment extends Fragment {
             }
         });
         return root;
+
+
     }
+
 }
