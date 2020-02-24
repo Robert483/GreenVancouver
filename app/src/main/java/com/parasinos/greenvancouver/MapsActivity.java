@@ -45,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleMap.addMarker(new MarkerOptions().position(vancouver).title("City Hall Here :D"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
         CameraPosition initPosition
-                = CameraPosition.builder().target(vancouver).zoom(10).bearing(0).tilt(45).build();
+                = CameraPosition.builder().target(vancouver).zoom(10).bearing(0).tilt(0).build();
         googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(initPosition));
     }
 }

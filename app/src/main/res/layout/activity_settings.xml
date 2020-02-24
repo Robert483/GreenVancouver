@@ -15,7 +15,7 @@
         android:padding="10dp"
         android:layout_centerHorizontal="true"
         android:text="@string/enable_location"
-        android:textSize="18sp" />
+        android:textSize="30sp" />
 
     <!-- appearance -->
 
@@ -27,7 +27,7 @@
         android:layout_margin="30dp"
         android:padding="10dp"
         android:layout_centerHorizontal="true"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:text="@string/appearance" />
     <TextView
         android:id="@+id/tos"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:padding="10dp"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:text="@string/tos"
         android:layout_alignBottom="@+id/about_us"/>
     <TextView
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:padding="10dp"
-        android:textSize="18sp"
+        android:textSize="30sp"
         android:text="@string/about_us"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>
