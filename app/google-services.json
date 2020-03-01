@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "648362499190",
+    "firebase_url": "https://greenvancouver.firebaseio.com",
+    "project_id": "greenvancouver",
+    "storage_bucket": "greenvancouver.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:648362499190:android:d456ca982bdf88765ad357",
+        "android_client_info": {
+          "package_name": "com.parasinos.greenvancouver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648362499190-lbt0ppmf6qifqh6mkmb82c4quputqa3a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parasinos.greenvancouver",
+            "certificate_hash": "27d9d21a44529f97d479deaeb286f104406a19f3"
+          }
+        },
+        {
+          "client_id": "648362499190-u40e2a22i7hr76sugfkc9uoof3k76vrs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbqzcD4zdsCHXOXUZ5zZzSt8gzFkJfbLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648362499190-u40e2a22i7hr76sugfkc9uoof3k76vrs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
