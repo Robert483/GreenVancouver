@@ -46,5 +46,11 @@
         <item>Reviews</item>
         <item>Volunteering</item>
     </string-array>
+    
+    <!-- For SignUp activity -->
+    <string name="signup_loginbtn">Login</string>
+    <string name="signup_signupbtn">Sign Up</string>
+    <string name="signup_emailhint">Enter email</string>
+    <string name="signup_passwordhint">Enter password</string>
 
 </resources>

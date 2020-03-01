@@ -19,12 +19,16 @@
     </style>
 
     <style name="NavigationViewTheme" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/colorTemp</item>
     </style>
 
     <style name="VolunteerFragmentTheme">
         <item name="android:layout_margin">@dimen/activity_margin</item>
         <item name="android:textSize">@dimen/volunteer_label_textsize</item>
+    </style>
+
+    <style name="LoginActivityTheme">
+        <item name="android:background">@color/colorTemp</item>
     </style>
 
 </resources>

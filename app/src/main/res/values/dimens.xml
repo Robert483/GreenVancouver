@@ -7,4 +7,8 @@
     <!-- For Volunteer fragment -->
     <dimen name="volunteer_label_textsize">12sp</dimen>
 
+    <!-- For SignUp/Login Activity -->
+    <dimen name="signup_input_fields">56dp</dimen>
+    <dimen name="signup_margin">32dp</dimen>
+
 </resources>
