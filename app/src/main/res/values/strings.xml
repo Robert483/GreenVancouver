@@ -1,3 +1,50 @@
 <resources>
+
+    <!-- For all -->
     <string name="app_name">GreenVancouver</string>
+    <string name="temp_float">5.0</string>
+    <string name="temp_int">100</string>
+    <string name="temp_name">Lorem I. Dolor</string>
+    <string name="temp_email">loremipsumo@dolor.sit</string>
+
+    <!-- For Splash activity -->
+    <string name="splash_city">City</string>
+    <string name="splash_car">Car</string>
+    <string name="splash_textlogo">Text logo</string>
+    <string name="splash_copyright">© Parasinos 2020\nSponsored by City of Vancouver</string>
+
+    <!-- For Main activity -->
+    <!-- For NavigationView in Main activity -->
+    <string name="main_profile">Profile picture</string>
+    <string name="main_map">Map</string>
+    <string name="main_bookmarks">Bookmarks</string>
+    <string name="main_myreviews">My Reviews</string>
+    <string name="main_settings">Settings</string>
+    <string name="main_communicate">Communicate</string>
+    <string name="main_share">Share</string>
+    <string name="main_send">Send</string>
+
+    <!-- For Volunteer fragment -->
+    <string name="volunteer_organizationname">Organization Name</string>
+    <string name="volunteer_organizationdetails">Details</string>
+    <string name="volunteer_registration">Registration Form</string>
+    <string name="volunteer_name">Name:</string>
+    <string name="volunteer_email">Email:</string>
+    <string name="volunteer_phone">Phone:</string>
+    <string name="volunteer_message">Message:</string>
+    <string name="volunteer_send">Send</string>
+
+    <!--For Settings fragment -->
+    <string name="settings_enablelocation">Enable Location</string>
+    <string name="settings_appearance">Dark Appearance</string>
+    <string name="settings_tos">Terms of Service</string>
+    <string name="settings_aboutus">About Us</string>
+
+    <!-- For ProjectInfo activity -->
+    <string-array name="projectinfo_tabs">
+        <item>Details</item>
+        <item>Reviews</item>
+        <item>Volunteering</item>
+    </string-array>
+
 </resources>

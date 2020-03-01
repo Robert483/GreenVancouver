@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashActivity">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/splash_textlogo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_50hor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/splash_im_textlogo" />
+
+    <ProgressBar
+        android:id="@+id/probar_loading"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="100dp"
+        android:progress="50"
+        android:progressTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgv_city" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_50hor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:id="@+id/imgv_city"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@string/splash_city"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="@+id/probar_loading"
+        app:layout_constraintStart_toStartOf="@+id/probar_loading"
+        app:layout_constraintTop_toBottomOf="@+id/guideline_50hor"
+        app:srcCompat="@drawable/splash_im_city" />
+
+    <ImageView
+        android:id="@+id/imgv_car"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="75dp"
+        android:contentDescription="@string/splash_car"
+        app:layout_constraintBottom_toBottomOf="@+id/probar_loading"
+        app:layout_constraintStart_toStartOf="@+id/probar_loading"
+        app:srcCompat="@drawable/splash_im_car" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:gravity="center"
+        android:text="@string/splash_copyright"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

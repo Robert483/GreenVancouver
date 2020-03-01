@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- For all -->
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
+
+    <!-- For Volunteer fragment -->
+    <dimen name="volunteer_label_textsize">12sp</dimen>
+
+</resources>

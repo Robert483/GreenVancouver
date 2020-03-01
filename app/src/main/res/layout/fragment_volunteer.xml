@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/VolunteerFragmentTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.VolunteerFragment">
+
+    <TextView
+        android:id="@+id/txtv_orgname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/volunteer_organizationname" />
+
+    <TextView
+        android:id="@+id/txtv_orgdetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/volunteer_organizationdetails" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/volunteer_registration" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@+id/txtv_volunteername"
+            android:text="@string/volunteer_name" />
+
+        <EditText
+            android:id="@+id/txtv_volunteername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/txtv_volunteeremail"
+            android:text="@string/volunteer_email" />
+
+        <EditText
+            android:id="@+id/txtv_volunteeremail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:labelFor="@id/txtv_volunteerphone"
+            android:text="@string/volunteer_phone" />
+
+        <EditText
+            android:id="@+id/txtv_volunteerphone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:importantForAutofill="no"
+            android:inputType="phone" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/txtv_volunteermessage"
+        android:text="@string/volunteer_message" />
+
+    <EditText
+        android:id="@+id/txtv_volunteermessage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/btn_send"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/volunteer_send" />
+
+</LinearLayout>
