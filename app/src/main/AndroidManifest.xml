@@ -20,7 +20,7 @@
 
         <activity
             android:name=".SplashActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/SplashActivityTheme">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,6 @@
             </intent-filter>
 
         </activity>
-
 
         <activity
             android:name=".MainActivity"

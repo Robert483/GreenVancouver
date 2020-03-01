@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="5.0"
+                android:text="@string/temp_float"
                 android:textSize="75sp" />
 
             <TextView
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/txtv_averagerating"
                 android:layout_toEndOf="@id/txtv_averagerating"
-                android:text="(100)"
+                android:text="@string/temp_int"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <com.willy.ratingbar.BaseRatingBar
@@ -44,8 +44,8 @@
                 android:layout_centerHorizontal="true"
                 app:srb_clearRatingEnabled="false"
                 app:srb_clickable="false"
-                app:srb_drawableEmpty="@drawable/leaf_empty"
-                app:srb_drawableFilled="@drawable/leaf_filled"
+                app:srb_drawableEmpty="@drawable/reviews_ic_leafempty"
+                app:srb_drawableFilled="@drawable/reviews_ic_leaffilled"
                 app:srb_numStars="5"
                 app:srb_rating="3.5"
                 app:srb_scrollable="false"
@@ -59,4 +59,5 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
 </ScrollView>

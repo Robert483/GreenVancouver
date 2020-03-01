@@ -2,19 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorPrimary"
     android:orientation="vertical"
     android:padding="@dimen/activity_margin"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    android:theme="@style/NavigationViewTheme">
 
     <ImageView
         android:id="@+id/imgv_profilepicture"
         android:layout_width="108dp"
         android:layout_height="108dp"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/nav_profile"
+        android:contentDescription="@string/main_profile"
         android:paddingTop="@dimen/widget_margin"
-        android:src="@drawable/app_placeholder" />
+        android:src="@drawable/app_im_placeholder" />
 
     <TextView
         android:id="@+id/txtv_username"
@@ -29,4 +28,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temp_email" />
+
 </LinearLayout>

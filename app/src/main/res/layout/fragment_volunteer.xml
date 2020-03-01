@@ -1,65 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/VolunteerFragmentTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.VolunteerFragment"
     android:orientation="vertical"
-    style="@style/FragmentLayouts">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/orgName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/organization_name" />
+    tools:context=".fragments.VolunteerFragment">
 
     <TextView
-        android:id="@+id/orgDetails"
+        android:id="@+id/txtv_orgname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/organization_details" />
+        android:text="@string/volunteer_organizationname" />
 
     <TextView
-        android:id="@+id/registrationLabel"
+        android:id="@+id/txtv_orgdetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/registration_label" />
+        android:text="@string/volunteer_organizationdetails" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/volunteer_registration" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/volunteerNameLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/name_label"/>
+            android:labelFor="@+id/txtv_volunteername"
+            android:text="@string/volunteer_name" />
 
         <EditText
-            android:id="@+id/volunteerName"
+            android:id="@+id/txtv_volunteername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Name" />
+            android:importantForAutofill="no"
+            android:inputType="textPersonName" />
 
     </LinearLayout>
 
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/volunteerEmailLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/email_label"/>
+            android:labelFor="@id/txtv_volunteeremail"
+            android:text="@string/volunteer_email" />
+
         <EditText
-            android:id="@+id/volunteerEmail"
+            android:id="@+id/txtv_volunteeremail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress" />
 
     </LinearLayout>
@@ -67,42 +67,43 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <TextView
-            android:id="@+id/volunteerPhoneLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/phone_label"/>
+            android:labelFor="@id/txtv_volunteerphone"
+            android:text="@string/volunteer_phone" />
 
         <EditText
-            android:id="@+id/volunteerPhone"
+            android:id="@+id/txtv_volunteerphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:importantForAutofill="no"
             android:inputType="phone" />
 
     </LinearLayout>
+
     <TextView
-        android:id="@+id/volunteerMessageLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/message_label"/>
-
+        android:labelFor="@id/txtv_volunteermessage"
+        android:text="@string/volunteer_message" />
 
     <EditText
-        android:id="@+id/volunteerMessage"
+        android:id="@+id/txtv_volunteermessage"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine"
-        />
+        android:importantForAutofill="no"
+        android:inputType="textMultiLine" />
 
     <Button
-        android:id="@+id/sendButton"
+        android:id="@+id/btn_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/send_button_label" />
-
+        android:text="@string/volunteer_send" />
 
 </LinearLayout>

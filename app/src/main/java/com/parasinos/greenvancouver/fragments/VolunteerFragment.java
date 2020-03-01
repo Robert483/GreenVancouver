@@ -18,7 +18,7 @@ public class VolunteerFragment extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 
-    public static VolunteerFragment newInstance(String param1, String param2) {
+    public static VolunteerFragment newInstance(/*String param1, String param2*/) {
         VolunteerFragment fragment = new VolunteerFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);

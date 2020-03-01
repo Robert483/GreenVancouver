@@ -25,11 +25,11 @@ public class ProjectInfoActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tabl_info);
         new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            String[] titles = getResources().getStringArray(R.array.projectinfo_tabs);
+            private final String[] TITLES = getResources().getStringArray(R.array.projectinfo_tabs);
 
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(titles[position]);
+                tab.setText(TITLES[position]);
                 viewPager.setCurrentItem(position);
             }
         }).attach();

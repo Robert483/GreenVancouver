@@ -3,6 +3,8 @@ package com.parasinos.greenvancouver.adapters;
 import com.parasinos.greenvancouver.fragments.ReviewsFragment;
 import com.parasinos.greenvancouver.fragments.VolunteerFragment;
 
+import java.security.InvalidParameterException;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -20,11 +22,14 @@ public class ProjectInfoAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return VolunteerFragment.newInstance("test", "test");
+                throw new UnsupportedOperationException("Not implemented");
             case 1:
-                return ReviewsFragment.newInstance("test", "test");
+                return ReviewsFragment.newInstance();
+            case 2:
+                return VolunteerFragment.newInstance();
+            default:
+                throw new InvalidParameterException("Position is not valid");
         }
-        return VolunteerFragment.newInstance("test", "test");
     }
 
     @Override

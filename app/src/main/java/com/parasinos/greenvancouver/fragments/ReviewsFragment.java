@@ -18,7 +18,7 @@ public class ReviewsFragment extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 
-    public static ReviewsFragment newInstance(String param1, String param2) {
+    public static ReviewsFragment newInstance(/*String param1, String param2*/) {
         ReviewsFragment fragment = new ReviewsFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
