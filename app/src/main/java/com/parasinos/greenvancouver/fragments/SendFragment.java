@@ -1,4 +1,4 @@
-package com.parasinos.greenvancouver.ui.tools;
+package com.parasinos.greenvancouver.fragments;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +14,10 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.parasinos.greenvancouver.R;
 
-public class ToolsFragment extends Fragment {
-
-    private ToolsViewModel toolsViewModel;
+public class SendFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_send, container, false);
     }
 }

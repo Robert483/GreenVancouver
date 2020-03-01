@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_map"
+            android:icon="@drawable/main_menu_map"
+            android:title="@string/main_map" />
+        <item
+            android:id="@+id/item_bookmarks"
+            android:icon="@drawable/main_menu_bookmarks"
+            android:title="@string/main_bookmarks" />
+        <item
+            android:id="@+id/item_myreviews"
+            android:icon="@drawable/main_menu_my_reviews"
+            android:title="@string/main_myreviews" />
+        <item
+            android:id="@+id/item_settings"
+            android:icon="@drawable/main_menu_settings"
+            android:title="@string/main_settings" />
+    </group>
+
+    <item android:title="@string/main_communicate">
+        <menu>
+            <item
+                android:id="@+id/item_share"
+                android:icon="@drawable/main_menu_share"
+                android:title="@string/main_share" />
+            <item
+                android:id="@+id/item_send"
+                android:icon="@drawable/main_menu_send"
+                android:title="@string/main_send" />
+        </menu>
+    </item>
+
+</menu>

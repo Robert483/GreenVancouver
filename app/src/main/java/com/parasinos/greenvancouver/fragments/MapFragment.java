@@ -1,17 +1,13 @@
-package com.parasinos.greenvancouver.ui.home;
+package com.parasinos.greenvancouver.fragments;
 
 import android.os.Bundle;
-import android.service.autofill.OnClickAction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -23,16 +19,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parasinos.greenvancouver.R;
 
-public class HomeFragment extends Fragment implements OnMapReadyCallback {
-
-    private HomeViewModel homeViewModel;
+public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        return root;
+        return inflater.inflate(R.layout.fragment_map, container, false);
     }
 
     @Override
@@ -42,21 +33,11 @@ public class HomeFragment extends Fragment implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
-
-        getView().findViewById(R.id.map).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: do launch acitivity
-            }
-        });
-
-
         super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         // Add a marker in Sydney and move the camera
         LatLng vancouver = new LatLng(49.2827, -123.1207);
         googleMap.addMarker(new MarkerOptions().position(vancouver).title("City Hall Here :D"));
