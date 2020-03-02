@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:outlineProvider="bounds"
     tools:context=".fragments.ReviewsFragment">
 
     <LinearLayout
@@ -14,50 +15,208 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="100dp"
-            android:paddingTop="20dp"
-            android:paddingEnd="100dp"
-            android:paddingBottom="20dp">
+            android:layout_margin="@dimen/activity_margin">
 
             <TextView
-                android:id="@+id/txtv_averagerating"
+                android:id="@+id/txtv_average"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif-medium"
+                android:includeFontPadding="false"
                 android:text="@string/temp_float"
-                android:textSize="75sp" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+                android:textColor="@color/material_on_background_emphasis_high_type" />
 
             <TextView
-                android:id="@+id/txtv_totalvotes"
+                android:id="@+id/txtv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@id/txtv_averagerating"
-                android:layout_toEndOf="@id/txtv_averagerating"
+                android:layout_alignBaseline="@id/txtv_average"
+                android:layout_toEndOf="@id/txtv_average"
                 android:text="@string/temp_int"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.willy.ratingbar.BaseRatingBar
-                android:id="@+id/simpleRatingBar"
-                android:layout_width="match_parent"
+                android:id="@+id/ratingbar_average"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/txtv_averagerating"
+                android:layout_below="@id/txtv_average"
                 android:layout_centerHorizontal="true"
                 app:srb_clearRatingEnabled="false"
                 app:srb_clickable="false"
                 app:srb_drawableEmpty="@drawable/reviews_ic_leafempty"
                 app:srb_drawableFilled="@drawable/reviews_ic_leaffilled"
-                app:srb_numStars="5"
-                app:srb_rating="3.5"
                 app:srb_scrollable="false"
-                app:srb_starHeight="35dp"
-                app:srb_starPadding="0dp"
-                app:srb_starWidth="35dp"
-                app:srb_stepSize="0.5" />
+                app:srb_starHeight="32dp"
+                app:srb_starPadding="4dp"
+                app:srb_starWidth="32dp" />
+
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="1dp"
+            android:background="@color/colorDivider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_margin"
+            android:layout_marginVertical="@dimen/widget_margin"
+            android:text="@string/reviews_yours"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/widget_margin"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/imgv_profilepicture"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="@dimen/widget_margin"
+                    android:contentDescription="@string/app_profile"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/app_im_placeholder" />
+
+                <TextView
+                    android:id="@+id/txtv_username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/widget_margin"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/temp_name"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    android:textColor="@color/material_on_background_emphasis_high_type" />
+
+                <com.willy.ratingbar.RotationRatingBar
+                    android:id="@+id/ratingbar_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_drawableEmpty="@drawable/reviews_ic_leafempty"
+                    app:srb_drawableFilled="@drawable/reviews_ic_leaffilled"
+                    app:srb_starHeight="20dp"
+                    app:srb_starPadding="3dp"
+                    app:srb_starWidth="20dp" />
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/widget_margin">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edttxt_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:hint="@string/reviews_reviewhint"
+                    android:inputType="textMultiLine"
+                    android:minLines="3" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/txtv_review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/widget_margin"
+                android:text="@string/temp_text"
+                android:textColor="@color/material_on_background_emphasis_high_type"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/activity_margin"
+                android:gravity="end">
+
+                <ImageButton
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_margin="@dimen/widget_margin"
+                    android:background="@drawable/app_sh_rounded_button"
+                    android:contentDescription="@string/app_cancel"
+                    android:src="@drawable/app_ic_clear"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_save"
+                    style="@style/ReviewsButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/app_ic_save"
+                    android:text="@string/app_save"
+                    android:visibility="gone"
+                    tools:ignore="RtlHardcoded" />
+
+                <Button
+                    android:id="@+id/btn_edit"
+                    style="@style/ReviewsButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/app_ic_edit"
+                    android:text="@string/app_edit"
+                    android:visibility="gone"
+                    tools:ignore="RtlHardcoded" />
+
+                <Button
+                    android:id="@+id/btn_send"
+                    style="@style/ReviewsButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/app_ic_publish"
+                    android:text="@string/app_send"
+                    tools:ignore="RtlHardcoded" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorDivider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_margin"
+            android:layout_marginVertical="@dimen/widget_margin"
+            android:text="@string/reviews_others"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
+
+        <TextView
+            android:id="@+id/txtv_noreviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/activity_margin"
+            android:layout_marginVertical="@dimen/widget_margin"
+            android:gravity="center"
+            android:text="@string/reviews_noreviews"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/material_on_background_emphasis_high_type" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ryclerv_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone" />
+
     </LinearLayout>
 
 </ScrollView>

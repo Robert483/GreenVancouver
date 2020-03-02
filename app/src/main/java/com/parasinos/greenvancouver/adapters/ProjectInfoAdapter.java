@@ -22,7 +22,6 @@ public class ProjectInfoAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                throw new UnsupportedOperationException("Not implemented");
             case 1:
                 return ReviewsFragment.newInstance();
             case 2:

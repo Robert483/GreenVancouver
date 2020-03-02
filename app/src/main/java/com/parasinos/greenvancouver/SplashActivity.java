@@ -19,5 +19,12 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(new Intent(SplashActivity.this, MainActivity.class));
             }
         });
+
+        findViewById(R.id.imgv_car).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SplashActivity.this, ProjectInfoActivity.class));
+            }
+        });
     }
 }

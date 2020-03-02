@@ -31,7 +31,7 @@
             <item
                 android:id="@+id/item_send"
                 android:icon="@drawable/main_menu_send"
-                android:title="@string/main_send" />
+                android:title="@string/app_send" />
         </menu>
     </item>
 

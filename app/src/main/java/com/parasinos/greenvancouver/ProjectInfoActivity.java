@@ -1,13 +1,11 @@
 package com.parasinos.greenvancouver;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
 import com.parasinos.greenvancouver.adapters.ProjectInfoAdapter;
 
 public class ProjectInfoActivity extends AppCompatActivity {
@@ -24,14 +22,21 @@ public class ProjectInfoActivity extends AppCompatActivity {
         viewPager.setUserInputEnabled(false);
 
         TabLayout tabLayout = findViewById(R.id.tabl_info);
-        new TabLayoutMediator(tabLayout, viewPager, new TabLayoutMediator.TabConfigurationStrategy() {
-            private final String[] TITLES = getResources().getStringArray(R.array.projectinfo_tabs);
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
 
             @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(TITLES[position]);
-                viewPager.setCurrentItem(position);
+            public void onTabUnselected(TabLayout.Tab tab) {
+                // Nothing
             }
-        }).attach();
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                // Nothing
+            }
+        });
     }
 }
