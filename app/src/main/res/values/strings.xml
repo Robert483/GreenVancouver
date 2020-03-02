@@ -47,4 +47,6 @@
         <item>Volunteering</item>
     </string-array>
 
+    <!-- For Map fragment -->
+    <string name="map_api_url">https://opendata.vancouver.ca/api/records/1.0/search/?dataset=greenest-city-projects&amp;q=%s&amp;&amp;rows=3</string>
 </resources>
