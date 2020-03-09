@@ -40,10 +40,6 @@ public class Project {
         return recordTimestamp;
     }
 
-    public String getMapID(){
-        return this.field.getMapID();
-    }
-
     @NonNull
     @Override
     public String toString() {

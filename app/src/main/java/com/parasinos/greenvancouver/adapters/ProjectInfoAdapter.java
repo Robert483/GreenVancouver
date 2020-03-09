@@ -1,5 +1,6 @@
 package com.parasinos.greenvancouver.adapters;
 
+import com.parasinos.greenvancouver.fragments.DetailsFragment;
 import com.parasinos.greenvancouver.fragments.ReviewsFragment;
 import com.parasinos.greenvancouver.fragments.VolunteerFragment;
 
@@ -22,7 +23,7 @@ public class ProjectInfoAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                throw new UnsupportedOperationException("Not implemented");
+                return DetailsFragment.newInstance();
             case 1:
                 return ReviewsFragment.newInstance();
             case 2:

@@ -6,22 +6,26 @@ import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.parasinos.greenvancouver.fragments.MapFragment;
 import com.parasinos.greenvancouver.handlers.HttpHandler;
 import com.parasinos.greenvancouver.models.APIRetrieval;
+import com.parasinos.greenvancouver.models.Project;
 
 import java.lang.ref.WeakReference;
+import java.util.List;
 
 /**
  * Async task class to get json by making HTTP call
  */
-public class MapMarkerGenerator extends AsyncTask<Void, Void, Void> {
-    private WeakReference<Activity> activity;
+public class MapMarkerGenerator extends AsyncTask<Void, Void, List<Project>> {
+    private WeakReference<MapFragment> fragment;
     private String url;
 
-    public MapMarkerGenerator(Activity activity, String url) {
-        this.activity = new WeakReference<>(activity);
+    public MapMarkerGenerator(MapFragment fragment, String url) {
+        this.fragment = new WeakReference<>(fragment);
         this.url = url;
     }
 
@@ -31,7 +35,7 @@ public class MapMarkerGenerator extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected Void doInBackground(Void... arg0) {
+    protected List<Project> doInBackground(Void... arg0) {
         HttpHandler sh = new HttpHandler();
 
         // Making a request to url and getting response
@@ -40,9 +44,13 @@ public class MapMarkerGenerator extends AsyncTask<Void, Void, Void> {
         if (jsonStr != null) {
             Gson gson = new Gson();
             APIRetrieval responses = gson.fromJson(jsonStr, APIRetrieval.class);
-            MapFragment.projectList = responses.getRecords();
+            return responses.getRecords();
         } else {
-            final Activity activity = this.activity.get();
+            final Activity activity = this.fragment.get().getActivity();
+            if (activity == null) {
+                return null;
+            }
+
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -58,8 +66,9 @@ public class MapMarkerGenerator extends AsyncTask<Void, Void, Void> {
     }
 
     @Override
-    protected void onPostExecute(Void result) {
+    protected void onPostExecute(List<Project> result) {
         super.onPostExecute(result);
+        this.fragment.get().updateMarkers(result);
 
     }
 }

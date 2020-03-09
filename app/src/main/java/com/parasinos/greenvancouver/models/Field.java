@@ -55,6 +55,9 @@ public class Field {
     @Expose
     private String mapID = null;
 
+    public String getMapID() {
+        return mapID;
+    }
 
     @SerializedName("geom")
     @Expose
