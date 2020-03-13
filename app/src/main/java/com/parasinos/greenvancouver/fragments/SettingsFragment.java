@@ -12,8 +12,14 @@ import com.parasinos.greenvancouver.R;
 
 public class SettingsFragment extends Fragment {
 
+    private int maxNumResult = 0;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_settings, container, false);
+    }
+
+    public int getMaxNumResult() {
+        return maxNumResult;
     }
 }

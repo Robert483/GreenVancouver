@@ -32,6 +32,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
     private GoogleMap googleMap;
     private List<Marker> markers;
     private List<String> mapIDList;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_map, container, false);
@@ -53,9 +54,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         int numRecords = 10;
         String service_url = getString(R.string.map_api_url, query, numRecords);
         new MapMarkerGenerator(this, service_url).execute();
-//        for (Marker marker : markers){
-//            marker.on
-//        }
+
     }
 
 
@@ -65,24 +64,23 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         this.googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                String mapID ="";
-                for (int i = 0; i < markers.size(); i++){
-                    if (marker.equals(markers.get(i))){
+                String mapID = "";
+                for (int i = 0; i < markers.size(); i++) {
+                    if (marker.equals(markers.get(i))) {
                         mapID = mapIDList.get(i);
                     }
                 }
+                // pass mapID of the selected project to ProjectInfoActivity
                 Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
                 intent.putExtra("mapID", mapID);
-                marker.showInfoWindow();
-                return false;
+//                marker.showInfoWindow();
+                startActivity(intent);
+                return true;
             }
         });
 
         LatLng vancouver = new LatLng(49.2827, -123.1207);
-        this.googleMap.addMarker(new MarkerOptions().position(vancouver).title("City Hall"));
         this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
-        this.googleMap.addMarker(new MarkerOptions().position(new LatLng(49.2276, -123.0076)).title("MetroTown"));
-
         CameraPosition initPosition
                 = CameraPosition.builder().target(vancouver).zoom(12).bearing(0).tilt(0).build();
         this.googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(initPosition));
@@ -100,12 +98,5 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             markers.add(marker);
         }
     }
-
-//
-//    public boolean onMarkerClick(Marker marker) {
-//        Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
-//        marker.showInfoWindow();
-//        return false;
-//    }
 
 }

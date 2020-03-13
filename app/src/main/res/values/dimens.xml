@@ -3,8 +3,17 @@
     <!-- For all -->
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="margin_lvl1">40dp</dimen>
+    <dimen name="margin_lvl2">30dp</dimen>
+    <dimen name="margin_lvl3">20dp</dimen>
+    <dimen name="margin_lvl4">10dp</dimen>
 
     <!-- For Volunteer fragment -->
     <dimen name="volunteer_label_textsize">12sp</dimen>
+
+    <!-- For Details fragment -->
+    <dimen name="details_share_icon">50dp</dimen>
+
+
 
 </resources>

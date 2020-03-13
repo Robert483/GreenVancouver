@@ -3,7 +3,6 @@ package com.parasinos.greenvancouver.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-// MAPID;NAME;CATEGORY1;CATEGORY2;ADDRESS;SHORT_DESCRIPTION;URL;URL2;URL3;Geom;Geo Local Area
 public class Field {
     @SerializedName("category1")
     @Expose

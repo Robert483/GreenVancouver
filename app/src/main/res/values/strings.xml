@@ -2,10 +2,16 @@
 
     <!-- For all -->
     <string name="app_name">GreenVancouver</string>
+    <string name="app_profile">Profile picture</string>
+    <string name="app_send">Send</string>
+    <string name="app_edit">Edit</string>
+    <string name="app_save">Save</string>
+    <string name="app_cancel">Cancel</string>
     <string name="temp_float">5.0</string>
     <string name="temp_int">100</string>
     <string name="temp_name">Lorem I. Dolor</string>
     <string name="temp_email">loremipsumo@dolor.sit</string>
+    <string name="temp_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend nulla mauris, quis lobortis velit suscipit ut. Vivamus tempor blandit rutrum. Etiam dapibus elit a facilisis tincidunt. Morbi in euismod enim. Curabitur at efficitur urna. Nunc ullamcorper, magna sit amet varius pharetra, ante justo condimentum nunc, eget congue turpis ligula sed risus.</string>
 
     <!-- For Splash activity -->
     <string name="splash_city">City</string>
@@ -15,14 +21,12 @@
 
     <!-- For Main activity -->
     <!-- For NavigationView in Main activity -->
-    <string name="main_profile">Profile picture</string>
     <string name="main_map">Map</string>
     <string name="main_bookmarks">Bookmarks</string>
     <string name="main_myreviews">My Reviews</string>
     <string name="main_settings">Settings</string>
     <string name="main_communicate">Communicate</string>
     <string name="main_share">Share</string>
-    <string name="main_send">Send</string>
 
     <!-- For Volunteer fragment -->
     <string name="volunteer_organizationname">Organization Name</string>
@@ -37,18 +41,31 @@
     <!--For Settings fragment -->
     <string name="settings_enablelocation">Enable Location</string>
     <string name="settings_appearance">Dark Appearance</string>
-    <string name="settings_tos">Terms of Service</string>
-    <string name="settings_aboutus">About Us</string>
+    <string name="settings_tos"><u>Terms of Service</u></string>
+    <string name="settings_aboutus"><u>About Us</u></string>
 
     <!-- For ProjectInfo activity -->
-    <string-array name="projectinfo_tabs">
-        <item>Details</item>
-        <item>Reviews</item>
-        <item>Volunteering</item>
-    </string-array>
+    <string name="projectinfo_details">Details</string>
+    <string name="projectinfo_reviews">Reviews</string>
+    <string name="projectinfo_volunteering">Volunteering</string>
+
+    <!-- For Details Fragment -->
+    <string name="details_nameDummy">Green Vancouver Project Name</string>
+    <string name="details_categoryLabel">Category: </string>
+    <string name="details_typeLabel">Type: </string>
+    <string name="details_addressLabel">Address: </string>
+    <string name="details_descriptionLabel">Description: </string>
+    <string name="details_websiteLabel">Website: </string>
+    <string name="details_imageDesc">Image Gallery</string>
+
+
+    <!-- For Reviews Fragment -->
+    <string name="reviews_yours">Your review</string>
+    <string name="reviews_others">Other reviews</string>
+    <string name="reviews_reviewhint">Share your feedback with the project owner</string>
+    <string name="reviews_noreviews">There are no reviews currently.\nBe the first to do so.</string>
 
     <!-- For Map fragment -->
     <string name="map_api_url">https://opendata.vancouver.ca/api/records/1.0/search/?dataset=greenest-city-projects&amp;q=%s&amp;&amp;rows=%d</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
