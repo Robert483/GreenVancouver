@@ -7,91 +7,76 @@
     tools:context=".SignUpActivity"
     style="@style/LoginActivityTheme">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="@dimen/signup_margin"
+        android:paddingTop="@dimen/signup_margin"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/splash_im_textlogo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/signup_margin"
         android:layout_marginRight="@dimen/signup_margin"
-        android:background="#98ffffff"
+        android:orientation="vertical"
         android:padding="@dimen/activity_margin"
-        android:orientation="vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
+            android:id="@+id/signup_name"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/signup_input_fields">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/signup_margin"
+            android:background="#90ffffff"
+            android:hint="@string/signup_name"
+            android:padding="@dimen/activity_margin" />
 
-            <EditText
-                android:id="@+id/signup_email"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/signup_emailhint"/>
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <EditText
+            android:id="@+id/signup_email"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/signup_input_fields">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/signup_margin"
+            android:background="#90ffffff"
+            android:hint="@string/login_emailhint"
+            android:padding="@dimen/activity_margin" />
 
-            <EditText
-                android:id="@+id/signup_password"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/signup_passwordhint"
-                android:inputType="textPassword"/>
+        <EditText
+            android:id="@+id/signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/signup_margin"
+            android:background="#90ffffff"
+            android:hint="@string/login_passwordhint"
+            android:inputType="textPassword"
+            android:padding="@dimen/activity_margin" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+        <EditText
+            android:id="@+id/signup_confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#90ffffff"
+            android:hint="@string/signup_confirm_password"
+            android:inputType="textPassword"
+            android:padding="@dimen/activity_margin" />
 
         <Button
             android:id="@+id/signup_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/signup_input_fields"
             android:layout_marginTop="@dimen/signup_margin"
-            android:text="@string/signup_signupbtn"/>
+            android:text="@string/login_signupbtn" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="@dimen/activity_margin">
-
-            <TextView
-                android:id="@+id/signup_or_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:text="OR"
-                android:textColor="#000000"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_toLeftOf="@id/signup_or_label"
-                android:background="#000000" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/activity_margin"
-                android:layout_toRightOf="@id/signup_or_label"
-                android:background="#000000" />
-
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/signup_login_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/signup_input_fields"
-            android:layout_marginTop="@dimen/activity_margin"
-            android:text="@string/signup_loginbtn" />
 
     </LinearLayout>
 

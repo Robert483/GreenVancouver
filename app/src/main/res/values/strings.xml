@@ -23,6 +23,8 @@
     <string name="main_communicate">Communicate</string>
     <string name="main_share">Share</string>
     <string name="main_send">Send</string>
+    <string name="main_login">Login/Sign Up</string>
+    <string name="main_logout">Logout</string>
 
     <!-- For Volunteer fragment -->
     <string name="volunteer_organizationname">Organization Name</string>
@@ -46,11 +48,15 @@
         <item>Reviews</item>
         <item>Volunteering</item>
     </string-array>
-    
-    <!-- For SignUp activity -->
-    <string name="signup_loginbtn">Login</string>
-    <string name="signup_signupbtn">Sign Up</string>
-    <string name="signup_emailhint">Enter email</string>
-    <string name="signup_passwordhint">Enter password</string>
+
+    <!-- For Login activity -->
+    <string name="login_loginbtn">Login</string>
+    <string name="login_signupbtn">Sign Up</string>
+    <string name="login_emailhint">Email</string>
+    <string name="login_passwordhint">Password</string>
+    <string name="bookmarks_title">Bookmarks</string>
+    <string name="bookmarks_warning">Please sign in to view your bookmarks.</string>
+    <string name="signup_confirm_password">Confirm Password</string>
+    <string name="signup_name"><![CDATA[First & Last Name]]></string>
 
 </resources>

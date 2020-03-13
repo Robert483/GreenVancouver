@@ -20,13 +20,14 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText loginEmail, loginPassword;
-    private Button loginBtn;
+    private Button loginBtn, signupBtn;
 
     private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -38,7 +39,19 @@ public class LoginActivity extends AppCompatActivity {
                 loginUserAccount();
             }
         });
+
+        signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+                String email = loginEmail.getText().toString();
+
+                i.putExtra("email", email);
+                startActivity(i);
+            }
+        });
     }
+
 
     private void loginUserAccount() {
 
@@ -79,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         loginPassword = findViewById(R.id.login_password);
 
         loginBtn = findViewById(R.id.login_btn);
+        signupBtn = findViewById(R.id.login_signup_btn);
     }
 }
 
