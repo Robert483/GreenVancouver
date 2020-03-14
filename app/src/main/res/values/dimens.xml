@@ -13,6 +13,7 @@
 
     <!-- For Details fragment -->
     <dimen name="details_share_icon">50dp</dimen>
+    <dimen name="details_attribute_col">200dp</dimen>
 
 
 

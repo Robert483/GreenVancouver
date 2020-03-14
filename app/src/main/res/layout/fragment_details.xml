@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:outlineProvider="bounds"
     tools:context=".fragments.DetailsFragment">
 
@@ -15,7 +15,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_lvl4"
+            android:padding="@dimen/margin_lvl4"
             android:orientation="vertical">
 
             <TextView
@@ -46,78 +46,88 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/margin_lvl4"
                 android:layout_marginBottom="@dimen/margin_lvl1"
                 android:orientation="vertical">
 
                 <!-- Category -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    style="@style/DetailsTableStyle">
 
                     <TextView
                         android:id="@+id/tv_categoryLabel"
-                        style="@style/DetailsText"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/details_categoryLabel"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableStart="@drawable/ic_category_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_projectCategory"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/margin_lvl4"
                         android:layout_weight="1" />
 
                 </LinearLayout>
 
                 <!-- Type -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    style="@style/DetailsTableStyle">
 
                     <TextView
                         android:id="@+id/tv_typeLabel"
-                        style="@style/DetailsText"
-
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/details_typeLabel"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableStart="@drawable/ic_type_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_projectType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/margin_lvl4"
                         android:layout_weight="1" />
 
                 </LinearLayout>
 
                 <!-- Address -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    style="@style/DetailsTableStyle">
 
                     <TextView
                         android:id="@+id/tv_addressLabel"
-                        style="@style/DetailsText"
-
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/details_addressLabel"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableStart="@drawable/ic_location_on_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_projectAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/margin_lvl4"
                         android:layout_weight="1" />
 
 
@@ -125,48 +135,54 @@
 
                 <!-- Description -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    style="@style/DetailsTableStyle">
 
                     <TextView
                         android:id="@+id/tv_descLabel"
-                        style="@style/DetailsText"
-
-                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/details_descriptionLabel"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableStart="@drawable/ic_description_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_projectDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/margin_lvl4"
                         android:layout_weight="1" />
 
                 </LinearLayout>
 
                 <!-- Website -->
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    style="@style/DetailsTableStyle">
 
                     <TextView
                         android:id="@+id/tv_websiteLabel"
-                        style="@style/DetailsText"
-
-                        android:layout_width="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+                        android:layout_width="45dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/details_websiteLabel"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableStart="@drawable/ic_website_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tv_website"
+                        android:id="@+id/tv_projectWebsite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="@dimen/margin_lvl4"
                         android:layout_weight="1" />
 
                 </LinearLayout>
@@ -179,15 +195,16 @@
         <View
             android:id="@+id/divider2"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="2dp"
             android:background="?android:attr/listDivider" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_lvl3"
             android:layout_marginTop="@dimen/margin_lvl1"
-            android:orientation="horizontal">
+            android:layout_marginBottom="@dimen/margin_lvl2"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"

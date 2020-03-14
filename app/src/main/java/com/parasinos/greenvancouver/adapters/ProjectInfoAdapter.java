@@ -14,8 +14,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ProjectInfoAdapter extends FragmentStateAdapter {
 
-    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    private String mapId;
+    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String mapID) {
         super(fragmentManager, lifecycle);
+        this.mapId = mapID;
     }
 
     @NonNull
@@ -23,7 +25,7 @@ public class ProjectInfoAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return DetailsFragment.newInstance();
+                return DetailsFragment.newInstance(mapId);
             case 1:
                 return ReviewsFragment.newInstance();
             case 2:

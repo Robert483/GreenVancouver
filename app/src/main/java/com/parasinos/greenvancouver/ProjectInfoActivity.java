@@ -11,14 +11,14 @@ import com.parasinos.greenvancouver.adapters.ProjectInfoAdapter;
 
 public class ProjectInfoActivity extends AppCompatActivity {
 
-    public String mapID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_info);
 
-        ProjectInfoAdapter adapter = new ProjectInfoAdapter(getSupportFragmentManager(), getLifecycle());
+        String mapID = getIntent().getStringExtra("mapID");
+        ProjectInfoAdapter adapter = new ProjectInfoAdapter(getSupportFragmentManager(), getLifecycle(), mapID);
 
         final ViewPager2 viewPager = findViewById(R.id.vpager_info);
         viewPager.setAdapter(adapter);
@@ -42,10 +42,6 @@ public class ProjectInfoActivity extends AppCompatActivity {
             }
         });
 
-        mapID = (new Intent()).getStringExtra("mapID");
-    }
 
-    public String getMapID() {
-        return mapID;
     }
 }

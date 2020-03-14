@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.parasinos.greenvancouver.fragments.MapFragment;
+import com.parasinos.greenvancouver.fragments.DetailsFragment;
 import com.parasinos.greenvancouver.handlers.HttpHandler;
 import com.parasinos.greenvancouver.models.APIRetrieval;
 import com.parasinos.greenvancouver.models.Project;
@@ -13,14 +13,12 @@ import com.parasinos.greenvancouver.models.Project;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
-/**
- * Async task class to get json by making HTTP call
- */
-public class MapMarkerGenerator extends AsyncTask<Void, Void, List<Project>> {
-    private WeakReference<MapFragment> fragment;
+public class SimpleRetrieval extends AsyncTask<Void, Void, List<Project>> {
+
+    private WeakReference<DetailsFragment> fragment;
     private String url;
 
-    public MapMarkerGenerator(MapFragment fragment, String url) {
+    public SimpleRetrieval(DetailsFragment fragment, String url) {
         this.fragment = new WeakReference<>(fragment);
         this.url = url;
     }
@@ -64,11 +62,7 @@ public class MapMarkerGenerator extends AsyncTask<Void, Void, List<Project>> {
     @Override
     protected void onPostExecute(List<Project> result) {
         super.onPostExecute(result);
-        this.fragment.get().updateMarkers(result);
+        this.fragment.get().updateProjectInfo(result);
 
     }
 }
-
-
-
-

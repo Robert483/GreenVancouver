@@ -38,7 +38,7 @@
     <style name="SettingTextStyle" parent="TextAppearance.AppCompat">
         <item name="android:layout_marginStart">10sp</item>
         <item name="android:layout_marginTop">15dp</item>
-        <item name="android:titleMarginBottom">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:textSize">20sp</item>
     </style>
@@ -55,10 +55,9 @@
         <item name="android:textColor">@color/colorAccent</item>
     </style>
 
-    <style name="DetailsText" parent="TextAppearance.AppCompat">
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:titleMarginBottom">5dp</item>
-        <item name="android:textSize">20sp</item>
+    <style name="DetailsTableStyle">
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
     </style>
 
 </resources>

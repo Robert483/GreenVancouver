@@ -57,6 +57,7 @@
     <string name="details_descriptionLabel">Description: </string>
     <string name="details_websiteLabel">Website: </string>
     <string name="details_imageDesc">Image Gallery</string>
+    <string name="details_api_url">https://opendata.vancouver.ca/api/records/1.0/search/?dataset=greenest-city-projects&amp;refine.mapid=%s</string>
 
 
     <!-- For Reviews Fragment -->

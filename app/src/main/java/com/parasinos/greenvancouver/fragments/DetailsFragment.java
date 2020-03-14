@@ -11,15 +11,19 @@ import android.widget.TextView;
 
 import com.parasinos.greenvancouver.ProjectInfoActivity;
 import com.parasinos.greenvancouver.R;
+import com.parasinos.greenvancouver.models.Field;
+import com.parasinos.greenvancouver.models.Project;
+import com.parasinos.greenvancouver.tasks.SimpleRetrieval;
+
+import java.util.List;
 
 public class DetailsFragment extends Fragment {
+    private String mapID;
 
-
-    public static DetailsFragment newInstance(/*String param1, String param2*/) {
+    public static DetailsFragment newInstance(String mapId) {
         DetailsFragment fragment = new DetailsFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
+        args.putString("mapId", mapId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -27,11 +31,9 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
+        if (getArguments() != null) {
+            mapID = getArguments().getString("mapId");
+        }
 
     }
 
@@ -47,17 +49,34 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ProjectInfoActivity infoActivity = (ProjectInfoActivity) getActivity();
-        if (infoActivity != null) {
-            String mapID = infoActivity.mapID;
-            View v = getView();
-            if (v != null) {
-            TextView tvTest = v.findViewById(R.id.tv_projectType);
-            tvTest.setText(mapID);
-            }
-        }
-
+        String service_url = getString(R.string.details_api_url, mapID);
+        new SimpleRetrieval(this, service_url).execute();
 
     }
 
+    public void updateProjectInfo(List<Project> result) {
+        ProjectInfoActivity infoActivity = (ProjectInfoActivity) getActivity();
+
+        if (infoActivity != null) {
+            View v = getView();
+            Project project = result.get(0);
+            Field projectDetails = project.getField();
+
+            if (v != null) {
+                TextView tvCategory = v.findViewById(R.id.tv_projectCategory);
+                TextView tvType = v.findViewById(R.id.tv_projectType);
+                TextView tvAddress = v.findViewById(R.id.tv_projectAddress);
+                TextView tvDescription = v.findViewById(R.id.tv_projectDescription);
+                TextView tvWebsite = v.findViewById(R.id.tv_projectWebsite);
+
+                tvCategory.setText(projectDetails.getCategory1() == null ? "N/A" : projectDetails.getCategory1());
+                tvType.setText(projectDetails.getCategory2() == null ? "N/A" : projectDetails.getCategory2());
+                tvAddress.setText(projectDetails.getAddress() == null ? "N/A" : projectDetails.getAddress());
+                tvDescription.setText(projectDetails.getShortDescription() == null ? "N/A" : projectDetails.getShortDescription());
+                tvWebsite.setText(projectDetails.getUrl() == null ? "N/A" : projectDetails.getUrl());
+            }
+        }
+    }
+
 }
+
