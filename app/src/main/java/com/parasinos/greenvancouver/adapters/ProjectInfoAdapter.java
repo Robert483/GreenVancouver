@@ -23,7 +23,7 @@ public class ProjectInfoAdapter extends FragmentStateAdapter {
         switch (position) {
             case 0:
             case 1:
-                return ReviewsFragment.newInstance();
+                return ReviewsFragment.newInstance("testmapId1");
             case 2:
                 return VolunteerFragment.newInstance();
             default:

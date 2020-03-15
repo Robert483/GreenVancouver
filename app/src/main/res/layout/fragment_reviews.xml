@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,7 +24,6 @@
                 android:layout_centerHorizontal="true"
                 android:fontFamily="sans-serif-medium"
                 android:includeFontPadding="false"
-                android:text="@string/temp_float"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
                 android:textColor="@color/material_on_background_emphasis_high_type" />
 
@@ -34,7 +33,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@id/txtv_average"
                 android:layout_toEndOf="@id/txtv_average"
-                android:text="@string/temp_int"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.willy.ratingbar.BaseRatingBar
@@ -67,10 +65,24 @@
             android:text="@string/reviews_yours"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtv_nouser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginHorizontal="@dimen/activity_margin"
+            android:layout_marginVertical="@dimen/widget_margin"
+            android:gravity="center"
+            android:text="@string/reviews_nouser"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/material_on_background_emphasis_high_type"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/linearl_yourreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -209,14 +221,16 @@
             android:gravity="center"
             android:text="@string/reviews_noreviews"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            android:textColor="@color/material_on_background_emphasis_high_type" />
+            android:textColor="@color/material_on_background_emphasis_high_type"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ryclerv_reviews"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/item_review_details" />
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

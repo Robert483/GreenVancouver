@@ -18,7 +18,7 @@
             android:layout_marginHorizontal="@dimen/widget_margin"
             android:contentDescription="@string/app_profile"
             android:scaleType="fitXY"
-            android:src="@drawable/app_im_placeholder" />
+            android:src="@drawable/app_im_profile_picture" />
 
         <TextView
             android:id="@+id/txtv_username"
@@ -27,7 +27,6 @@
             android:layout_marginHorizontal="@dimen/widget_margin"
             android:layout_weight="1"
             android:fontFamily="sans-serif-medium"
-            android:text="@string/temp_name"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
             android:textColor="@color/material_on_background_emphasis_high_type" />
 
@@ -37,6 +36,7 @@
             android:layout_height="wrap_content"
             android:clickable="false"
             app:srb_clearRatingEnabled="false"
+            app:srb_clickable="false"
             app:srb_drawableEmpty="@drawable/reviews_ic_leafempty"
             app:srb_drawableFilled="@drawable/reviews_ic_leaffilled"
             app:srb_scrollable="false"
@@ -52,7 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/activity_margin"
         android:layout_marginVertical="@dimen/widget_margin"
-        android:text="@string/temp_text"
         android:textColor="@color/material_on_background_emphasis_high_type" />
 
     <View
