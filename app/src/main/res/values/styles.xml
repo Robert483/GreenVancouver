@@ -31,4 +31,8 @@
         <item name="android:background">@color/colorTemp</item>
     </style>
 
+    <style name="BookmarksFragmentTheme">
+        <item name="android:layout_margin">@dimen/activity_margin</item>
+    </style>
+
 </resources>

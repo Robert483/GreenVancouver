@@ -91,7 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
                                     String user_id = mAuth.getCurrentUser().getUid();
 
 
-                                    Task setValueTask = myRef.child(user_id).setValue(newUser);
+                                    Task setValueTask = myRef.child(user_id).child("basicInfo").setValue(newUser);
 
                                     startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                     finish();

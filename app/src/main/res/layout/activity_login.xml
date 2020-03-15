@@ -40,6 +40,7 @@
             android:background="#90ffffff"
             android:padding="@dimen/activity_margin"
             android:layout_marginBottom="@dimen/signup_margin"
+            android:textColorHint="@color/cardview_light_background"
             android:hint="@string/login_emailhint" />
 
         <EditText
@@ -48,6 +49,7 @@
             android:layout_height="match_parent"
             android:background="#90ffffff"
             android:padding="@dimen/activity_margin"
+            android:textColorHint="@color/cardview_light_background"
             android:hint="@string/login_passwordhint"
             android:inputType="textPassword" />
 
@@ -61,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/signup_input_fields"
                 android:layout_weight="1"
+                android:backgroundTint="@color/cardview_light_background"
                 android:text="@string/login_signupbtn" />
 
 
@@ -69,6 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
                 android:layout_height="@dimen/signup_input_fields"
+                android:backgroundTint="@color/cardview_light_background"
                 android:text="@string/login_loginbtn" />
         </LinearLayout>
 

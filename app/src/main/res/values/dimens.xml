@@ -7,6 +7,10 @@
     <!-- For Volunteer fragment -->
     <dimen name="volunteer_label_textsize">12sp</dimen>
 
+    <!-- For Bookmarks Fragment -->
+    <dimen name="bookmarks_title">20sp</dimen>
+    <dimen name="bookmarks_margin">16dp</dimen>
+
     <!-- For SignUp/Login Activity -->
     <dimen name="signup_input_fields">56dp</dimen>
     <dimen name="signup_margin">32dp</dimen>
