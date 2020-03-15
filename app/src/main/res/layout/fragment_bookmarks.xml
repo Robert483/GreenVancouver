@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/bookmarks_warning"/>
     <ListView
+        android:id="@+id/bookmarks_lv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
