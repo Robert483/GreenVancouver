@@ -97,7 +97,7 @@
                     android:layout_marginHorizontal="@dimen/widget_margin"
                     android:contentDescription="@string/app_profile"
                     android:scaleType="fitXY"
-                    android:src="@drawable/app_im_placeholder" />
+                    android:src="@drawable/app_im_profile_picture" />
 
                 <TextView
                     android:id="@+id/txtv_username"
@@ -106,7 +106,6 @@
                     android:layout_marginHorizontal="@dimen/widget_margin"
                     android:layout_weight="1"
                     android:fontFamily="sans-serif-medium"
-                    android:text="@string/temp_name"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                     android:textColor="@color/material_on_background_emphasis_high_type" />
 
@@ -136,7 +135,8 @@
                     android:gravity="top"
                     android:hint="@string/reviews_reviewhint"
                     android:inputType="textMultiLine"
-                    android:minLines="3" />
+                    android:minLines="3"
+                    android:visibility="gone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,7 +146,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/activity_margin"
                 android:layout_marginTop="@dimen/widget_margin"
-                android:text="@string/temp_text"
                 android:textColor="@color/material_on_background_emphasis_high_type"
                 android:visibility="gone" />
 
@@ -192,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/app_ic_publish"
-                    android:text="@string/app_send"
+                    android:text="@string/app_publish"
                     tools:ignore="RtlHardcoded" />
 
             </LinearLayout>

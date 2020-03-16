@@ -45,6 +45,8 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
                     .noFade()
                     .transform(new CircleTransform())
                     .into(holder.profilePicture);
+        } else {
+            holder.profilePicture.setImageResource(R.drawable.app_im_profile_picture);
         }
     }
 

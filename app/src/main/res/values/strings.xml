@@ -4,6 +4,7 @@
     <string name="app_name">GreenVancouver</string>
     <string name="app_profile">Profile picture</string>
     <string name="app_send">Send</string>
+    <string name="app_publish">Publish</string>
     <string name="app_edit">Edit</string>
     <string name="app_save">Save</string>
     <string name="app_cancel">Cancel</string>

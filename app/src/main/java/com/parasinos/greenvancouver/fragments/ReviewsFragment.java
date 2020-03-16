@@ -1,5 +1,6 @@
 package com.parasinos.greenvancouver.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -8,9 +9,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +30,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.parasinos.greenvancouver.R;
 import com.parasinos.greenvancouver.adapters.ReviewAdapter;
+import com.parasinos.greenvancouver.misc.CircleTransform;
 import com.parasinos.greenvancouver.models.Review;
+import com.squareup.picasso.Picasso;
 import com.willy.ratingbar.BaseRatingBar;
 
 import java.util.ArrayList;
@@ -35,23 +44,31 @@ import java.util.Objects;
 public class ReviewsFragment extends Fragment {
     private static final String ARG_MAP_ID = "mapId";
 
+    private Review myReview = new Review();
     private float average;
+    private Mode currentMode = null;
     private boolean isInitialized = false;
 
     private DatabaseReference reviewsRef;
+    private DatabaseReference basicInfoRef;
+    private DatabaseReference reviewRef;
     private DatabaseReference myReviewRef;
     private ReviewAdapter reviewAdapter;
+
+    private ImageView imgvProfilePicture;
+    private TextView txtvName;
+    private BaseRatingBar ratingBarRating;
+    private TextView txtvContent;
+    private EditText edttxtContent;
+    private Button btnSend;
+    private Button btnEdit;
+    private Button btnSave;
+    private ImageButton imgbtnCancel;
 
     private View viewNoReviews;
     private TextView txtvAverage;
     private TextView txtvTotal;
     private BaseRatingBar ratingBarAverage;
-
-    private void updateOverallInfo() {
-        txtvAverage.setText(String.format(Locale.getDefault(), "%.1f", average));
-        txtvTotal.setText(String.format(Locale.getDefault(), "(%d)", reviewAdapter.getItemCount()));
-        ratingBarAverage.setRating(average);
-    }
 
     public static ReviewsFragment newInstance(String mapId) {
         ReviewsFragment fragment = new ReviewsFragment();
@@ -61,38 +78,80 @@ public class ReviewsFragment extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() == null) {
+    private void initializeMyReview() {
+        if (basicInfoRef == null) {
             return;
         }
 
-        String mapId = getArguments().getString(ARG_MAP_ID);
-        String path = String.join("/", "projects", mapId, "reviews");
-        reviewsRef = FirebaseDatabase.getInstance().getReference(path);
+        View.OnClickListener listener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myReview.setContent(edttxtContent.getText().toString());
+                myReview.setRating((int) ratingBarRating.getRating());
+                reviewRef.setValue(myReview);
+                myReviewRef.setValue(myReview);
+                changeMode(Mode.VIEW);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            String uid = user.getUid();
-            path = String.join("/", "users", uid, mapId);
-            myReviewRef = FirebaseDatabase.getInstance().getReference(path);
-        }
+                Context context = Objects.requireNonNull(getContext());
+                InputMethodManager imm = (InputMethodManager) Objects.requireNonNull(context.getSystemService(Context.INPUT_METHOD_SERVICE));
+                imm.hideSoftInputFromWindow(edttxtContent.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        };
+
+        btnSend.setOnClickListener(listener);
+        btnSave.setOnClickListener(listener);
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeMode(Mode.EDIT);
+            }
+        });
+
+        imgbtnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeMode(Mode.VIEW);
+            }
+        });
+
+        basicInfoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Review basicInfo = Objects.requireNonNull(dataSnapshot.getValue(Review.class));
+                myReview.setName(basicInfo.getName());
+                myReview.setProfilePicture(basicInfo.getProfilePicture());
+                updateUserBasicInfo();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Do nothing
+            }
+        });
+
+        reviewRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (!dataSnapshot.exists()) {
+                    changeMode(Mode.NEW);
+                    return;
+                }
+
+                myReview = Objects.requireNonNull(dataSnapshot.getValue(Review.class));
+                if (currentMode != Mode.EDIT) {
+                    changeMode(Mode.VIEW);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Do nothing
+            }
+        });
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_reviews, container, false);
-
-        View view = root.findViewById(myReviewRef == null ? R.id.txtv_nouser : R.id.linearl_yourreview);
-        view.setVisibility(View.VISIBLE);
-
-        viewNoReviews = root.findViewById(R.id.txtv_noreviews);
-        txtvAverage = root.findViewById(R.id.txtv_average);
-        txtvTotal = root.findViewById(R.id.txtv_total);
-        ratingBarAverage = root.findViewById(R.id.ratingbar_average);
-
+    private void initializeOtherReviews() {
         reviewsRef.addChildEventListener(new ReviewEventListener());
         reviewsRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -112,7 +171,7 @@ public class ReviewsFragment extends Fragment {
                     average = 0;
                     viewNoReviews.setVisibility(View.VISIBLE);
                 }
-                updateOverallInfo();
+                updateProjectOverallInfo();
 
                 RecyclerView recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.ryclerv_reviews);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -126,7 +185,134 @@ public class ReviewsFragment extends Fragment {
                 // Do nothing
             }
         });
+    }
+
+    private void updateUserBasicInfo() {
+        txtvName.setText(myReview.getName());
+        if (!TextUtils.isEmpty(myReview.getProfilePicture())) {
+            Picasso.get()
+                    .load(myReview.getProfilePicture())
+                    .resize(100, 0)
+                    .noFade()
+                    .transform(new CircleTransform())
+                    .into(imgvProfilePicture);
+        } else {
+            imgvProfilePicture.setImageResource(R.drawable.app_im_profile_picture);
+        }
+    }
+
+    private void updateProjectOverallInfo() {
+        txtvAverage.setText(String.format(Locale.getDefault(), "%.1f", average));
+        txtvTotal.setText(String.format(Locale.getDefault(), "(%d)", reviewAdapter.getItemCount()));
+        ratingBarAverage.setRating(average);
+    }
+
+    private void changeMode(Mode mode) {
+        currentMode = mode;
+        switch (currentMode) {
+            case NEW:
+                btnSend.setVisibility(View.VISIBLE);
+                btnEdit.setVisibility(View.GONE);
+                btnSave.setVisibility(View.GONE);
+                imgbtnCancel.setVisibility(View.GONE);
+                txtvContent.setVisibility(View.GONE);
+                edttxtContent.setVisibility(View.VISIBLE);
+
+                ratingBarRating.setClickable(true);
+                ratingBarRating.setScrollable(true);
+                ratingBarRating.setClearRatingEnabled(true);
+                ratingBarRating.setEmptyDrawableRes(R.drawable.reviews_ic_leafemptyenabled);
+
+                edttxtContent.setText("");
+                ratingBarRating.setRating(0);
+                break;
+            case VIEW:
+                btnSend.setVisibility(View.GONE);
+                btnEdit.setVisibility(View.VISIBLE);
+                btnSave.setVisibility(View.GONE);
+                imgbtnCancel.setVisibility(View.GONE);
+                txtvContent.setVisibility(View.VISIBLE);
+                edttxtContent.setVisibility(View.GONE);
+
+                ratingBarRating.setClickable(false);
+                ratingBarRating.setScrollable(false);
+                ratingBarRating.setClearRatingEnabled(false);
+                ratingBarRating.setEmptyDrawableRes(R.drawable.reviews_ic_leafempty);
+
+                txtvContent.setText(myReview.getContent());
+                ratingBarRating.setRating(myReview.getRating());
+                break;
+            case EDIT:
+                btnSend.setVisibility(View.GONE);
+                btnEdit.setVisibility(View.GONE);
+                btnSave.setVisibility(View.VISIBLE);
+                imgbtnCancel.setVisibility(View.VISIBLE);
+                txtvContent.setVisibility(View.GONE);
+                edttxtContent.setVisibility(View.VISIBLE);
+
+                ratingBarRating.setClickable(true);
+                ratingBarRating.setScrollable(true);
+                ratingBarRating.setClearRatingEnabled(true);
+                ratingBarRating.setEmptyDrawableRes(R.drawable.reviews_ic_leafemptyenabled);
+
+                edttxtContent.setText(txtvContent.getText());
+                break;
+        }
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() == null) {
+            return;
+        }
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        String mapId = getArguments().getString(ARG_MAP_ID);
+        reviewsRef = database.getReference(String.join("/", "projects", mapId, "reviews"));
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            String uid = user.getUid();
+            basicInfoRef = database.getReference(String.join("/", "users", uid, "basicInfo"));
+            reviewRef = database.getReference(String.join("/", "projects", mapId, "reviews", uid));
+            myReviewRef = database.getReference(String.join("/", "users", uid, "reviews", mapId));
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View root = inflater.inflate(R.layout.fragment_reviews, container, false);
+
+        root.findViewById(basicInfoRef == null ? R.id.txtv_nouser : R.id.linearl_yourreview)
+                .setVisibility(View.VISIBLE);
+
+        imgvProfilePicture = root.findViewById(R.id.imgv_profilepicture);
+        txtvName = root.findViewById(R.id.txtv_username);
+        ratingBarRating = root.findViewById(R.id.ratingbar_rating);
+        txtvContent = root.findViewById(R.id.txtv_review);
+        edttxtContent = root.findViewById(R.id.edttxt_review);
+        btnSend = root.findViewById(R.id.btn_send);
+        btnEdit = root.findViewById(R.id.btn_edit);
+        btnSave = root.findViewById(R.id.btn_save);
+        imgbtnCancel = root.findViewById(R.id.btn_cancel);
+
+        viewNoReviews = root.findViewById(R.id.txtv_noreviews);
+        txtvAverage = root.findViewById(R.id.txtv_average);
+        txtvTotal = root.findViewById(R.id.txtv_total);
+        ratingBarAverage = root.findViewById(R.id.ratingbar_average);
+
+        initializeMyReview();
+        initializeOtherReviews();
         return root;
+    }
+
+    private enum Mode {
+        NEW,
+        VIEW,
+        EDIT
     }
 
     private class ReviewEventListener implements ChildEventListener {
@@ -139,7 +325,7 @@ public class ReviewsFragment extends Fragment {
 
                 int size = reviewAdapter.getItemCount();
                 average = (average * (size - 1) + review.getRating()) / size;
-                updateOverallInfo();
+                updateProjectOverallInfo();
 
                 if (size - 1 == 0) {
                     viewNoReviews.setVisibility(View.GONE);
@@ -155,7 +341,7 @@ public class ReviewsFragment extends Fragment {
 
             int size = reviewAdapter.getItemCount();
             average = (average * size - old.getRating() + review.getRating()) / size;
-            updateOverallInfo();
+            updateProjectOverallInfo();
         }
 
         @Override
@@ -171,7 +357,7 @@ public class ReviewsFragment extends Fragment {
                 viewNoReviews.setVisibility(View.VISIBLE);
             }
 
-            updateOverallInfo();
+            updateProjectOverallInfo();
         }
 
         @Override
