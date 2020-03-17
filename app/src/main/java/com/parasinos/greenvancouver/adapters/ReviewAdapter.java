@@ -17,23 +17,21 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder> {
-    private List<Review> reviews;
-
+public class ReviewAdapter extends FirebaseListAdapter<Review, ReviewAdapter.ReviewViewHolder> {
     public ReviewAdapter(List<Review> reviews) {
-        this.reviews = reviews;
+        super(reviews);
     }
 
     @NonNull
     @Override
     public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = View.inflate(parent.getContext(), R.layout.item_review_details, null);
+        View itemView = View.inflate(parent.getContext(), R.layout.item_review, null);
         return new ReviewViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
-        Review review = reviews.get(position);
+        Review review = get(position);
         holder.name.setText(review.getName());
         holder.content.setText(review.getContent());
         holder.rating.setRating(review.getRating());
@@ -48,47 +46,6 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
         } else {
             holder.profilePicture.setImageResource(R.drawable.app_im_profile_picture);
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return reviews.size();
-    }
-
-    public void add(Review review) {
-        int pos = reviews.size();
-        reviews.add(review);
-        notifyItemInserted(pos);
-    }
-
-    public Review update(Review review) {
-        int pos = reviews.indexOf(review);
-        Review old = reviews.get(pos);
-        reviews.set(pos, review);
-        notifyItemChanged(pos);
-        return old;
-    }
-
-    public void remove(String key) {
-        Review review = new Review(key);
-        int pos = reviews.indexOf(review);
-        reviews.remove(review);
-        notifyItemRemoved(pos);
-    }
-
-    public void move(String key, String previousKey) {
-        int oldPos = reviews.indexOf(new Review(key));
-        int newPos = previousKey == null ? 0 : reviews.indexOf(new Review(previousKey)) + 1;
-
-        int cur = Math.min(oldPos, newPos);
-        int end = Math.max(oldPos, newPos);
-        Review review = reviews.get(cur);
-        while (cur < end) {
-            reviews.set(cur, reviews.get(cur + 1));
-            cur++;
-        }
-        reviews.set(end, review);
-        notifyItemMoved(oldPos, newPos);
     }
 
     static class ReviewViewHolder extends RecyclerView.ViewHolder {

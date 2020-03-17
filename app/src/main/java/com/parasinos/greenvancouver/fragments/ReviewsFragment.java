@@ -43,16 +43,19 @@ import java.util.Objects;
 
 public class ReviewsFragment extends Fragment {
     private static final String ARG_MAP_ID = "mapId";
+    private static final String ARG_PROJECT_NAME = "projectName";
 
     private Review myReview = new Review();
-    private float average;
     private Mode currentMode = null;
+    private String projectName;
+    private float average;
     private boolean isInitialized = false;
 
-    private DatabaseReference reviewsRef;
     private DatabaseReference basicInfoRef;
     private DatabaseReference reviewRef;
     private DatabaseReference myReviewRef;
+    private DatabaseReference overallRatingRef;
+    private DatabaseReference reviewsRef;
     private ReviewAdapter reviewAdapter;
 
     private ImageView imgvProfilePicture;
@@ -65,15 +68,16 @@ public class ReviewsFragment extends Fragment {
     private Button btnSave;
     private ImageButton imgbtnCancel;
 
-    private View viewNoReviews;
+    private TextView viewNoReviews;
     private TextView txtvAverage;
     private TextView txtvTotal;
     private BaseRatingBar ratingBarAverage;
 
-    public static ReviewsFragment newInstance(String mapId) {
+    public static ReviewsFragment newInstance(String mapId, String projectName) {
         ReviewsFragment fragment = new ReviewsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_MAP_ID, mapId);
+        args.putString(ARG_PROJECT_NAME, projectName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -86,10 +90,19 @@ public class ReviewsFragment extends Fragment {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myReview.setContent(edttxtContent.getText().toString());
-                myReview.setRating((int) ratingBarRating.getRating());
+                String content = edttxtContent.getText().toString();
+                int rating = (int) ratingBarRating.getRating();
+
+                myReview.setContent(content);
+                myReview.setRating(rating);
                 reviewRef.setValue(myReview);
-                myReviewRef.setValue(myReview);
+
+                Review review = new Review();
+                review.setContent(content);
+                review.setRating(rating);
+                review.setProjectName(projectName);
+                myReviewRef.setValue(review);
+
                 changeMode(Mode.VIEW);
 
                 Context context = Objects.requireNonNull(getContext());
@@ -205,6 +218,7 @@ public class ReviewsFragment extends Fragment {
         txtvAverage.setText(String.format(Locale.getDefault(), "%.1f", average));
         txtvTotal.setText(String.format(Locale.getDefault(), "(%d)", reviewAdapter.getItemCount()));
         ratingBarAverage.setRating(average);
+        overallRatingRef.setValue(average);
     }
 
     private void changeMode(Mode mode) {
@@ -263,18 +277,17 @@ public class ReviewsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() == null) {
-            return;
-        }
-
+        Bundle args = Objects.requireNonNull(getArguments());
         FirebaseDatabase database = FirebaseDatabase.getInstance();
 
-        String mapId = getArguments().getString(ARG_MAP_ID);
+        String mapId = args.getString(ARG_MAP_ID);
         reviewsRef = database.getReference(String.join("/", "projects", mapId, "reviews"));
+        overallRatingRef = database.getReference(String.join("/", "projects", mapId, "overallRating"));
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             String uid = user.getUid();
+            projectName = args.getString(ARG_PROJECT_NAME);
             basicInfoRef = database.getReference(String.join("/", "users", uid, "basicInfo"));
             reviewRef = database.getReference(String.join("/", "projects", mapId, "reviews", uid));
             myReviewRef = database.getReference(String.join("/", "users", uid, "reviews", mapId));
@@ -321,7 +334,7 @@ public class ReviewsFragment extends Fragment {
             if (isInitialized) {
                 Review review = Objects.requireNonNull(dataSnapshot.getValue(Review.class));
                 review.setKey(dataSnapshot.getKey());
-                reviewAdapter.add(review);
+                reviewAdapter.add(review, s == null ? null : new Review(s));
 
                 int size = reviewAdapter.getItemCount();
                 average = (average * (size - 1) + review.getRating()) / size;
@@ -346,7 +359,7 @@ public class ReviewsFragment extends Fragment {
 
         @Override
         public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-            reviewAdapter.remove(dataSnapshot.getKey());
+            reviewAdapter.remove(new Review(dataSnapshot.getKey()));
 
             int size = reviewAdapter.getItemCount();
             if (size > 0) {
@@ -362,7 +375,7 @@ public class ReviewsFragment extends Fragment {
 
         @Override
         public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-            reviewAdapter.move(dataSnapshot.getKey(), s);
+            reviewAdapter.move(new Review(dataSnapshot.getKey()), s == null ? null : new Review(s));
         }
 
         @Override

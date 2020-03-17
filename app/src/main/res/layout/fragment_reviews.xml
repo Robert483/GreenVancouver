@@ -113,8 +113,11 @@
                     android:id="@+id/ratingbar_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:srb_clearRatingEnabled="false"
+                    app:srb_clickable="false"
                     app:srb_drawableEmpty="@drawable/reviews_ic_leafempty"
                     app:srb_drawableFilled="@drawable/reviews_ic_leaffilled"
+                    app:srb_scrollable="false"
                     app:srb_starHeight="20dp"
                     app:srb_starPadding="3dp"
                     app:srb_starWidth="20dp" />
@@ -228,7 +231,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
-            tools:listitem="@layout/item_review_details" />
+            tools:listitem="@layout/item_review" />
 
     </LinearLayout>
 

@@ -11,6 +11,7 @@ public class Review {
     private String content;
     private String name;
     private String profilePicture;
+    private String projectName;
 
     public Review() {}
 
@@ -56,6 +57,14 @@ public class Review {
 
     public void setProfilePicture(String profilePicture) {
         this.profilePicture = profilePicture;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
     @Override
