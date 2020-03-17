@@ -3,6 +3,7 @@ package com.parasinos.greenvancouver.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parasinos.greenvancouver.R;
 import com.parasinos.greenvancouver.models.Review;
@@ -31,9 +32,12 @@ public class MyReviewAdapter extends FirebaseListAdapter<Review, MyReviewAdapter
         holder.projectName.setText(review.getProjectName());
         holder.content.setText(review.getContent());
         holder.rating.setRating(review.getRating());
+        holder.mapId = review.getKey();
     }
 
     static class MyReviewViewHolder extends RecyclerView.ViewHolder {
+        private String mapId;
+
         private TextView projectName;
         private TextView content;
         private BaseRatingBar rating;
@@ -43,6 +47,14 @@ public class MyReviewAdapter extends FirebaseListAdapter<Review, MyReviewAdapter
             projectName = itemView.findViewById(R.id.txtv_project);
             content = itemView.findViewById(R.id.txtv_review);
             rating = itemView.findViewById(R.id.ratingbar_rating);
+
+            projectName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String text = String.join(" ", "TODO: go to project info or main activity for", mapId);
+                    Toast.makeText(v.getContext(), text, Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }
