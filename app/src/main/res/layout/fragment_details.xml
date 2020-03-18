@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/ic_category_black_24dp"
+                        android:drawableStart="@drawable/detail_category_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -92,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/ic_type_black_24dp"
+                        android:drawableStart="@drawable/detail_type_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -119,7 +119,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/ic_location_on_black_24dp"
+                        android:drawableStart="@drawable/detail_location_on_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/ic_description_black_24dp"
+                        android:drawableStart="@drawable/detail_description_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -174,7 +174,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/ic_website_black_24dp"
+                        android:drawableStart="@drawable/detail_website_black_24dp"
                         android:textStyle="bold" />
 
                     <TextView

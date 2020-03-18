@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragments.MapFragment">
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/frag_map"
@@ -9,4 +11,88 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/margin_lvl3"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+<!--        <SearchView-->
+<!--            android:id="@+id/simpleSearchView"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:layout_marginEnd="3dp"-->
+<!--            android:background="@drawable/map_searchbar"-->
+<!--            android:iconifiedByDefault="false"-->
+<!--            android:imeOptions="actionSearch"-->
+<!--            android:queryHint="@string/searchhint"-->
+<!--            android:searchIcon="@null" />-->
+
+        <EditText
+            android:id="@+id/searchText"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingStart="@dimen/margin_lvl4"
+            android:paddingEnd="@dimen/margin_lvl4"
+            android:hint="@string/searchhint"
+            android:drawableStart="@drawable/map_search_dimgray_24dp"
+            android:background="@drawable/map_searchbar"
+            android:autofillHints="@string/app_name"
+            android:maxLines="1"
+            android:inputType="text" />
+
+
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:gravity="center_vertical"-->
+<!--            android:backgroundTint="@color/colorBtnWhite"-->
+<!--            android:drawableTop="@drawable/map_search_dimgray_24dp"-->
+<!--            android:textColor="#696969" />-->
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|end"
+        android:layout_marginEnd="@dimen/margin_lvl4"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnChangeMapType"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/colorBtnWhite"
+            android:drawableEnd="@drawable/map_layers_dimgray_50dp"
+            android:padding="10dp" />
+
+        <Button
+            android:id="@+id/btnZoomIn"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/colorBtnWhite"
+            android:text="@string/zoomIn"
+            android:textColor="#696969"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnZoomOut"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/colorBtnWhite"
+            android:text="@string/zoomOut"
+            android:textColor="#696969"
+            android:textSize="24sp" />
+
+
+    </LinearLayout>
+
+
+</FrameLayout>
