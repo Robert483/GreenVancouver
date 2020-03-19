@@ -63,12 +63,14 @@ public class DetailsFragment extends Fragment {
             Field projectDetails = project.getField();
 
             if (v != null) {
+                TextView tvTitle = v.findViewById(R.id.tv_projectName);
                 TextView tvCategory = v.findViewById(R.id.tv_projectCategory);
                 TextView tvType = v.findViewById(R.id.tv_projectType);
                 TextView tvAddress = v.findViewById(R.id.tv_projectAddress);
                 TextView tvDescription = v.findViewById(R.id.tv_projectDescription);
                 TextView tvWebsite = v.findViewById(R.id.tv_projectWebsite);
 
+                tvTitle.setText(project.toString());
                 tvCategory.setText(projectDetails.getCategory1() == null ? "N/A" : projectDetails.getCategory1());
                 tvType.setText(projectDetails.getCategory2() == null ? "N/A" : projectDetails.getCategory2());
                 tvAddress.setText(projectDetails.getAddress() == null ? "N/A" : projectDetails.getAddress());

@@ -6,5 +6,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorDivider">#1F000000</color>
     <color name="colorTemp">#4CAF50</color>
-    <color name="colorBtnWhite">#FFFFFF</color>
+    <color name="colorBtnWhite">#FFFFF0</color>
+    <color name="colorInfoWinBgr">#8FBC8B</color>
 </resources>

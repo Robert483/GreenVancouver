@@ -143,7 +143,7 @@
                     <TextView
                         android:id="@+id/tv_descLabel"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="45dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
@@ -154,7 +154,8 @@
                         android:id="@+id/tv_projectDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
+                        android:maxLines="4"
+                        android:singleLine="false"
                         android:layout_marginStart="@dimen/margin_lvl4"
                         android:layout_weight="1" />
 
@@ -170,7 +171,7 @@
                     <TextView
                         android:id="@+id/tv_websiteLabel"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="45dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:layout_gravity="center_horizontal"
@@ -181,7 +182,8 @@
                         android:id="@+id/tv_projectWebsite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
+                        android:maxLines="4"
+                        android:singleLine="false"
                         android:layout_marginStart="@dimen/margin_lvl4"
                         android:layout_weight="1" />
 

@@ -33,12 +33,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, View.OnClickListener, EditText.OnEditorActionListener {
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
+        View.OnClickListener, EditText.OnEditorActionListener {
 
     private GoogleMap googleMap;
     private List<Marker> markers;
-    //    private List<Project> projectList;
-    private List<String> mapIDList;
+    private List<String> mapIdList;
+    private String selectMapId = "";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,6 +52,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
         bZoomOut.setOnClickListener(this);
         Button bMapType = v.findViewById(R.id.btnChangeMapType);
         bMapType.setOnClickListener(this);
+        Button bTransDetails = v.findViewById(R.id.transDetail);
+        bTransDetails.setOnClickListener(this);
 
         // fragment EditText editor action handling
         EditText etQuery = v.findViewById(R.id.searchText);
@@ -67,6 +70,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
                 break;
             case R.id.btnZoomOut:
                 this.googleMap.animateCamera(CameraUpdateFactory.zoomOut());
+                break;
+            case R.id.transDetail:
+                if (!selectMapId.equals("")) {
+                    Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
+                    intent.putExtra("mapID", selectMapId);
+                    startActivity(intent);
+                }
                 break;
             case R.id.btnChangeMapType:
                 if (this.googleMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL)
@@ -109,7 +119,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
         mapFragment.getMapAsync(this);
         super.onViewCreated(view, savedInstanceState);
         markers = new ArrayList<>();
-        mapIDList = new ArrayList<>();
+        mapIdList = new ArrayList<>();
 
         // get keyword from the search bar as query string
         EditText etQuery = view.findViewById(R.id.searchText);
@@ -124,47 +134,90 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, View.On
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-        this.googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                String mapID = "";
-                for (int i = 0; i < markers.size(); i++) {
-                    if (marker.equals(markers.get(i))) {
-//                        mapID = projectList.get(i).getField().getMapID();
-                        mapID = mapIDList.get(i);
-                    }
+
+        if (this.googleMap != null) {
+
+            this.googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+                @Override
+                public View getInfoWindow(Marker marker) {
+                    return null;
                 }
-                // pass mapID of the selected project to ProjectInfoActivity
-                Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
-                intent.putExtra("mapID", mapID);
-//                marker.showInfoWindow();
-                startActivity(intent);
-                return true;
+
+                @Override
+                public View getInfoContents(Marker marker) {
+                    View v = getLayoutInflater().inflate(R.layout.marker_info_window, null);
+                    TextView tvTitle = v.findViewById(R.id.projectTitle);
+                    TextView tvSnippet = v.findViewById(R.id.snippet);
+
+                    tvTitle.setText(marker.getTitle());
+                    tvSnippet.setText(marker.getSnippet());
+
+                    for (int i = 0; i < markers.size(); i++) {
+                        if (marker.equals(markers.get(i))) {
+                            selectMapId = mapIdList.get(i);
+                        }
+                    }
+
+                    return v;
+                }
+            });
+
+
+            // Initialize Camera focus
+            LatLng vancouver = new LatLng(49.2827, -123.1207);
+            this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
+            CameraPosition initPosition
+                    = CameraPosition.builder().target(vancouver).zoom(10).bearing(0).tilt(0).build();
+            this.googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(initPosition));
+        }
+
+    }
+
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        for (int i = 0; i < markers.size(); i++) {
+            if (marker.equals(markers.get(i))) {
+                selectMapId = mapIdList.get(i);
             }
-        });
-
-        // Initialize Camera focus
-        LatLng vancouver = new LatLng(49.2827, -123.1207);
-        this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
-        CameraPosition initPosition
-                = CameraPosition.builder().target(vancouver).zoom(10).bearing(0).tilt(0).build();
-        this.googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(initPosition));
-
+        }
+        return true;
     }
 
     public void updateMarkers(List<Project> projectList) {
         for (Project p : projectList) {
-//            this.projectList.add(p);
             String title = p.toString();
             LatLng latLng = new LatLng(p.getField().getGeom().getCoordinates()[1],
                     p.getField().getGeom().getCoordinates()[0]);
             String mapID = p.getField().getMapID();
-            mapIDList.add(mapID);
-            Marker marker = googleMap.addMarker(new MarkerOptions().position(latLng).title(title)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            mapIdList.add(mapID);
+            String address = p.getField().getAddress();
+//            String desc = p.getField().getShortDescription();
+//            String snippetStr = address + "\n" + desc;
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(latLng);
+            markerOptions.title(title);
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+            markerOptions.snippet(address);
+//            Marker marker = googleMap.addMarker(new MarkerOptions().position(latLng).title(title)
+//                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
+            Marker marker = googleMap.addMarker(markerOptions);
             markers.add(marker);
         }
     }
 
 
+//    @Override
+//    public void onInfoWindowClick(Marker marker) {
+//        String mapID = "";
+//        for (int i = 0; i < markers.size(); i++) {
+//            if (marker.equals(markers.get(i))) {
+//                mapID = mapIdList.get(i);
+//            }
+//        }
+//        // pass mapID of the selected project to ProjectInfoActivity
+//        Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
+//        intent.putExtra("mapID", mapID);
+//        startActivity(intent);
+//    }
 }
