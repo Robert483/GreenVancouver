@@ -71,22 +71,8 @@ public class BookmarksFragment extends Fragment {
                         String address = bookmarksSnapshot.child("address").getValue().toString();
                         Bookmark bookmark = new Bookmark(address, name);
                         bookmarkList.add(bookmark);
-//                        Bookmark bookmark = bookmarksSnapshot.getValue(Bookmark.class);
-
-//                        bookmarkList.add(bookmark);
                     }
 
-//                    for (DataSnapshot readingSnapshot : dataSnapshot.getChildren()) {
-//                        Log.d("USER", readingSnapshot.getKey());
-//                        if (readingSnapshot.getKey().equals(user.getUid())) {
-//
-//                        }
-//                        DataSnapshot userBookmarks = readingSnapshot.child(user.getUid());
-//                        for (DataSnapshot bookmarks : userBookmarks.getChildren()) {
-//                            Bookmark bookmark = bookmarks.getValue(Bookmark.class);
-//                            bookmarkList.add(bookmark);
-//                        }
-//                    }
                     if (!bookmarkList.isEmpty()) {
                         BookmarksAdapter adapter = new BookmarksAdapter(getActivity(), bookmarkList);
                         lvBookmarks.setAdapter(adapter);
