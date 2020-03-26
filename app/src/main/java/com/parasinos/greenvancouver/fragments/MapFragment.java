@@ -1,6 +1,9 @@
 package com.parasinos.greenvancouver.fragments;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -9,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,16 +28,23 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parasinos.greenvancouver.ProjectInfoActivity;
 import com.parasinos.greenvancouver.R;
 import com.parasinos.greenvancouver.models.Project;
+import com.parasinos.greenvancouver.tasks.ImageDownloaderTask;
 import com.parasinos.greenvancouver.tasks.MapMarkerGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
+public class MapFragment extends Fragment implements OnMapReadyCallback, //GoogleMap.OnMarkerClickListener,
         View.OnClickListener, EditText.OnEditorActionListener {
 
     private GoogleMap googleMap;
@@ -74,7 +85,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             case R.id.transDetail:
                 if (!selectMapId.equals("")) {
                     Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
-                    intent.putExtra("mapID", selectMapId);
+                    intent.putExtra("mapId", selectMapId);
                     startActivity(intent);
                 }
                 break;
@@ -100,7 +111,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                         event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
             if (event == null || !event.isShiftPressed()) {
                 String query = v.getText().toString();
-                int numRecords = 10;
+
+                SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("pref", Context.MODE_PRIVATE);
+                int numRecords = sharedPreferences.getInt("maxResult", 10);
+
                 String service_url = getString(R.string.map_api_url, query, numRecords);
                 new MapMarkerGenerator(this, service_url).execute();
                 return true; // consume.
@@ -124,7 +138,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         // get keyword from the search bar as query string
         EditText etQuery = view.findViewById(R.id.searchText);
         String query = etQuery.getText().toString();
-        int numRecords = 10;
+
+        SharedPreferences sharedPreferences = Objects.requireNonNull(this.getActivity()).getSharedPreferences("pref", Context.MODE_PRIVATE);
+        int numRecords = sharedPreferences.getInt("maxResult", 10);
+
         String service_url = getString(R.string.map_api_url, query, numRecords);
         new MapMarkerGenerator(this, service_url).execute();
 
@@ -145,25 +162,48 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
                 @Override
                 public View getInfoContents(Marker marker) {
-                    View v = getLayoutInflater().inflate(R.layout.marker_info_window, null);
-                    TextView tvTitle = v.findViewById(R.id.projectTitle);
-                    TextView tvSnippet = v.findViewById(R.id.snippet);
-
-                    tvTitle.setText(marker.getTitle());
-                    tvSnippet.setText(marker.getSnippet());
-
+                    @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.marker_info_window, null);
                     for (int i = 0; i < markers.size(); i++) {
                         if (marker.equals(markers.get(i))) {
                             selectMapId = mapIdList.get(i);
                         }
                     }
+                    final ImageView ivInfo = v.findViewById(R.id.markerInfoImg);
+                    TextView tvTitle = v.findViewById(R.id.projectTitle);
+                    TextView tvSnippet = v.findViewById(R.id.snippet);
+
+                    String path = String.join("/", "projects", selectMapId, "Images", "0");
+                    DatabaseReference dbImageRef = FirebaseDatabase.getInstance().getReference(path);
+                    dbImageRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            String imgUrl = Objects.requireNonNull(dataSnapshot.getValue(String.class));
+                            if (!imgUrl.equals("")) {
+                                new ImageDownloaderTask(ivInfo).execute(imgUrl);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    tvTitle.setText(marker.getTitle());
+                    tvSnippet.setText(marker.getSnippet());
+
+//                    for (int i = 0; i < markers.size(); i++) {
+//                        if (marker.equals(markers.get(i))) {
+//                            selectMapId = mapIdList.get(i);
+//                        }
+//                    }
 
                     return v;
                 }
             });
 
 
-            // Initialize Camera focus
+            // Initialize Camera focus on Vancouver City Hall
             LatLng vancouver = new LatLng(49.2827, -123.1207);
             this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
             CameraPosition initPosition
@@ -173,15 +213,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
     }
 
-    @Override
-    public boolean onMarkerClick(final Marker marker) {
-        for (int i = 0; i < markers.size(); i++) {
-            if (marker.equals(markers.get(i))) {
-                selectMapId = mapIdList.get(i);
-            }
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onMarkerClick(final Marker marker) {
+//        for (int i = 0; i < markers.size(); i++) {
+//            if (marker.equals(markers.get(i))) {
+//                selectMapId = mapIdList.get(i);
+//            }
+//        }
+//        return true;
+//    }
 
     public void updateMarkers(List<Project> projectList) {
         for (Project p : projectList) {
@@ -206,18 +246,4 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         }
     }
 
-
-//    @Override
-//    public void onInfoWindowClick(Marker marker) {
-//        String mapID = "";
-//        for (int i = 0; i < markers.size(); i++) {
-//            if (marker.equals(markers.get(i))) {
-//                mapID = mapIdList.get(i);
-//            }
-//        }
-//        // pass mapID of the selected project to ProjectInfoActivity
-//        Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
-//        intent.putExtra("mapID", mapID);
-//        startActivity(intent);
-//    }
 }

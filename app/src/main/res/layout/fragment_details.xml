@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:outlineProvider="bounds"
     tools:context=".fragments.DetailsFragment">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -37,160 +38,150 @@
                 android:padding="10dp">
 
 
-                <androidx.recyclerview.widget.RecyclerView
+                <ImageView
+                    android:id="@+id/imgv_thumbnail"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@color/colorAccent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/border"
+                    android:contentDescription="@string/details_imageDesc"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/placeholder" />
 
             </FrameLayout>
 
-            <LinearLayout
+            <GridLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/margin_lvl4"
-                android:layout_marginBottom="@dimen/margin_lvl1"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:padding="10dp">
 
                 <!-- Category -->
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_categoryLabel"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    style="@style/DetailsTableStyle">
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    android:layout_gravity="start"
+                    android:drawableStart="@drawable/detail_category_black_24dp"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_categoryLabel"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/detail_category_black_24dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_projectCategory"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="@dimen/margin_lvl4"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_projectCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:layout_marginStart="@dimen/margin_lvl4"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:layout_row="0"
+                    android:layout_column="1" />
 
                 <!-- Type -->
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_typeLabel"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    style="@style/DetailsTableStyle">
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal"
+                    android:drawableStart="@drawable/detail_type_black_24dp"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_typeLabel"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/detail_type_black_24dp"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_projectType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/margin_lvl4"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:layout_row="1"
+                    android:layout_column="1" />
 
-                    <TextView
-                        android:id="@+id/tv_projectType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="@dimen/margin_lvl4"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
 
                 <!-- Address -->
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_addressLabel"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    style="@style/DetailsTableStyle">
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal"
+                    android:drawableStart="@drawable/detail_location_on_black_24dp"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_addressLabel"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/detail_location_on_black_24dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_projectAddress"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginStart="@dimen/margin_lvl4"
-                        android:layout_weight="1" />
-
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_projectAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/margin_lvl4"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:layout_row="2"
+                    android:layout_column="1" />
 
                 <!-- Description -->
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_descLabel"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    style="@style/DetailsTableStyle">
+                    android:layout_row="3"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal"
+                    android:drawableStart="@drawable/detail_description_black_24dp"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_descLabel"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/detail_description_black_24dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_projectDescription"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="4"
-                        android:singleLine="false"
-                        android:layout_marginStart="@dimen/margin_lvl4"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_projectDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="4"
+                    android:singleLine="false"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/margin_lvl4"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:gravity="start"
+                    android:layout_row="3"
+                    android:layout_column="1" />
 
                 <!-- Website -->
-                <LinearLayout
+                <TextView
+                    android:id="@+id/tv_websiteLabel"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    style="@style/DetailsTableStyle">
+                    android:layout_row="4"
+                    android:layout_column="0"
+                    android:layout_gravity="center_horizontal"
+                    android:drawableStart="@drawable/detail_website_black_24dp"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tv_websiteLabel"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_horizontal"
-                        android:drawableStart="@drawable/detail_website_black_24dp"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/tv_projectWebsite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:gravity="start"
+                    android:maxLines="4"
+                    android:singleLine="false"
+                    android:layout_marginStart="@dimen/margin_lvl4"
+                    android:layout_marginBottom="@dimen/margin_lvl3"
+                    android:layout_row="4"
+                    android:layout_column="1"/>
 
-                    <TextView
-                        android:id="@+id/tv_projectWebsite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="4"
-                        android:singleLine="false"
-                        android:layout_marginStart="@dimen/margin_lvl4"
-                        android:layout_weight="1" />
+            </GridLayout>
 
-                </LinearLayout>
-
-
-            </LinearLayout>
 
         </LinearLayout>
 

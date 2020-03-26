@@ -16,7 +16,7 @@ public class ProjectInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_project_info);
 
-        String mapID = getIntent().getStringExtra("mapID");
+        String mapID = getIntent().getStringExtra("mapId");
         ProjectInfoAdapter adapter = new ProjectInfoAdapter(getSupportFragmentManager(), getLifecycle(), mapID);
 
         final ViewPager2 viewPager = findViewById(R.id.vpager_info);

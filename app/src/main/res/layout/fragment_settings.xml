@@ -5,39 +5,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/enableLocationSwitch"
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/settings_enablelocation"
-            style="@style/SettingTextStyle"/>
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/SettingTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="@string/settings_maxresult" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <View
-            android:id="@+id/divider1"
+            android:id="@+id/divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/listDivider" />
-
-        <Switch
-            android:id="@+id/darkAppearanceSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/settings_appearance"
-            style="@style/SettingTextStyle" />
-
-        <View
-            android:id="@+id/divider2"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider" />
-
-
-
 
     </LinearLayout>
+
 
     <TextView
         android:id="@+id/termsOfService"
@@ -50,12 +51,13 @@
 
     <TextView
         android:id="@+id/txtv_aboutus"
+        style="@style/SettingTextStyle.AuxiliaryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/margin_lvl4"
-        android:text="@string/settings_aboutus"
-        style="@style/SettingTextStyle.AuxiliaryText" />
+        android:text="@string/settings_aboutus" />
+
 
 
 

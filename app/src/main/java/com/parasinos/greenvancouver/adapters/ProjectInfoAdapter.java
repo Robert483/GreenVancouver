@@ -15,9 +15,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 public class ProjectInfoAdapter extends FragmentStateAdapter {
 
     private String mapId;
-    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String mapID) {
+    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String mapId) {
         super(fragmentManager, lifecycle);
-        this.mapId = mapID;
+        this.mapId = mapId;
     }
 
     @NonNull

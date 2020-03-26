@@ -48,6 +48,7 @@
     <!--For Settings fragment -->
     <string name="settings_enablelocation">Enable Location</string>
     <string name="settings_appearance">Dark Appearance</string>
+    <string name="settings_maxresult">Max Number of Results </string>
     <string name="settings_tos"><u>Terms of Service</u></string>
     <string name="settings_aboutus"><u>About Us</u></string>
 
