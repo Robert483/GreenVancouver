@@ -46,6 +46,7 @@ public class BookmarksFragment extends Fragment {
     DatabaseReference databaseBookmarks = FirebaseDatabase.getInstance().getReference("users");
     FirebaseUser user = mAuth.getCurrentUser();
     BookmarksAdapter adapter;
+    ActionMode actionMode = null;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -74,6 +75,7 @@ public class BookmarksFragment extends Fragment {
                 // Inflate the menu for the CAB
                 MenuInflater inflater = mode.getMenuInflater();
                 inflater.inflate(R.menu.toolbar_cab, menu);
+                actionMode = mode;
                 return true;
             }
 
@@ -88,6 +90,7 @@ public class BookmarksFragment extends Fragment {
                     case R.id.action_delete:
                         for (Bookmark i : toDelete) {
                             adapter.remove(i);
+                            databaseBookmarks.child(user.getUid()).child("bookmarks").child(i.getMapid()).removeValue();
                         }
                         adapter.notifyDataSetChanged();
                         mode.finish();
@@ -99,7 +102,7 @@ public class BookmarksFragment extends Fragment {
 
             @Override
             public void onDestroyActionMode(ActionMode mode) {
-
+                actionMode = null;
             }
         });
 
@@ -129,7 +132,8 @@ public class BookmarksFragment extends Fragment {
                         Log.d("USER", bookmarksSnapshot.getKey());
                         String name = bookmarksSnapshot.child("name").getValue().toString();
                         String address = bookmarksSnapshot.child("address").getValue().toString();
-                        Bookmark bookmark = new Bookmark(address, name);
+                        String mapid = bookmarksSnapshot.child("mapid").getValue().toString();
+                        Bookmark bookmark = new Bookmark(address, name, mapid);
                         bookmarkList.add(bookmark);
                     }
 
@@ -149,5 +153,13 @@ public class BookmarksFragment extends Fragment {
         }
 
 
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+        //Destroy action mode
+        if(actionMode != null)
+            actionMode.finish();
     }
 }
