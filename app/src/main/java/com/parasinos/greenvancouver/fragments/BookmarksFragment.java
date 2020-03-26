@@ -1,7 +1,5 @@
 package com.parasinos.greenvancouver.fragments;
 
-import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -12,10 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,25 +24,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.parasinos.greenvancouver.Bookmark;
-import com.parasinos.greenvancouver.LoginActivity;
-import com.parasinos.greenvancouver.MainActivity;
 import com.parasinos.greenvancouver.R;
 import com.parasinos.greenvancouver.adapters.BookmarksAdapter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class BookmarksFragment extends Fragment {
-    ListView lvBookmarks;
-    List<Bookmark> bookmarkList;
+    private ListView lvBookmarks;
+    private List<Bookmark> bookmarkList;
     private ArrayList<Bookmark> toDelete;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    DatabaseReference databaseBookmarks = FirebaseDatabase.getInstance().getReference("users");
-    FirebaseUser user = mAuth.getCurrentUser();
-    BookmarksAdapter adapter;
-    ActionMode actionMode = null;
+    private DatabaseReference databaseBookmarks = FirebaseDatabase.getInstance().getReference("users");
+    private FirebaseUser user = mAuth.getCurrentUser();
+    private BookmarksAdapter adapter;
+    private ActionMode actionMode = null;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
