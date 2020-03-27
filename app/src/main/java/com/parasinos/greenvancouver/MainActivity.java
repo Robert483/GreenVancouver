@@ -3,6 +3,8 @@ package com.parasinos.greenvancouver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -116,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             logoutBtn.setVisibility(View.GONE);
             tvUsername.setText("Not logged in");
             tvEmail.setVisibility(View.GONE);
+
         }else{
             user = mAuth.getCurrentUser();
 
