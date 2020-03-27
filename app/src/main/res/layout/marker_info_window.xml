@@ -11,7 +11,9 @@
         android:layout_height="80dp"
         android:contentDescription="@string/details_imageDesc"
         android:padding="@dimen/margin_lvl4"
-        android:src="@mipmap/ic_launcher_round" />
+        android:layout_marginEnd="@dimen/margin_lvl3"
+        android:background="@drawable/map_image_border"
+        android:src="@drawable/map_city_of_vancouver_logo" />
 
     <LinearLayout
         android:layout_width="180dp"
@@ -24,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_lvl4"
             android:textSize="16sp" />
+
 
         <TextView
             android:id="@+id/snippet"

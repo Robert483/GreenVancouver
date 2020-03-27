@@ -12,8 +12,9 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -28,16 +29,16 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+//import com.google.firebase.database.DataSnapshot;
+//import com.google.firebase.database.DatabaseError;
+//import com.google.firebase.database.DatabaseReference;
+//import com.google.firebase.database.FirebaseDatabase;
+//import com.google.firebase.database.ValueEventListener;
 import com.parasinos.greenvancouver.ProjectInfoActivity;
 import com.parasinos.greenvancouver.R;
 import com.parasinos.greenvancouver.models.Project;
-import com.parasinos.greenvancouver.tasks.ImageDownloaderTask;
 import com.parasinos.greenvancouver.tasks.MapMarkerGenerator;
+//import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
         bMapType.setOnClickListener(this);
         Button bTransDetails = v.findViewById(R.id.transDetail);
         bTransDetails.setOnClickListener(this);
+        Button bBookMark = v.findViewById(R.id.bookMark);
+        bBookMark.setOnClickListener(this);
 
         // fragment EditText editor action handling
         EditText etQuery = v.findViewById(R.id.searchText);
@@ -87,6 +90,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
                     Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
                     intent.putExtra("mapId", selectMapId);
                     startActivity(intent);
+                }
+                break;
+            case R.id.bookMark:
+                if (!selectMapId.equals("")) {
+                    // TODO
+
+                    Toast.makeText(getActivity(), "Bookmarked " + selectMapId,
+                            Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.btnChangeMapType:
@@ -132,6 +143,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
         super.onViewCreated(view, savedInstanceState);
+
+        // initialise markers and mapIdList fo each query
         markers = new ArrayList<>();
         mapIdList = new ArrayList<>();
 
@@ -153,7 +166,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
         this.googleMap = googleMap;
 
         if (this.googleMap != null) {
-
+            // set up infoWindow adapter
             this.googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
                 @Override
                 public View getInfoWindow(Marker marker) {
@@ -161,42 +174,52 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
                 }
 
                 @Override
-                public View getInfoContents(Marker marker) {
-                    @SuppressLint("InflateParams") View v = getLayoutInflater().inflate(R.layout.marker_info_window, null);
+                public View getInfoContents(final Marker marker) {
+                    @SuppressLint("InflateParams") final View v = getLayoutInflater().inflate(R.layout.marker_info_window, null);
                     for (int i = 0; i < markers.size(); i++) {
                         if (marker.equals(markers.get(i))) {
                             selectMapId = mapIdList.get(i);
                         }
                     }
-                    final ImageView ivInfo = v.findViewById(R.id.markerInfoImg);
+//                    final ImageView ivInfo = v.findViewById(R.id.markerInfoImg);
                     TextView tvTitle = v.findViewById(R.id.projectTitle);
-                    TextView tvSnippet = v.findViewById(R.id.snippet);
+                    final TextView tvSnippet = v.findViewById(R.id.snippet);
 
-                    String path = String.join("/", "projects", selectMapId, "Images", "0");
-                    DatabaseReference dbImageRef = FirebaseDatabase.getInstance().getReference(path);
-                    dbImageRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            String imgUrl = Objects.requireNonNull(dataSnapshot.getValue(String.class));
-                            if (!imgUrl.equals("")) {
-                                new ImageDownloaderTask(ivInfo).execute(imgUrl);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+//                    String path = String.join("/", "projects", selectMapId, "images", "0");
+//                    DatabaseReference dbImageRef = FirebaseDatabase.getInstance().getReference(path);
+//                    dbImageRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            Log.v("E_Value", "DATA: " + dataSnapshot.getValue());
+//                            String imgUrl = (String) dataSnapshot.getValue();
+//                            assert imgUrl != null;
+//                            if (!imgUrl.equals("")) {
+//                                Toast.makeText(getActivity(), imgUrl, Toast.LENGTH_SHORT).show();
+//                                Picasso.get().load(imgUrl).into(ivInfo);
+//
+//                                Picasso.get().load(imgUrl).into(ivInfo, new com.squareup.picasso.Callback() {
+//                                    @Override
+//                                    public void onSuccess() {
+//                                        tvSnippet.setText(marker.getSnippet());
+//                                        if (marker.isInfoWindowShown()){
+//                                            marker.showInfoWindow();
+//                                        }
+//                                    }
+//                                    @Override
+//                                    public void onError(Exception e) {
+//                                    }
+//                                });
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                        }
+//                    });
 
                     tvTitle.setText(marker.getTitle());
                     tvSnippet.setText(marker.getSnippet());
-
-//                    for (int i = 0; i < markers.size(); i++) {
-//                        if (marker.equals(markers.get(i))) {
-//                            selectMapId = mapIdList.get(i);
-//                        }
-//                    }
 
                     return v;
                 }
@@ -231,16 +254,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
             String mapID = p.getField().getMapID();
             mapIdList.add(mapID);
             String address = p.getField().getAddress();
-//            String desc = p.getField().getShortDescription();
-//            String snippetStr = address + "\n" + desc;
 
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
             markerOptions.title(title);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
             markerOptions.snippet(address);
-//            Marker marker = googleMap.addMarker(new MarkerOptions().position(latLng).title(title)
-//                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
             Marker marker = googleMap.addMarker(markerOptions);
             markers.add(marker);
         }

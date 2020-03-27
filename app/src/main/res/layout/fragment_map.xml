@@ -76,6 +76,16 @@
             android:paddingEnd="10dp" />
 
         <Button
+            android:id="@+id/bookMark"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:backgroundTint="@color/colorBtnWhite"
+            android:drawableEnd="@drawable/map_bookmark_border_black_24dp"
+            android:gravity="center"
+            android:paddingStart="2dp"
+            android:paddingEnd="13dp" />
+
+        <Button
             android:id="@+id/btnChangeMapType"
             android:layout_width="50dp"
             android:layout_height="50dp"
