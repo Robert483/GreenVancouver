@@ -1,10 +1,13 @@
 package com.parasinos.greenvancouver.fragments;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +15,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-//import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,29 +31,34 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-//import com.google.firebase.database.DataSnapshot;
-//import com.google.firebase.database.DatabaseError;
-//import com.google.firebase.database.DatabaseReference;
-//import com.google.firebase.database.FirebaseDatabase;
-//import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.parasinos.greenvancouver.ProjectInfoActivity;
 import com.parasinos.greenvancouver.R;
+import com.parasinos.greenvancouver.adapters.ProjectWindowAdapter;
 import com.parasinos.greenvancouver.models.Project;
 import com.parasinos.greenvancouver.tasks.MapMarkerGenerator;
-//import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
-public class MapFragment extends Fragment implements OnMapReadyCallback, //GoogleMap.OnMarkerClickListener,
+public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
         View.OnClickListener, EditText.OnEditorActionListener {
 
     private GoogleMap googleMap;
     private List<Marker> markers;
     private List<String> mapIdList;
     private String selectMapId = "";
+
+    private MarkerTarget target;
+    private ProjectWindowAdapter windowAdapter;
+    private FirebaseDatabase database;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +79,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
         // fragment EditText editor action handling
         EditText etQuery = v.findViewById(R.id.searchText);
         etQuery.setOnEditorActionListener(this);
+
+        this.windowAdapter = new ProjectWindowAdapter(getContext());
+        this.database = FirebaseDatabase.getInstance();
+        this.target = new MarkerTarget();
 
         return v;
     }
@@ -167,63 +178,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
 
         if (this.googleMap != null) {
             // set up infoWindow adapter
-            this.googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
-                @Override
-                public View getInfoWindow(Marker marker) {
-                    return null;
-                }
-
-                @Override
-                public View getInfoContents(final Marker marker) {
-                    @SuppressLint("InflateParams") final View v = getLayoutInflater().inflate(R.layout.marker_info_window, null);
-                    for (int i = 0; i < markers.size(); i++) {
-                        if (marker.equals(markers.get(i))) {
-                            selectMapId = mapIdList.get(i);
-                        }
-                    }
-//                    final ImageView ivInfo = v.findViewById(R.id.markerInfoImg);
-                    TextView tvTitle = v.findViewById(R.id.projectTitle);
-                    final TextView tvSnippet = v.findViewById(R.id.snippet);
-
-//                    String path = String.join("/", "projects", selectMapId, "images", "0");
-//                    DatabaseReference dbImageRef = FirebaseDatabase.getInstance().getReference(path);
-//                    dbImageRef.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                            Log.v("E_Value", "DATA: " + dataSnapshot.getValue());
-//                            String imgUrl = (String) dataSnapshot.getValue();
-//                            assert imgUrl != null;
-//                            if (!imgUrl.equals("")) {
-//                                Toast.makeText(getActivity(), imgUrl, Toast.LENGTH_SHORT).show();
-//                                Picasso.get().load(imgUrl).into(ivInfo);
-//
-//                                Picasso.get().load(imgUrl).into(ivInfo, new com.squareup.picasso.Callback() {
-//                                    @Override
-//                                    public void onSuccess() {
-//                                        tvSnippet.setText(marker.getSnippet());
-//                                        if (marker.isInfoWindowShown()){
-//                                            marker.showInfoWindow();
-//                                        }
-//                                    }
-//                                    @Override
-//                                    public void onError(Exception e) {
-//                                    }
-//                                });
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                        }
-//                    });
-
-                    tvTitle.setText(marker.getTitle());
-                    tvSnippet.setText(marker.getSnippet());
-
-                    return v;
-                }
-            });
+            this.googleMap.setInfoWindowAdapter(this.windowAdapter);
+            this.googleMap.setOnMarkerClickListener(this);
 
 
             // Initialize Camera focus on Vancouver City Hall
@@ -236,15 +192,38 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
 
     }
 
-//    @Override
-//    public boolean onMarkerClick(final Marker marker) {
-//        for (int i = 0; i < markers.size(); i++) {
-//            if (marker.equals(markers.get(i))) {
-//                selectMapId = mapIdList.get(i);
-//            }
-//        }
-//        return true;
-//    }
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        for (int i = 0; i < markers.size(); i++) {
+            if (marker.equals(markers.get(i))) {
+                selectMapId = mapIdList.get(i);
+            }
+        }
+
+        String path = String.join("/", "projects", selectMapId, "images", "0");
+        database.getReference(path).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.v("E_Value", "DATA: " + dataSnapshot.getValue());
+                String imgUrl = (String) dataSnapshot.getValue();
+                assert imgUrl != null;
+                if (TextUtils.isEmpty(imgUrl)) {
+                    return;
+                }
+
+                Toast.makeText(getActivity(), imgUrl, Toast.LENGTH_SHORT).show();
+                target.setMarker(marker);
+                Picasso.get().load(imgUrl).into(target);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Do nothing
+            }
+        });
+
+        return false;
+    }
 
     public void updateMarkers(List<Project> projectList) {
         for (Project p : projectList) {
@@ -262,6 +241,30 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, //Googl
             markerOptions.snippet(address);
             Marker marker = googleMap.addMarker(markerOptions);
             markers.add(marker);
+        }
+    }
+
+    private class MarkerTarget implements Target {
+        private Marker marker;
+
+        private void setMarker(Marker marker) {
+            this.marker = marker;
+        }
+
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            windowAdapter.setImage(bitmap);
+            marker.showInfoWindow();
+        }
+
+        @Override
+        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
         }
     }
 
