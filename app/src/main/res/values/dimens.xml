@@ -3,6 +3,10 @@
     <!-- For all -->
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="widget_margin">8dp</dimen>
+    <dimen name="margin_lvl1">40dp</dimen>
+    <dimen name="margin_lvl2">30dp</dimen>
+    <dimen name="margin_lvl3">20dp</dimen>
+    <dimen name="margin_lvl4">10dp</dimen>
 
     <!-- For Volunteer fragment -->
     <dimen name="volunteer_label_textsize">12sp</dimen>
@@ -10,9 +14,15 @@
     <!-- For Bookmarks Fragment -->
     <dimen name="bookmarks_title">20sp</dimen>
     <dimen name="bookmarks_margin">16dp</dimen>
+    <dimen name="bookmarks_project_title">17sp</dimen>
 
     <!-- For SignUp/Login Activity -->
     <dimen name="signup_input_fields">56dp</dimen>
     <dimen name="signup_margin">32dp</dimen>
+
+    <!-- For Details fragment -->
+    <dimen name="details_share_icon">50dp</dimen>
+    <dimen name="details_attribute_col">200dp</dimen>
+
 
 </resources>

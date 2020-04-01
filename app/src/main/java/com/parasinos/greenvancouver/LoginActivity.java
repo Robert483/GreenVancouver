@@ -44,9 +44,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
-                String email = loginEmail.getText().toString();
-
-                i.putExtra("email", email);
                 startActivity(i);
             }
         });
@@ -75,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(),
                                     "Login successful!", Toast.LENGTH_LONG).show();
+
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);

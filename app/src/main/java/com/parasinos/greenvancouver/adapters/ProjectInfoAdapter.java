@@ -1,5 +1,6 @@
 package com.parasinos.greenvancouver.adapters;
 
+import com.parasinos.greenvancouver.fragments.DetailsFragment;
 import com.parasinos.greenvancouver.fragments.ReviewsFragment;
 import com.parasinos.greenvancouver.fragments.VolunteerFragment;
 
@@ -13,8 +14,10 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ProjectInfoAdapter extends FragmentStateAdapter {
 
-    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
+    private String mapId;
+    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String mapId) {
         super(fragmentManager, lifecycle);
+        this.mapId = mapId;
     }
 
     @NonNull
@@ -22,11 +25,11 @@ public class ProjectInfoAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                throw new UnsupportedOperationException("Not implemented");
+                return DetailsFragment.newInstance(mapId);
             case 1:
                 return ReviewsFragment.newInstance();
             case 2:
-                return VolunteerFragment.newInstance();
+                return VolunteerFragment.newInstance(mapId);
             default:
                 throw new InvalidParameterException("Position is not valid");
         }

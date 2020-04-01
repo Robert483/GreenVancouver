@@ -76,6 +76,7 @@
             android:layout_height="@dimen/signup_input_fields"
             android:layout_marginTop="@dimen/signup_margin"
             android:backgroundTint="@color/cardview_light_background"
+            android:textColor="@color/colorTemp"
             android:text="@string/login_signupbtn" />
 
 

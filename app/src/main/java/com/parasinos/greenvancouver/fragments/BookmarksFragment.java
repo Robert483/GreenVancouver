@@ -1,7 +1,6 @@
 package com.parasinos.greenvancouver.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -115,19 +114,20 @@ public class BookmarksFragment extends Fragment {
         toDelete = new ArrayList<>();
         if (user != null) {
 
-            databaseBookmarks.addValueEventListener(new ValueEventListener() {
+            databaseBookmarks.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     bookmarkList.clear();
                     DataSnapshot userBookmark = dataSnapshot.child(user.getUid()).child("bookmarks");
 
                     for (DataSnapshot bookmarksSnapshot : userBookmark.getChildren()) {
-                        Log.d("USER", bookmarksSnapshot.getKey());
-                        String name = bookmarksSnapshot.child("name").getValue().toString();
-                        String address = bookmarksSnapshot.child("address").getValue().toString();
-                        String mapid = bookmarksSnapshot.child("mapid").getValue().toString();
-                        Bookmark bookmark = new Bookmark(address, name, mapid);
-                        bookmarkList.add(bookmark);
+                        if (!bookmarksSnapshot.getKey().equals("filler")) {
+                            String name = bookmarksSnapshot.child("name").getValue().toString();
+                            String address = bookmarksSnapshot.child("address").getValue().toString();
+                            String mapid = bookmarksSnapshot.child("mapid").getValue().toString();
+                            Bookmark bookmark = new Bookmark(address, name, mapid);
+                            bookmarkList.add(bookmark);
+                        }
                     }
 
                     if (!bookmarkList.isEmpty()) {

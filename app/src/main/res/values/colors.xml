@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryHalf">#7F008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorDivider">#1F000000</color>
     <color name="colorTemp">#4CAF50</color>
     <color name="activated_color">#E8E8E8</color>
+    <color name="colorBtnWhite">#FFFFF0</color>
+    <color name="colorInfoWinBgr">#8FBC8B</color>
+>>>>>>> 679135716376dcb1d12bc4f94f577f122e29e5db
 </resources>

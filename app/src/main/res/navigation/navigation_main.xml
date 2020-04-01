@@ -39,7 +39,7 @@
     <fragment
         android:id="@+id/item_send"
         android:name="com.parasinos.greenvancouver.fragments.SendFragment"
-        android:label="@string/main_send"
+        android:label="@string/app_send"
         tools:layout="@layout/fragment_send" />
 
 </navigation>

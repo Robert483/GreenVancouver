@@ -1,10 +1,9 @@
 package com.parasinos.greenvancouver;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference database;
     private FirebaseUser user;
     private String username;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = navHost.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        sharedPreferences = getSharedPreferences("pref", 0);
     }
 
     @Override
@@ -122,22 +124,24 @@ public class MainActivity extends AppCompatActivity {
         }else{
             user = mAuth.getCurrentUser();
 
-            Query nameQuery = database.orderByChild("name");
-            ValueEventListener valueEventListener = new ValueEventListener() {
+            database.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot ds : dataSnapshot.getChildren()) {
-                        username = ds.child("basicInfo").child("name").getValue().toString();
-                        tvUsername.setText(username);
-
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    DataSnapshot basicInfo = dataSnapshot.child(user.getUid()).child("basicInfo");
+                    for (DataSnapshot value : basicInfo.getChildren()) {
+                        if (value.getKey().equals("name")) {
+                            String name = value.getValue().toString();
+                            tvUsername.setText(name);
+                        }
                     }
+
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
-            };
-            nameQuery.addListenerForSingleValueEvent(valueEventListener);
+            });
             loginBtn.setVisibility(View.GONE);
             logoutBtn.setVisibility(View.VISIBLE);
             tvEmail.setVisibility(View.VISIBLE);

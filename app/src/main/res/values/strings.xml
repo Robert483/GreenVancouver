@@ -2,10 +2,16 @@
 
     <!-- For all -->
     <string name="app_name">GreenVancouver</string>
+    <string name="app_profile">Profile picture</string>
+    <string name="app_send">Send</string>
+    <string name="app_edit">Edit</string>
+    <string name="app_save">Save</string>
+    <string name="app_cancel">Cancel</string>
     <string name="temp_float">5.0</string>
     <string name="temp_int">100</string>
     <string name="temp_name">Lorem I. Dolor</string>
     <string name="temp_email">loremipsumo@dolor.sit</string>
+    <string name="temp_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eleifend nulla mauris, quis lobortis velit suscipit ut. Vivamus tempor blandit rutrum. Etiam dapibus elit a facilisis tincidunt. Morbi in euismod enim. Curabitur at efficitur urna. Nunc ullamcorper, magna sit amet varius pharetra, ante justo condimentum nunc, eget congue turpis ligula sed risus.</string>
 
     <!-- For Splash activity -->
     <string name="splash_city">City</string>
@@ -15,7 +21,6 @@
 
     <!-- For Main activity -->
     <!-- For NavigationView in Main activity -->
-    <string name="main_profile">Profile picture</string>
     <string name="main_map">Map</string>
     <string name="main_bookmarks">Bookmarks</string>
     <string name="main_myreviews">My Reviews</string>
@@ -26,6 +31,13 @@
     <string name="main_login">Login/Sign Up</string>
     <string name="main_logout">Logout</string>
 
+    <!-- For Map fragment -->
+    <string name="searchhint">Search here</string>
+    <string name="search">search</string>
+    <string name="mapType">Toggle Map</string>
+    <string name="zoomIn">+</string>
+    <string name="zoomOut">-</string>
+
     <!-- For Volunteer fragment -->
     <string name="volunteer_organizationname">Organization Name</string>
     <string name="volunteer_organizationdetails">Details</string>
@@ -33,21 +45,42 @@
     <string name="volunteer_name">Name:</string>
     <string name="volunteer_email">Email:</string>
     <string name="volunteer_phone">Phone:</string>
-    <string name="volunteer_message">Message:</string>
+    <string name="volunteer_message">Additional Information (Reason, qualifications, etc.):</string>
     <string name="volunteer_send">Send</string>
+    <string name="volunteer_orgInfo">NOTE: This organization has not provided us with volunteer requirements,
+        but feel free to send them a message!</string>
 
     <!--For Settings fragment -->
     <string name="settings_enablelocation">Enable Location</string>
     <string name="settings_appearance">Dark Appearance</string>
-    <string name="settings_tos">Terms of Service</string>
-    <string name="settings_aboutus">About Us</string>
+    <string name="settings_maxresult">Max Number of Results </string>
+    <string name="settings_tos"><u>Terms of Service</u></string>
+    <string name="settings_aboutus"><u>About Us</u></string>
 
     <!-- For ProjectInfo activity -->
-    <string-array name="projectinfo_tabs">
-        <item>Details</item>
-        <item>Reviews</item>
-        <item>Volunteering</item>
-    </string-array>
+    <string name="projectinfo_details">Details</string>
+    <string name="projectinfo_reviews">Reviews</string>
+    <string name="projectinfo_volunteering">Volunteering</string>
+
+    <!-- For Details Fragment -->
+    <string name="details_nameDummy">Green Vancouver Project Name</string>
+    <string name="details_categoryLabel">Category: </string>
+    <string name="details_typeLabel">Type: </string>
+    <string name="details_addressLabel">Address: </string>
+    <string name="details_descriptionLabel">Description: </string>
+    <string name="details_websiteLabel">Website: </string>
+    <string name="details_imageDesc">Image Gallery</string>
+    <string name="details_api_url">https://opendata.vancouver.ca/api/records/1.0/search/?dataset=greenest-city-projects&amp;refine.mapid=%s</string>
+
+
+    <!-- For Reviews Fragment -->
+    <string name="reviews_yours">Your review</string>
+    <string name="reviews_others">Other reviews</string>
+    <string name="reviews_reviewhint">Share your feedback with the project owner</string>
+    <string name="reviews_noreviews">There are no reviews currently.\nBe the first to do so.</string>
+
+    <!-- For Map fragment -->
+    <string name="map_api_url">https://opendata.vancouver.ca/api/records/1.0/search/?dataset=greenest-city-projects&amp;q=%s&amp;&amp;rows=%d</string>
 
     <!-- For Login activity -->
     <string name="login_loginbtn">Login</string>
@@ -58,5 +91,6 @@
     <string name="bookmarks_warning">Please sign in to view your bookmarks.</string>
     <string name="signup_confirm_password">Confirm Password</string>
     <string name="signup_name"><![CDATA[First & Last Name]]></string>
+
 
 </resources>
