@@ -1,11 +1,23 @@
 package com.parasinos.greenvancouver;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +30,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,13 +42,15 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth mAuth;
     private DatabaseReference database;
     private FirebaseUser user;
-    private String username;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -71,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 onStart();
             }
         });
+
+
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -114,12 +131,18 @@ public class MainActivity extends AppCompatActivity {
         Button logoutBtn = headerView.findViewById(R.id.main_logout);
         final TextView tvUsername = headerView.findViewById(R.id.txtv_username);
         final TextView tvEmail = headerView.findViewById(R.id.txtv_email);
+        final ImageView profilePic = headerView.findViewById(R.id.imgv_profilepicture);
 
         if(currentUser == null){
             loginBtn.setVisibility(View.VISIBLE);
             logoutBtn.setVisibility(View.GONE);
             tvUsername.setText("Not logged in");
             tvEmail.setVisibility(View.GONE);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                profilePic.setImageDrawable(getApplicationContext().getDrawable(R.drawable.app_im_placeholder));
+            } else {
+                profilePic.setImageDrawable(getResources().getDrawable(R.drawable.app_im_placeholder));
+            }
 
         }else{
             user = mAuth.getCurrentUser();
@@ -132,6 +155,8 @@ public class MainActivity extends AppCompatActivity {
                         if (value.getKey().equals("name")) {
                             String name = value.getValue().toString();
                             tvUsername.setText(name);
+                        } else if (value.getKey().equals("profilePicture")) {
+                            Picasso.get().load(value.getValue().toString()).into(profilePic);
                         }
                     }
 
@@ -149,5 +174,48 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
+
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // create an alert builder
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Edit your profile picture");
+                // set the custom layout
+                final View customLayout = getLayoutInflater().inflate(R.layout.profile_picture_edit, null);
+                builder.setView(customLayout);
+                // create and show the alert dialog
+                final AlertDialog dialog = builder.create();
+                Button changeBtn = customLayout.findViewById(R.id.profile_change);
+                Button cancelBtn = customLayout.findViewById(R.id.profile_cancel);
+
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+                changeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        user = mAuth.getCurrentUser();
+                        EditText url = customLayout.findViewById(R.id.profile_url);
+                        if (!TextUtils.isEmpty(url.getText()) || user != null) {
+                            Picasso.get().load(url.getText().toString()).into(profilePic);
+
+                            DatabaseReference info = database.child(user.getUid()).child("basicInfo");
+                            info.child("profilePicture").setValue(url.getText().toString());
+
+                        } else {
+                            Toast.makeText(MainActivity.this, "URL is empty", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
+                dialog.show();
+            }
+        });
     }
+
 }
+

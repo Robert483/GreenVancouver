@@ -91,6 +91,8 @@
     <string name="bookmarks_warning">Please sign in to view your bookmarks.</string>
     <string name="signup_confirm_password">Confirm Password</string>
     <string name="signup_name"><![CDATA[First & Last Name]]></string>
+    <string name="profile_btn_change">Change</string>
+    <string name="profile_btn_cancel">Cancel</string>
 
 
 </resources>
