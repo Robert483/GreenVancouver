@@ -16,8 +16,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -124,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         View headerView = navigationView.getHeaderView(0);
 
+
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance().getReference("users");
 
@@ -175,7 +178,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        profilePic.setOnClickListener(new View.OnClickListener() {
+        ImageButton editPic = headerView.findViewById(R.id.edit_pc_btn);
+
+        editPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // create an alert builder
