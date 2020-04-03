@@ -4,8 +4,9 @@
     package="com.parasinos.greenvancouver">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
@@ -14,6 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".BookmarksListLayout"></activity>
+        <activity
+            android:name=".LoginActivity"
+            android:noHistory="true" />
+        <activity android:name=".SignUpActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

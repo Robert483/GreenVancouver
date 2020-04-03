@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "648362499190-n328hi81341t32d3l2lcfusqgl3481p2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.parasinos.greenvancouver",
+            "certificate_hash": "e081e54132c186b53f7a9ea5921fcf934982ef9d"
+          }
+        },
+        {
           "client_id": "648362499190-lbt0ppmf6qifqh6mkmb82c4quputqa3a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

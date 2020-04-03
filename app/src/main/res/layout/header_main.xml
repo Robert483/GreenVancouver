@@ -5,15 +5,30 @@
     android:orientation="vertical"
     android:padding="@dimen/activity_margin"
     android:theme="@style/NavigationViewTheme">
-
-    <ImageView
-        android:id="@+id/imgv_profilepicture"
-        android:layout_width="108dp"
-        android:layout_height="108dp"
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/app_profile"
-        android:paddingTop="@dimen/widget_margin"
-        android:src="@drawable/app_im_placeholder" />
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imgv_profilepicture"
+            android:layout_width="108dp"
+            android:layout_height="108dp"
+            android:contentDescription="@string/app_profile"
+            android:paddingTop="@dimen/widget_margin"
+            android:src="@drawable/app_im_placeholder" />
+
+        <ImageButton
+            android:id="@+id/edit_pc_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="80dp"
+            android:background="@drawable/profile_edit_pic"/>
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/txtv_username"
@@ -28,5 +43,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/temp_email" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/main_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/main_login" />
+
+        <Button
+            android:id="@+id/main_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/main_logout" />
+    </LinearLayout>
 
 </LinearLayout>
