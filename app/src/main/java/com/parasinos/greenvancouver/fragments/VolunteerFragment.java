@@ -54,7 +54,7 @@ public class VolunteerFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        String service_url = getString(R.string.details_api_url, mapID);
+        String service_url = getString(R.string.details_apiurl, mapID);
         new Retrieval(this, service_url).execute();
         View v = Objects.requireNonNull(getView());
         Button send = v.findViewById(R.id.btn_send);

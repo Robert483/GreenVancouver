@@ -2,22 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LoginActivityTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
-    style="@style/LoginActivityTheme">
+    tools:context=".SignUpActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="@dimen/signup_margin"
-        android:paddingTop="@dimen/signup_margin"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/splash_textlogo"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/splash_im_textlogo" />
 
     <LinearLayout
@@ -40,7 +39,10 @@
             android:layout_marginBottom="@dimen/signup_margin"
             android:background="#90ffffff"
             android:hint="@string/signup_name"
-            android:padding="@dimen/activity_margin" />
+            android:importantForAutofill="no"
+            android:inputType="textPersonName"
+            android:padding="@dimen/activity_margin"
+            android:textColorHint="@color/material_on_primary_emphasis_high_type" />
 
         <EditText
             android:id="@+id/signup_email"
@@ -49,7 +51,10 @@
             android:layout_marginBottom="@dimen/signup_margin"
             android:background="#90ffffff"
             android:hint="@string/login_emailhint"
-            android:padding="@dimen/activity_margin" />
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/activity_margin"
+            android:textColorHint="@color/material_on_primary_emphasis_high_type" />
 
         <EditText
             android:id="@+id/signup_password"
@@ -58,27 +63,30 @@
             android:layout_marginBottom="@dimen/signup_margin"
             android:background="#90ffffff"
             android:hint="@string/login_passwordhint"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:padding="@dimen/activity_margin" />
+            android:padding="@dimen/activity_margin"
+            android:textColorHint="@color/material_on_primary_emphasis_high_type" />
 
         <EditText
             android:id="@+id/signup_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#90ffffff"
-            android:hint="@string/signup_confirm_password"
+            android:hint="@string/signup_confirmpassword"
+            android:importantForAutofill="no"
             android:inputType="textPassword"
-            android:padding="@dimen/activity_margin" />
+            android:padding="@dimen/activity_margin"
+            android:textColorHint="@color/material_on_primary_emphasis_high_type" />
 
         <Button
             android:id="@+id/signup_btn"
             android:layout_width="match_parent"
             android:layout_height="@dimen/signup_input_fields"
             android:layout_marginTop="@dimen/signup_margin"
-            android:backgroundTint="@color/cardview_light_background"
-            android:textColor="@color/colorTemp"
-            android:text="@string/login_signupbtn" />
-
+            android:backgroundTint="@color/material_on_primary_emphasis_high_type"
+            android:text="@string/login_signupbtn"
+            android:textColor="@color/colorLeaf" />
 
     </LinearLayout>
 

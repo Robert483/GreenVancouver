@@ -2,22 +2,21 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/LoginActivityTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity"
-    style="@style/LoginActivityTheme">
+    tools:context=".SignUpActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/signup_margin"
-        android:paddingHorizontal="@dimen/signup_margin"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/splash_textlogo"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/splash_im_textlogo" />
 
     <LinearLayout
@@ -37,48 +36,51 @@
             android:id="@+id/login_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#90ffffff"
-            android:padding="@dimen/activity_margin"
             android:layout_marginBottom="@dimen/signup_margin"
-            android:textColorHint="@color/cardview_light_background"
-            android:hint="@string/login_emailhint" />
+            android:background="#90ffffff"
+            android:hint="@string/login_emailhint"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:padding="@dimen/activity_margin"
+            android:textColorHint="@color/material_on_primary_emphasis_high_type" />
 
         <EditText
             android:id="@+id/login_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#90ffffff"
-            android:padding="@dimen/activity_margin"
-            android:textColorHint="@color/cardview_light_background"
             android:hint="@string/login_passwordhint"
-            android:inputType="textPassword" />
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:padding="@dimen/activity_margin"
+            android:textColorHint="@color/material_on_primary_emphasis_high_type" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/signup_margin"
             android:orientation="horizontal">
-            <Button
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_signup_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/signup_input_fields"
+                android:layout_marginEnd="@dimen/signup_margin"
                 android:layout_weight="1"
-                android:layout_marginRight="@dimen/signup_margin"
-                android:backgroundTint="@color/cardview_light_background"
-                android:textColor="@color/colorTemp"
-                android:text="@string/login_signupbtn" />
+                android:backgroundTint="@color/material_on_primary_emphasis_high_type"
+                android:text="@string/login_signupbtn"
+                android:textColor="@color/colorLeaf" />
 
-
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/login_btn"
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
                 android:layout_height="@dimen/signup_input_fields"
-                android:backgroundTint="@color/cardview_light_background"
-                android:textColor="@color/colorTemp"
-                android:text="@string/login_loginbtn" />
-        </LinearLayout>
+                android:layout_weight="1"
+                android:backgroundTint="@color/material_on_primary_emphasis_high_type"
+                android:text="@string/login_loginbtn"
+                android:textColor="@color/colorLeaf" />
 
+        </LinearLayout>
 
     </LinearLayout>
 

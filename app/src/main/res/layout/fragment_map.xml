@@ -19,44 +19,21 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-<!--        <SearchView-->
-<!--            android:id="@+id/simpleSearchView"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:layout_marginEnd="3dp"-->
-<!--            android:background="@drawable/map_searchbar"-->
-<!--            android:iconifiedByDefault="false"-->
-<!--            android:imeOptions="actionSearch"-->
-<!--            android:queryHint="@string/searchhint"-->
-<!--            android:searchIcon="@null" />-->
-
         <EditText
             android:id="@+id/searchText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:paddingStart="@dimen/margin_lvl4"
-            android:paddingEnd="@dimen/margin_lvl4"
-            android:hint="@string/searchhint"
-            android:drawableStart="@drawable/map_search_dimgray_24dp"
-            android:background="@drawable/map_searchbar"
             android:autofillHints="@string/app_name"
+            android:background="@drawable/map_bg_search_bar"
+            android:drawableStart="@drawable/map_ic_search"
+            android:drawableTint="#7F696969"
+            android:hint="@string/map_searchhint"
+            android:inputType="text"
             android:maxLines="1"
-            android:inputType="text" />
-
-
-<!--        <Button-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="50dp"-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:backgroundTint="@color/colorBtnWhite"-->
-<!--            android:drawableTop="@drawable/map_search_dimgray_24dp"-->
-<!--            android:textColor="#696969" />-->
-
+            android:paddingStart="@dimen/margin_lvl4"
+            android:paddingEnd="@dimen/margin_lvl4" />
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -65,57 +42,61 @@
         android:layout_marginEnd="@dimen/margin_lvl4"
         android:orientation="vertical">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/transDetail"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/colorBtnWhite"
-            android:drawableEnd="@drawable/map_info_black_24dp"
+            android:drawableEnd="@drawable/map_ic_info"
+            android:drawableTint="#696969"
+            android:elevation="8dp"
             android:gravity="center"
             android:paddingStart="2dp"
             android:paddingEnd="10dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/bookMark"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/colorBtnWhite"
-            android:drawableEnd="@drawable/map_bookmark_border_black_24dp"
+            android:drawableEnd="@drawable/map_ic_bookmark"
+            android:drawableTint="#696969"
+            android:elevation="8dp"
             android:gravity="center"
             android:paddingStart="2dp"
             android:paddingEnd="13dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnChangeMapType"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/colorBtnWhite"
-            android:drawableEnd="@drawable/map_layers_dimgray_50dp"
+            android:drawableEnd="@drawable/map_ic_layers"
+            android:drawableTint="#696969"
+            android:elevation="8dp"
             android:paddingStart="10dp"
             android:paddingEnd="5dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnZoomIn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/colorBtnWhite"
-            android:text="@string/zoomIn"
+            android:elevation="8dp"
+            android:text="@string/map_zoomin"
             android:textColor="#696969"
             android:textSize="24sp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnZoomOut"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:backgroundTint="@color/colorBtnWhite"
-            android:text="@string/zoomOut"
+            android:elevation="8dp"
+            android:text="@string/map_zoomout"
             android:textColor="#696969"
             android:textSize="24sp" />
 
-
-
-
     </LinearLayout>
-
 
 </FrameLayout>

@@ -6,31 +6,33 @@
     android:orientation="vertical"
     android:padding="@dimen/bookmarks_margin">
 
-
     <EditText
         android:id="@+id/profile_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter picture url"
+        android:hint="@string/main_profilehint"
+        android:importantForAutofill="no"
+        android:inputType="textUri"
         android:scrollbars="vertical" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        >
-        <Button
+        android:layout_gravity="end">
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/profile_change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/bookmarks_margin"
-            android:text="@string/profile_btn_change"/>
-        <Button
+            android:layout_marginEnd="@dimen/bookmarks_margin"
+            android:text="@string/app_change" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/profile_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_btn_cancel"/>
+            android:text="@string/app_cancel" />
 
     </LinearLayout>
-
 
 </LinearLayout>

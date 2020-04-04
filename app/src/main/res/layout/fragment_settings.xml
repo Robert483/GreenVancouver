@@ -8,7 +8,6 @@
         android:layout_height="100dp"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +38,6 @@
 
     </LinearLayout>
 
-
     <TextView
         android:id="@+id/termsOfService"
         style="@style/SettingTextStyle.AuxiliaryText"
@@ -57,8 +55,5 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/margin_lvl4"
         android:text="@string/settings_aboutus" />
-
-
-
 
 </RelativeLayout>

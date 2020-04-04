@@ -12,31 +12,28 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_lvl4"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="@dimen/margin_lvl4">
 
             <TextView
                 android:id="@+id/tv_projectName"
                 style="@style/DetailsFragmentTitle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/details_nameDummy" />
+                android:layout_height="wrap_content" />
 
             <View
                 android:id="@+id/divider1"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider" />
+                android:background="@color/colorDivider" />
 
             <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp">
-
 
                 <ImageView
                     android:id="@+id/detailImage"
@@ -45,10 +42,10 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:adjustViewBounds="true"
-                    android:background="@drawable/details_image_border"
-                    android:contentDescription="@string/details_imageDesc"
+                    android:background="@drawable/details_bg_border"
+                    android:contentDescription="@string/details_imagedesc"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/details_image_placeholder" />
+                    app:srcCompat="@drawable/details_im_placeholder" />
 
             </FrameLayout>
 
@@ -60,128 +57,126 @@
                 <!-- Category -->
                 <TextView
                     android:id="@+id/tv_categoryLabel"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="0"
                     android:layout_column="0"
                     android:layout_gravity="start"
-                    android:drawableStart="@drawable/detail_category_black_24dp"
                     android:layout_marginBottom="@dimen/margin_lvl4"
+                    android:drawableStart="@drawable/details_ic_category"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_projectCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_row="0"
+                    android:layout_column="1"
                     android:layout_gravity="start"
-                    android:gravity="start"
                     android:layout_marginStart="@dimen/margin_lvl4"
                     android:layout_marginBottom="@dimen/margin_lvl4"
-                    android:layout_row="0"
-                    android:layout_column="1" />
+                    android:gravity="start" />
 
                 <!-- Type -->
                 <TextView
                     android:id="@+id/tv_typeLabel"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="1"
                     android:layout_column="0"
                     android:layout_gravity="center_horizontal"
-                    android:drawableStart="@drawable/detail_type_black_24dp"
                     android:layout_marginBottom="@dimen/margin_lvl4"
+                    android:drawableStart="@drawable/details_ic_type"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_projectType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_row="1"
+                    android:layout_column="1"
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/margin_lvl4"
-                    android:layout_marginBottom="@dimen/margin_lvl4"
-                    android:layout_row="1"
-                    android:layout_column="1" />
-
+                    android:layout_marginBottom="@dimen/margin_lvl4" />
 
                 <!-- Address -->
                 <TextView
                     android:id="@+id/tv_addressLabel"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="2"
                     android:layout_column="0"
                     android:layout_gravity="center_horizontal"
-                    android:drawableStart="@drawable/detail_location_on_black_24dp"
                     android:layout_marginBottom="@dimen/margin_lvl4"
+                    android:drawableStart="@drawable/details_ic_location"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_projectAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_row="2"
+                    android:layout_column="1"
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/margin_lvl4"
-                    android:layout_marginBottom="@dimen/margin_lvl4"
-                    android:layout_row="2"
-                    android:layout_column="1" />
+                    android:layout_marginBottom="@dimen/margin_lvl4" />
 
                 <!-- Description -->
                 <TextView
                     android:id="@+id/tv_descLabel"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="3"
                     android:layout_column="0"
                     android:layout_gravity="center_horizontal"
-                    android:drawableStart="@drawable/detail_description_black_24dp"
                     android:layout_marginBottom="@dimen/margin_lvl4"
+                    android:drawableStart="@drawable/details_ic_description"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_projectDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:maxLines="4"
-                    android:singleLine="false"
+                    android:layout_row="3"
+                    android:layout_column="1"
                     android:layout_gravity="start"
                     android:layout_marginStart="@dimen/margin_lvl4"
                     android:layout_marginBottom="@dimen/margin_lvl4"
                     android:gravity="start"
-                    android:layout_row="3"
-                    android:layout_column="1" />
+                    android:maxLines="4"
+                    android:singleLine="false" />
 
                 <!-- Website -->
                 <TextView
                     android:id="@+id/tv_websiteLabel"
-                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="4"
                     android:layout_column="0"
                     android:layout_gravity="center_horizontal"
-                    android:drawableStart="@drawable/detail_website_black_24dp"
                     android:layout_marginBottom="@dimen/margin_lvl4"
+                    android:drawableStart="@drawable/details_ic_website"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_projectWebsite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_row="4"
+                    android:layout_column="1"
                     android:layout_gravity="start"
-                    android:gravity="start"
-                    android:maxLines="4"
-                    android:singleLine="false"
                     android:layout_marginStart="@dimen/margin_lvl4"
                     android:layout_marginBottom="@dimen/margin_lvl4"
-                    android:layout_row="4"
-                    android:layout_column="1"/>
+                    android:gravity="start"
+                    android:maxLines="4"
+                    android:singleLine="false" />
 
             </GridLayout>
-
 
         </LinearLayout>
 
@@ -189,37 +184,36 @@
             android:id="@+id/divider2"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="?android:attr/listDivider" />
+            android:background="@color/colorDivider" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_lvl1"
             android:layout_marginBottom="@dimen/margin_lvl2"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal">
+            android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_lvl4"
-                android:contentDescription="@string/details_imageDesc"
-                android:src="@drawable/details_share_ic_facebook" />
+                android:contentDescription="@string/details_imagedesc"
+                android:src="@drawable/details_ic_facebook" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_lvl4"
-                android:contentDescription="@string/details_imageDesc"
-                android:src="@drawable/details_share_ic_twitter" />
+                android:contentDescription="@string/details_imagedesc"
+                android:src="@drawable/details_ic_twitter" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_lvl4"
-                android:contentDescription="@string/details_imageDesc"
-                android:src="@drawable/details_share_ic_instagram" />
-
+                android:contentDescription="@string/details_imagedesc"
+                android:src="@drawable/details_ic_instagram" />
 
         </LinearLayout>
 

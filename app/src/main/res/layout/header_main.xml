@@ -2,64 +2,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/main_bg_vancouver"
+    android:backgroundTint="#5F000000"
+    android:backgroundTintMode="src_over"
     android:orientation="vertical"
-    android:padding="@dimen/activity_margin"
-    android:theme="@style/NavigationViewTheme">
+    android:padding="@dimen/activity_margin">
+
     <RelativeLayout
-        android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="108dp"
+        android:layout_height="108dp"
         android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imgv_profilepicture"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/app_profile"
             android:paddingTop="@dimen/widget_margin"
-            android:src="@drawable/app_im_placeholder" />
+            android:scaleType="centerCrop" />
 
         <ImageButton
             android:id="@+id/edit_pc_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="80dp"
-            android:background="@drawable/profile_edit_pic"/>
-    </RelativeLayout>
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/app_sh_rounded_filled_button"
+            android:backgroundTint="#CC000000"
+            android:contentDescription="@string/app_edit"
+            android:padding="@dimen/widget_margin"
+            android:src="@drawable/app_ic_edit"
+            android:tint="@android:color/white" />
 
+    </RelativeLayout>
 
     <TextView
         android:id="@+id/txtv_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/widget_margin"
-        android:text="@string/temp_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
         android:id="@+id/txtv_email"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/temp_email" />
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/main_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/widget_margin"
             android:layout_weight="1"
             android:text="@string/main_login" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/main_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/main_logout" />
+
     </LinearLayout>
 
 </LinearLayout>

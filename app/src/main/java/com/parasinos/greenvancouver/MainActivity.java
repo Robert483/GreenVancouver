@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Edit your profile picture");
                 // set the custom layout
-                final View customLayout = View.inflate(MainActivity.this, R.layout.profile_picture_edit, null);
+                final View customLayout = View.inflate(MainActivity.this, R.layout.dialog_profile_editor, null);
                 builder.setView(customLayout);
                 // create and show the alert dialog
                 final AlertDialog dialog = builder.create();
@@ -197,4 +197,3 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-

@@ -13,7 +13,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:activatedBackgroundIndicator">@drawable/activatedbackground</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/app_bg_indicator</item>
         <item name="android:textColor">@color/material_on_background_emphasis_medium</item>
     </style>
 
@@ -24,27 +24,23 @@
     </style>
 
     <style name="SplashActivityTheme" parent="AppTheme.NoActionBar">
-        <item name="android:windowBackground">@color/colorTemp</item>
+        <item name="android:windowBackground">@color/colorLeaf</item>
     </style>
 
-    <style name="NavigationViewTheme" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="android:background">@color/colorTemp</item>
-    </style>
-
-    <style name="VolunteerFragmentTheme">
+    <style name="VolunteerFragmentTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="android:padding">@dimen/activity_margin</item>
         <item name="android:textSize">@dimen/volunteer_label_textsize</item>
     </style>
 
-    <style name="LoginActivityTheme">
-        <item name="android:background">@color/colorTemp</item>
+    <style name="LoginActivityTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="android:background">@color/colorLeaf</item>
     </style>
 
-    <style name="BookmarksFragmentTheme">
-        <item name="android:layout_margin">@dimen/activity_margin</item>
+    <style name="BookmarksFragmentTheme" parent="ThemeOverlay.MaterialComponents.Dark">
         <item name="windowActionModeOverlay">true</item>
-        <item name="android:activatedBackgroundIndicator">@drawable/activatedbackground</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/app_bg_indicator</item>
     </style>
+
     <style name="SettingTextStyle" parent="TextAppearance.AppCompat">
         <item name="android:layout_marginStart">10sp</item>
         <item name="android:layout_marginTop">15dp</item>

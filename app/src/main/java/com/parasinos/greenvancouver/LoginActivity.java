@@ -90,4 +90,3 @@ public class LoginActivity extends AppCompatActivity {
         signupBtn = findViewById(R.id.login_signup_btn);
     }
 }
-

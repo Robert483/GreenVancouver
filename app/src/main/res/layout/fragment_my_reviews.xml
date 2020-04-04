@@ -6,15 +6,32 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/bookmarks_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
+        android:text="@string/myreviews_title"
+        android:textColor="@color/material_on_background_emphasis_high_type"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtv_nouser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_margin"
+        android:text="@string/myreviews_warning"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+        android:textColor="@color/material_on_background_emphasis_medium"
+        android:visibility="gone" />
+
+    <TextView
         android:id="@+id/txtv_noreviews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/activity_margin"
-        android:layout_marginVertical="@dimen/widget_margin"
-        android:gravity="center"
         android:text="@string/myreviews_noreviews"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textColor="@color/material_on_background_emphasis_high_type"
+        android:textColor="@color/material_on_background_emphasis_medium"
         android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

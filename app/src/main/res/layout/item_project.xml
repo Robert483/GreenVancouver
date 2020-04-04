@@ -11,8 +11,8 @@
         android:layout_height="80dp"
         android:layout_marginEnd="@dimen/margin_lvl3"
         android:adjustViewBounds="true"
-        android:background="@drawable/map_image_border"
-        android:contentDescription="@string/details_imageDesc"
+        android:background="@drawable/map_bg_border"
+        android:contentDescription="@string/details_imagedesc"
         android:scaleType="fitXY" />
 
     <LinearLayout
@@ -27,15 +27,12 @@
             android:layout_marginBottom="@dimen/margin_lvl4"
             android:textSize="16sp" />
 
-
         <TextView
             android:id="@+id/snippet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end" />
 
-
     </LinearLayout>
-
 
 </LinearLayout>

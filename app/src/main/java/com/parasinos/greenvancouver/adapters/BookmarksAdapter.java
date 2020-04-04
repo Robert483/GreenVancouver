@@ -27,7 +27,7 @@ public class BookmarksAdapter extends ArrayAdapter<Bookmark> {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
 
     public BookmarksAdapter(FragmentActivity context, List<Bookmark> bookmarksList) {
-        super(context, R.layout.bookmarks_list_layout, bookmarksList);
+        super(context, R.layout.item_bookmark, bookmarksList);
         this.context = context;
         this.bookmarksList = bookmarksList;
     }
@@ -37,7 +37,7 @@ public class BookmarksAdapter extends ArrayAdapter<Bookmark> {
     public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View listViewItem;
         if (convertView == null) {
-            listViewItem = View.inflate(context, R.layout.bookmarks_list_layout, null);
+            listViewItem = View.inflate(context, R.layout.item_bookmark, null);
         } else {
             listViewItem = convertView;
         }

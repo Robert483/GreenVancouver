@@ -52,7 +52,7 @@ public class DetailsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        String service_url = getString(R.string.details_api_url, mapID);
+        String service_url = getString(R.string.details_apiurl, mapID);
         new SimpleRetrieval(this, service_url).execute();
     }
 

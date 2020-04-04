@@ -62,7 +62,7 @@ public class BookmarksFragment extends Fragment {
             public boolean onCreateActionMode(ActionMode mode, Menu menu) {
                 // Inflate the menu for the CAB
                 MenuInflater inflater = mode.getMenuInflater();
-                inflater.inflate(R.menu.toolbar_cab, menu);
+                inflater.inflate(R.menu.cab_bookmarks, menu);
                 actionMode = mode;
                 return true;
             }

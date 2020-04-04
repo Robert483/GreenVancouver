@@ -18,7 +18,7 @@ public class ProjectWindowAdapter implements GoogleMap.InfoWindowAdapter {
     private ImageView ivInfo;
 
     public ProjectWindowAdapter(Context context) {
-        view = View.inflate(context, R.layout.marker_info_window, null);
+        view = View.inflate(context, R.layout.item_project, null);
         tvTitle = view.findViewById(R.id.projectTitle);
         tvSnippet = view.findViewById(R.id.snippet);
         ivInfo = view.findViewById(R.id.markerInfoImg);
