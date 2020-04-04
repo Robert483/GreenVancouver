@@ -225,7 +225,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     return;
                 }
 
-                Toast.makeText(getActivity(), imgUrl, Toast.LENGTH_SHORT).show();
                 target.setMarker(marker);
                 Picasso.get()
                         .load(imgUrl)
@@ -255,7 +254,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(latLng);
             markerOptions.title(title);
-            markerOptions.icon(BitmapDescriptorFactory.defaultMarker(122));
+            markerOptions.icon(BitmapDescriptorFactory.defaultMarker());
             markerOptions.snippet(address);
             Marker marker = googleMap.addMarker(markerOptions);
             markers.add(marker);

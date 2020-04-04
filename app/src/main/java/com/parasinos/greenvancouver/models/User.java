@@ -4,6 +4,10 @@ public class User {
     private String name;
     private String profilePicture;
 
+    @SuppressWarnings("unused")
+    public User() {
+    }
+
     public User(String name, String profilePicture) {
         this.name = name;
         this.profilePicture = profilePicture;

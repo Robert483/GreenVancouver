@@ -36,7 +36,7 @@
         <item name="android:background">@color/colorLeaf</item>
     </style>
 
-    <style name="BookmarksFragmentTheme" parent="ThemeOverlay.MaterialComponents.Dark">
+    <style name="BookmarksFragmentTheme" parent="ThemeOverlay.AppCompat.Dark">
         <item name="windowActionModeOverlay">true</item>
         <item name="android:activatedBackgroundIndicator">@drawable/app_bg_indicator</item>
     </style>

@@ -32,7 +32,7 @@ public class MyReviewsFragment extends Fragment {
     private boolean isInitialized = false;
     private DatabaseReference reviewsRef;
     private MyReviewAdapter reviewAdapter;
-    private TextView viewNoReviews;
+    private TextView txtvMessage;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,47 +42,49 @@ public class MyReviewsFragment extends Fragment {
         if (user != null) {
             String path = String.join("/", "users", user.getUid(), "reviews");
             reviewsRef = FirebaseDatabase.getInstance().getReference(path);
-        } else {
-            String path = String.join("/", "users", "testuser5", "reviews");
-            reviewsRef = FirebaseDatabase.getInstance().getReference(path);
         }
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_my_reviews, container, false);
-        viewNoReviews = root.findViewById(R.id.txtv_noreviews);
+        txtvMessage = root.findViewById(R.id.txtv_message);
 
-        if (reviewsRef != null) {
-            reviewsRef.addChildEventListener(new MyReviewEventListener());
-            reviewsRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    List<Review> reviews = new ArrayList<>();
-                    for (DataSnapshot reviewSnapshot : dataSnapshot.getChildren()) {
-                        Review review = Objects.requireNonNull(reviewSnapshot.getValue(Review.class));
-                        review.setKey(reviewSnapshot.getKey());
-                        reviews.add(review);
-                    }
-
-                    reviewAdapter = new MyReviewAdapter(reviews);
-                    if (reviews.size() == 0) {
-                        viewNoReviews.setVisibility(View.VISIBLE);
-                    }
-
-                    RecyclerView recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.ryclerv_reviews);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                    recyclerView.setAdapter(reviewAdapter);
-
-                    isInitialized = true;
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // Do nothing
-                }
-            });
+        if (reviewsRef == null) {
+            txtvMessage.setText(R.string.myreviews_warning);
+            txtvMessage.setVisibility(View.VISIBLE);
+            return root;
         }
+
+        txtvMessage.setText(R.string.myreviews_noreviews);
+        reviewsRef.addChildEventListener(new MyReviewEventListener());
+        reviewsRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                List<Review> reviews = new ArrayList<>();
+                for (DataSnapshot reviewSnapshot : dataSnapshot.getChildren()) {
+                    Review review = Objects.requireNonNull(reviewSnapshot.getValue(Review.class));
+                    review.setKey(reviewSnapshot.getKey());
+                    reviews.add(review);
+                }
+
+                reviewAdapter = new MyReviewAdapter(reviews);
+                if (reviews.size() == 0) {
+                    txtvMessage.setVisibility(View.VISIBLE);
+                }
+
+                RecyclerView recyclerView = Objects.requireNonNull(getView()).findViewById(R.id.ryclerv_reviews);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(reviewAdapter);
+
+                isInitialized = true;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Do nothing
+            }
+        });
 
         return root;
     }
@@ -95,7 +97,7 @@ public class MyReviewsFragment extends Fragment {
                 review.setKey(dataSnapshot.getKey());
 
                 if (reviewAdapter.getItemCount() == 0) {
-                    viewNoReviews.setVisibility(View.GONE);
+                    txtvMessage.setVisibility(View.GONE);
                 }
 
                 reviewAdapter.add(review, s == null ? null : new Review(s));
@@ -114,7 +116,7 @@ public class MyReviewsFragment extends Fragment {
             reviewAdapter.remove(new Review(dataSnapshot.getKey()));
 
             if (reviewAdapter.getItemCount() == 0) {
-                viewNoReviews.setVisibility(View.VISIBLE);
+                txtvMessage.setVisibility(View.VISIBLE);
             }
         }
 

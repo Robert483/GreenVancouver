@@ -3,6 +3,8 @@ package com.parasinos.greenvancouver;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -44,6 +46,11 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference database;
     private FirebaseUser user;
 
+    private TextView tvUsername;
+    private TextView tvEmail;
+    private ImageView profilePic;
+    private ImageButton editPic;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        Button loginBtn = headerView.findViewById(R.id.main_login);
+        final Button loginBtn = headerView.findViewById(R.id.main_login);
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,13 +74,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button logoutBtn = headerView.findViewById(R.id.main_logout);
+        final Button logoutBtn = headerView.findViewById(R.id.main_logout);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(getApplicationContext(), "LOGGED OUT", Toast.LENGTH_SHORT).show();
-                onStart();
+                loginBtn.setVisibility(View.VISIBLE);
+                logoutBtn.setVisibility(View.GONE);
+                tvUsername.setText("");
+                tvEmail.setText("");
+                profilePic.setImageDrawable(null);
+                editPic.setVisibility(View.GONE);
             }
         });
 
@@ -116,16 +128,15 @@ public class MainActivity extends AppCompatActivity {
 
         Button loginBtn = headerView.findViewById(R.id.main_login);
         Button logoutBtn = headerView.findViewById(R.id.main_logout);
-        final TextView tvUsername = headerView.findViewById(R.id.txtv_username);
-        final TextView tvEmail = headerView.findViewById(R.id.txtv_email);
-        final ImageView profilePic = headerView.findViewById(R.id.imgv_profilepicture);
+        tvUsername = headerView.findViewById(R.id.txtv_username);
+        tvEmail = headerView.findViewById(R.id.txtv_email);
+        profilePic = headerView.findViewById(R.id.imgv_profilepicture);
+        editPic = headerView.findViewById(R.id.edit_pc_btn);
 
         if (user == null) {
             loginBtn.setVisibility(View.VISIBLE);
             logoutBtn.setVisibility(View.GONE);
-            tvUsername.setText("");
-            tvEmail.setVisibility(View.GONE);
-            profilePic.setVisibility(View.INVISIBLE);
+            editPic.setVisibility(View.GONE);
         } else {
             String path = String.join("/", "users", user.getUid(), "basicInfo");
             database = FirebaseDatabase.getInstance().getReference(path);
@@ -136,9 +147,12 @@ public class MainActivity extends AppCompatActivity {
                     User user = Objects.requireNonNull(dataSnapshot.getValue(User.class));
                     tvUsername.setText(user.getName());
                     if (TextUtils.isEmpty(user.getProfilePicture())) {
+                        profilePic.setImageResource(R.drawable.app_im_profile_picture);
+                        profilePic.setImageTintList(ColorStateList.valueOf(Color.WHITE));
                         return;
                     }
 
+                    profilePic.setImageTintList(null);
                     Picasso.get()
                             .load(user.getProfilePicture())
                             .resize(500, 0)
@@ -153,11 +167,9 @@ public class MainActivity extends AppCompatActivity {
             });
             loginBtn.setVisibility(View.GONE);
             logoutBtn.setVisibility(View.VISIBLE);
-            tvEmail.setVisibility(View.VISIBLE);
             tvEmail.setText(user.getEmail());
+            editPic.setVisibility(View.VISIBLE);
         }
-
-        ImageButton editPic = headerView.findViewById(R.id.edit_pc_btn);
 
         editPic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,12 +196,15 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         user = mAuth.getCurrentUser();
                         EditText url = customLayout.findViewById(R.id.profile_url);
-                        if (!TextUtils.isEmpty(url.getText()) || user != null) {
-                            User user = new User(tvUsername.getText().toString(), url.getText().toString());
+                        if (user != null) {
+                            String urlStr = null;
+                            if (!TextUtils.isEmpty(url.getText())) {
+                                urlStr = url.getText().toString();
+                            }
+                            User user = new User(tvUsername.getText().toString(), urlStr);
                             database.setValue(user);
-                        } else {
-                            Toast.makeText(MainActivity.this, "URL is empty", Toast.LENGTH_SHORT).show();
                         }
+                        dialog.dismiss();
                     }
                 });
                 dialog.show();

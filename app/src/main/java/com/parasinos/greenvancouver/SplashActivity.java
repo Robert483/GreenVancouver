@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -61,7 +60,8 @@ public class SplashActivity extends AppCompatActivity {
 
         @Override
         public void onAnimationEnd(Animator animation) {
-            Toast.makeText(getApplicationContext(), "TODO: go to main activity.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
         }
 
         @Override

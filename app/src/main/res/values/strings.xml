@@ -46,13 +46,12 @@
     <string name="map_api_url">https://opendata.vancouver.ca/api/records/1.0/search/?dataset=greenest-city-projects&amp;q=%s&amp;&amp;rows=%d</string>
 
     <!-- For MyReviews Fragment -->
-    <string name="myreviews_title">My Reviews</string>
     <string name="myreviews_warning">Please sign in to view your reviews.</string>
     <string name="myreviews_noreviews">You haven\'t written any reviews yet.</string>
 
     <!-- For Bookmarks Fragment -->
-    <string name="bookmarks_title">Bookmarks</string>
     <string name="bookmarks_warning">Please sign in to view your bookmarks.</string>
+    <string name="bookmarks_nobookmarks">You haven\'t bookmarked any projects yet.</string>
 
     <!--For Settings fragment -->
     <string name="settings_maxresult">Max Number of Results</string>

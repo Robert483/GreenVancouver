@@ -1,128 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-
-    style="@style/VolunteerFragmentTheme"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:outlineProvider="bounds"
     tools:context=".fragments.VolunteerFragment">
 
-    <TextView
-        android:id="@+id/txtv_orgname"
-        style="@style/DetailsFragmentTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <View
-        android:id="@+id/volunteer_divider1"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
-    <TextView
-        android:id="@+id/txtv_orgdetails"
+    <LinearLayout
+        style="@style/VolunteerFragmentTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/bookmarks_margin"
-        android:text="@string/volunteer_organizationdetails"
-        android:textSize="@dimen/bookmarks_project_title" />
+        android:orientation="vertical"
+        android:outlineProvider="bounds">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/bookmarks_margin"
-        android:text="@string/volunteer_orginfo" />
+        <TextView
+            android:id="@+id/txtv_orgname"
+            style="@style/DetailsFragmentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/bookmarks_margin"
-        android:text="@string/volunteer_registration"
-        android:textSize="@dimen/bookmarks_project_title" />
+        <View
+            android:id="@+id/volunteer_divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?android:attr/listDivider" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="@dimen/widget_margin">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtv_volunteername"
+        <TextView
+            android:id="@+id/txtv_orgdetails"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/volunteer_name"
-            android:importantForAutofill="no"
-            android:inputType="textPersonName" />
+            android:layout_marginTop="@dimen/bookmarks_margin"
+            android:text="@string/volunteer_organizationdetails"
+            android:textSize="@dimen/bookmarks_project_title" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="150dp"
-        android:layout_marginBottom="@dimen/widget_margin">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtv_volunteerphone"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/volunteer_phone"
-            android:importantForAutofill="no"
-            android:inputType="phone" />
+            android:layout_marginTop="@dimen/bookmarks_margin"
+            android:text="@string/volunteer_orginfo" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="150dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtv_volunteeremail"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/volunteer_email"
-            android:importantForAutofill="no"
-            android:inputType="textEmailAddress" />
+            android:layout_marginVertical="@dimen/bookmarks_margin"
+            android:text="@string/volunteer_registration"
+            android:textSize="@dimen/bookmarks_project_title" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/widget_margin"
-        android:labelFor="@id/txtv_volunteermessage"
-        android:text="@string/volunteer_message" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/txtv_volunteermessage"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:gravity="top|start"
-            android:inputType="textMultiLine"
-            android:minLines="5" />
+            android:layout_marginEnd="150dp"
+            android:layout_marginBottom="@dimen/widget_margin">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtv_volunteername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/volunteer_name"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/btn_send"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/app_send" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-</LinearLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="150dp"
+            android:layout_marginBottom="@dimen/widget_margin">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtv_volunteerphone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/volunteer_phone"
+                android:importantForAutofill="no"
+                android:inputType="phone" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="150dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtv_volunteeremail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/volunteer_email"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/widget_margin"
+            android:labelFor="@id/txtv_volunteermessage"
+            android:text="@string/volunteer_message" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/txtv_volunteermessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:minLines="5" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_send" />
+
+    </LinearLayout>
+</ScrollView>

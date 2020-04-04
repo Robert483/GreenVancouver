@@ -41,10 +41,12 @@ public class BookmarksFragment extends Fragment {
     private BookmarksAdapter adapter;
     private ActionMode actionMode = null;
 
+    private TextView txtvMessage;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
-        final TextView tvWarning = view.findViewById(R.id.bookmarks_warning);
+        txtvMessage = view.findViewById(R.id.txtv_message);
         bookmarkList = new ArrayList<>();
         lvBookmarks = view.findViewById(R.id.bookmarks_lv);
         lvBookmarks.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE_MODAL);
@@ -94,11 +96,12 @@ public class BookmarksFragment extends Fragment {
         });
 
         if (user != null) {
-            tvWarning.setVisibility(View.GONE);
+            txtvMessage.setText(R.string.bookmarks_nobookmarks);
             String path = String.join("/", "users", user.getUid(), "bookmarks");
             databaseBookmarks = FirebaseDatabase.getInstance().getReference(path);
         } else {
-            tvWarning.setVisibility(View.VISIBLE);
+            txtvMessage.setText(R.string.bookmarks_warning);
+            txtvMessage.setVisibility(View.VISIBLE);
         }
 
         return view;
@@ -123,6 +126,9 @@ public class BookmarksFragment extends Fragment {
                     if (!bookmarkList.isEmpty()) {
                         adapter = new BookmarksAdapter(getActivity(), bookmarkList);
                         lvBookmarks.setAdapter(adapter);
+                        txtvMessage.setVisibility(View.GONE);
+                    } else {
+                        txtvMessage.setVisibility(View.VISIBLE);
                     }
                 }
 

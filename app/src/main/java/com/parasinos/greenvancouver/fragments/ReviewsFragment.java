@@ -66,7 +66,7 @@ public class ReviewsFragment extends Fragment {
     private Button btnSave;
     private ImageButton imgbtnCancel;
 
-    private TextView viewNoReviews;
+    private TextView txtvNoReviews;
     private TextView txtvAverage;
     private TextView txtvTotal;
     private BaseRatingBar ratingBarAverage;
@@ -180,7 +180,7 @@ public class ReviewsFragment extends Fragment {
                     average /= reviews.size();
                 } else {
                     average = 0;
-                    viewNoReviews.setVisibility(View.VISIBLE);
+                    txtvNoReviews.setVisibility(View.VISIBLE);
                 }
                 updateProjectOverallInfo();
 
@@ -310,7 +310,7 @@ public class ReviewsFragment extends Fragment {
         btnSave = root.findViewById(R.id.btn_save);
         imgbtnCancel = root.findViewById(R.id.btn_cancel);
 
-        viewNoReviews = root.findViewById(R.id.txtv_noreviews);
+        txtvNoReviews = root.findViewById(R.id.txtv_noreviews);
         txtvAverage = root.findViewById(R.id.txtv_average);
         txtvTotal = root.findViewById(R.id.txtv_total);
         ratingBarAverage = root.findViewById(R.id.ratingbar_average);
@@ -339,7 +339,7 @@ public class ReviewsFragment extends Fragment {
                 updateProjectOverallInfo();
 
                 if (size - 1 == 0) {
-                    viewNoReviews.setVisibility(View.GONE);
+                    txtvNoReviews.setVisibility(View.GONE);
                 }
             }
         }
@@ -365,7 +365,7 @@ public class ReviewsFragment extends Fragment {
                 average = (average * (size + 1) - newRating) / size;
             } else {
                 average = 0;
-                viewNoReviews.setVisibility(View.VISIBLE);
+                txtvNoReviews.setVisibility(View.VISIBLE);
             }
 
             updateProjectOverallInfo();

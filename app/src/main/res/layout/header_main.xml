@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="230dp"
     android:background="@drawable/main_bg_vancouver"
-    android:backgroundTint="#5F000000"
+    android:backgroundTint="#8F000000"
     android:backgroundTintMode="src_over"
     android:orientation="vertical"
     android:padding="@dimen/activity_margin">
@@ -29,11 +29,12 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:background="@drawable/app_sh_rounded_filled_button"
-            android:backgroundTint="#CC000000"
+            android:backgroundTint="@color/material_on_background_emphasis_high_type"
             android:contentDescription="@string/app_edit"
             android:padding="@dimen/widget_margin"
             android:src="@drawable/app_ic_edit"
-            android:tint="@android:color/white" />
+            android:tint="@android:color/white"
+            android:visibility="visible" />
 
     </RelativeLayout>
 
@@ -41,34 +42,30 @@
         android:id="@+id/txtv_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/widget_margin"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:layout_marginTop="@dimen/widget_margin"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/material_on_primary_emphasis_high_type" />
 
     <TextView
         android:id="@+id/txtv_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:textColor="@color/material_on_primary_emphasis_high_type" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/main_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/widget_margin"
-            android:layout_weight="1"
-            android:text="@string/main_login" />
+    <Button
+        android:id="@+id/main_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/main_login"
+        android:visibility="gone" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/main_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/main_logout" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/main_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/main_logout"
+        android:visibility="gone" />
 
 </LinearLayout>
