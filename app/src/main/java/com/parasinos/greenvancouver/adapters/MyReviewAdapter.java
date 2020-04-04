@@ -37,7 +37,6 @@ public class MyReviewAdapter extends FirebaseListAdapter<Review, MyReviewAdapter
 
     static class MyReviewViewHolder extends RecyclerView.ViewHolder {
         private String mapId;
-
         private TextView projectName;
         private TextView content;
         private BaseRatingBar rating;

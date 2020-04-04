@@ -13,11 +13,14 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ProjectInfoAdapter extends FragmentStateAdapter {
-
     private String mapId;
-    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle, String mapId) {
+    private String projectName;
+
+    public ProjectInfoAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle,
+                              String mapId, String projectName) {
         super(fragmentManager, lifecycle);
         this.mapId = mapId;
+        this.projectName = projectName;
     }
 
     @NonNull
@@ -27,7 +30,7 @@ public class ProjectInfoAdapter extends FragmentStateAdapter {
             case 0:
                 return DetailsFragment.newInstance(mapId);
             case 1:
-                return ReviewsFragment.newInstance("testmapId1", "Project 1");
+                return ReviewsFragment.newInstance(mapId, projectName);
             case 2:
                 return VolunteerFragment.newInstance(mapId);
             default:

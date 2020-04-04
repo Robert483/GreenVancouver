@@ -1,8 +1,5 @@
 package com.parasinos.greenvancouver;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,18 +13,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity {
-
     private EditText loginEmail, loginPassword;
     private Button loginBtn, signupBtn;
 
     private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -49,9 +50,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private void loginUserAccount() {
-
         String email, password;
         email = loginEmail.getText().toString();
         password = loginPassword.getText().toString();
@@ -60,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
             return;
         }
+
         if (TextUtils.isEmpty(password)) {
             Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
             return;
@@ -73,11 +73,8 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(),
                                     "Login successful!", Toast.LENGTH_LONG).show();
 
-
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        }
-                        else {
+                            finish();
+                        } else {
                             Toast.makeText(getApplicationContext(),
                                     "Login failed! Please try again later", Toast.LENGTH_LONG).show();
                         }

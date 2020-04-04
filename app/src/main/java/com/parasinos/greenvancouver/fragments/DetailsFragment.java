@@ -1,10 +1,6 @@
 package com.parasinos.greenvancouver.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +21,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
 public class DetailsFragment extends Fragment {
     private String mapID;
 
@@ -42,16 +41,12 @@ public class DetailsFragment extends Fragment {
         if (getArguments() != null) {
             mapID = getArguments().getString("mapId");
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         return inflater.inflate(R.layout.fragment_details, container, false);
-
     }
 
     @Override
@@ -59,7 +54,6 @@ public class DetailsFragment extends Fragment {
         super.onStart();
         String service_url = getString(R.string.details_api_url, mapID);
         new SimpleRetrieval(this, service_url).execute();
-
     }
 
     public void updateProjectInfo(List<Project> result) {
@@ -86,14 +80,12 @@ public class DetailsFragment extends Fragment {
                 tvDescription.setText(projectDetails.getShortDescription() == null ? "N/A" : projectDetails.getShortDescription());
                 tvWebsite.setText(projectDetails.getUrl() == null ? "N/A" : projectDetails.getUrl());
 
-//                Picasso.get().load("https://riverdistrict.ca/wp-content/uploads/Construction-Timeline-2015.png").into(imageView);
                 String path = String.join("/", "projects", mapID, "images", "0");
                 try {
                     DatabaseReference dbImageRef = FirebaseDatabase.getInstance().getReference(path);
                     dbImageRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
                             String imgUrl = (String) dataSnapshot.getValue();
                             if (imgUrl != null) {
                                 Picasso.get().load(imgUrl).into(imageView);
@@ -102,16 +94,13 @@ public class DetailsFragment extends Fragment {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                            // Do nothing
                         }
                     });
-                } catch (Exception e){
-                    //Nothing
+                } catch (Exception e) {
+                    // Do nothing
                 }
-
             }
         }
     }
-
 }
-

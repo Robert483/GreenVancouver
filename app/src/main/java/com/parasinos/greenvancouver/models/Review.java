@@ -13,7 +13,8 @@ public class Review {
     private String profilePicture;
     private String projectName;
 
-    public Review() {}
+    public Review() {
+    }
 
     public Review(String key) {
         this.key = key;

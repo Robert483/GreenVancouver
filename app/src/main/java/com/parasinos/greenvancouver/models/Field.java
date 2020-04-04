@@ -8,85 +8,78 @@ public class Field {
     @Expose
     private String category1 = null;
 
-    public String getCategory1() {
-        return category1;
-    }
-
     @SerializedName("category2")
     @Expose
     private String category2 = null;
-
-    public String getCategory2() {
-        return category2;
-    }
 
     @SerializedName("name")
     @Expose
     private String name = null;
 
-    public String getName() {
-        return name;
-    }
-
     @SerializedName("url")
     @Expose
     private String url = null;
 
-    public String getUrl() {
-        return url;
-    }
+    @SuppressWarnings("unused")
     @SerializedName("url2")
     @Expose
     private String url2 = null;
 
-    public String getUrl2() {
-        return url;
-    }
+    @SuppressWarnings("unused")
     @SerializedName("url3")
     @Expose
     private String url3 = null;
-
-    public String getUrl3() {
-        return url;
-    }
 
     @SerializedName("mapid")
     @Expose
     private String mapID = null;
 
-    public String getMapID() {
-        return mapID;
-    }
-
     @SerializedName("geom")
     @Expose
     private Geom geom = null;
-
-    public Geom getGeom() {
-        return geom;
-    }
 
     @SerializedName("address")
     @Expose
     private String address = null;
 
-    public String getAddress() {
-        return address;
-    }
-
     @SerializedName("short_description")
     @Expose
     private String shortDescription = null;
 
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("geo_local_area")
     @Expose
     private String geoLocalArea = null;
 
-    public String getGeoLocalArea() {
-        return geoLocalArea;
+    public String getCategory1() {
+        return category1;
+    }
+
+    public String getCategory2() {
+        return category2;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getMapID() {
+        return mapID;
+    }
+
+    public Geom getGeom() {
+        return geom;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
     }
 }

@@ -3,48 +3,29 @@ package com.parasinos.greenvancouver.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-
-public class QueryResultParam {
-
+class QueryResultParam {
+    @SuppressWarnings("unused")
     @SerializedName("dataset")
     @Expose
     private String dataSetName = null;
 
-    public String getDataSetName() {
-        return dataSetName;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("timezone")
     @Expose
     private String timezone = null;
 
-    public String getTimezone() {
-        return timezone;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("q")
     @Expose
     private String q = null;
 
-    public String getQ() {
-        return q;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("rows")
     @Expose
     private int rows = 0;
 
-    public int getRows() {
-        return rows;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("format")
     @Expose
     private String format = null;
-
-    public String getFormat() {
-        return format;
-    }
-
-
 }

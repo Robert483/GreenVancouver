@@ -5,12 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,22 +17,18 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.parasinos.greenvancouver.ProjectInfoActivity;
 import com.parasinos.greenvancouver.R;
-import com.parasinos.greenvancouver.handlers.HttpHandler;
 import com.parasinos.greenvancouver.models.APIRetrieval;
 import com.parasinos.greenvancouver.models.Field;
 import com.parasinos.greenvancouver.models.Project;
-import com.parasinos.greenvancouver.tasks.SimpleRetrieval;
+import com.parasinos.greenvancouver.tasks.HttpHandler;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
+import java.util.Objects;
 
+import androidx.fragment.app.Fragment;
 
 public class VolunteerFragment extends Fragment {
-//    private static final String ARG_PARAM1 = "param1";
-//    private static final String ARG_PARAM2 = "param2";
-//
-//    private String mParam1;
-//    private String mParam2;
     private String mapID;
     private String subject;
     private String body;
@@ -65,7 +56,7 @@ public class VolunteerFragment extends Fragment {
         super.onStart();
         String service_url = getString(R.string.details_api_url, mapID);
         new Retrieval(this, service_url).execute();
-        View v = getView();
+        View v = Objects.requireNonNull(getView());
         Button send = v.findViewById(R.id.btn_send);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +67,6 @@ public class VolunteerFragment extends Fragment {
                 startActivity(emailIntent);
             }
         });
-
     }
 
     @Override
@@ -85,7 +75,7 @@ public class VolunteerFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_volunteer, container, false);
     }
 
-    public void updateProjectInfo(List<Project> result) {
+    private void updateProjectInfo(List<Project> result) {
         ProjectInfoActivity infoActivity = (ProjectInfoActivity) getActivity();
 
         if (infoActivity != null) {
@@ -102,18 +92,16 @@ public class VolunteerFragment extends Fragment {
                 EditText volMsg = v.findViewById(R.id.txtv_volunteermessage);
 
                 orgName.setText(projectDetails.getName());
-                orgDetails.setText(projectDetails.getCategory1() +
-                        "\n" + projectDetails.getShortDescription());
+                orgDetails.setText(String.join("\n", projectDetails.getCategory1(),
+                        projectDetails.getShortDescription()));
 
                 subject = "Volunteer Application for " + projectDetails.getName();
                 body = "Hello, \nMy name is " + volName.getText().toString() + " and I would love "
                         + "an opportunity to help out with the " + projectDetails.getName()
-                        + " project." + "\nReasons/Qualifications:\n" + volMsg.getText().toString();;
+                        + " project." + "\nReasons/Qualifications:\n" + volMsg.getText().toString();
 
-                if ( !TextUtils.isEmpty(volEmail.getText())) {
+                if (!TextUtils.isEmpty(volEmail.getText())) {
                     contact += "\n" + volEmail.getText().toString();
-
-
                 }
 
                 if (!TextUtils.isEmpty(volPhone.getText())) {
@@ -122,62 +110,59 @@ public class VolunteerFragment extends Fragment {
 
                 body += contact;
                 body += "\n\nThank you,\n" + volName.getText().toString();
-
             }
         }
     }
-}
 
-class Retrieval extends AsyncTask<Void, Void, List<Project>> {
+    private static class Retrieval extends AsyncTask<Void, Void, List<Project>> {
+        private WeakReference<VolunteerFragment> fragment;
+        private String url;
 
-    private WeakReference<VolunteerFragment> fragment;
-    private String url;
+        Retrieval(VolunteerFragment fragment, String url) {
+            this.fragment = new WeakReference<>(fragment);
+            this.url = url;
+        }
 
-    public Retrieval(VolunteerFragment fragment, String url) {
-        this.fragment = new WeakReference<>(fragment);
-        this.url = url;
-    }
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-    }
+        @Override
+        protected List<Project> doInBackground(Void... arg0) {
+            HttpHandler sh = new HttpHandler();
 
-    @Override
-    protected List<Project> doInBackground(Void... arg0) {
-        HttpHandler sh = new HttpHandler();
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall(url);
 
-        // Making a request to url and getting response
-        String jsonStr = sh.makeServiceCall(url);
-
-        if (jsonStr != null) {
-            Gson gson = new Gson();
-            APIRetrieval responses = gson.fromJson(jsonStr, APIRetrieval.class);
-            return responses.getRecords();
-        } else {
-            final Activity activity = this.fragment.get().getActivity();
-            if (activity == null) {
-                return null;
-            }
-
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(activity.getApplicationContext(),
-                            "Couldn't get json from server. Check LogCat for possible errors!",
-                            Toast.LENGTH_LONG)
-                            .show();
+            if (jsonStr != null) {
+                Gson gson = new Gson();
+                APIRetrieval responses = gson.fromJson(jsonStr, APIRetrieval.class);
+                return responses.getRecords();
+            } else {
+                final Activity activity = this.fragment.get().getActivity();
+                if (activity == null) {
+                    return null;
                 }
-            });
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity.getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+            }
+
+            return null;
         }
 
-        return null;
-    }
-
-    @Override
-    protected void onPostExecute(List<Project> result) {
-        super.onPostExecute(result);
-        this.fragment.get().updateProjectInfo(result);
-
+        @Override
+        protected void onPostExecute(List<Project> result) {
+            super.onPostExecute(result);
+            this.fragment.get().updateProjectInfo(result);
+        }
     }
 }

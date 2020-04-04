@@ -6,14 +6,12 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class APIRetrieval {
+    @SuppressWarnings("unused")
     @SerializedName("nhits")
     @Expose
     private int numHits = 0;
 
-    public int getNumHits(){
-        return numHits;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("parameters")
     @Expose
     private QueryResultParam param = null;
@@ -21,9 +19,8 @@ public class APIRetrieval {
     @SerializedName("records")
     @Expose
     private List<Project> records = null;
+
     public List<Project> getRecords() {
         return records;
     }
-
 }
-

@@ -8,36 +8,27 @@ import java.util.Date;
 import androidx.annotation.NonNull;
 
 public class Project {
+    @SuppressWarnings("unused")
     @SerializedName("datasetid")
     @Expose
     private String dataSetID = null;
 
-    public String getDataSetId() {
-        return dataSetID;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("recordid")
     @Expose
     private String recordID = null;
-
-    public String getRecordID() {
-        return recordID;
-    }
 
     @SerializedName("fields")
     @Expose
     private Field field = null;
 
-    public Field getField() {
-        return field;
-    }
-
+    @SuppressWarnings("unused")
     @SerializedName("record_timestamp")
     @Expose
     private Date recordTimestamp = null;
 
-    public Date getRecordTimestamp() {
-        return recordTimestamp;
+    public Field getField() {
+        return field;
     }
 
     @NonNull
@@ -45,6 +36,4 @@ public class Project {
     public String toString() {
         return this.field.getName();
     }
-
-
 }

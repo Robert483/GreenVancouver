@@ -1,54 +1,45 @@
 package com.parasinos.greenvancouver;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.parasinos.greenvancouver.models.User;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity {
-
     private FirebaseAuth mAuth;
-    private FirebaseDatabase database;
-    DatabaseReference myRef;
 
     private EditText name;
     private EditText email;
     private EditText confirmPw;
     private EditText password;
-    private Button signUpBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
 
-        myRef = database.getReference("users");
         name = findViewById(R.id.signup_name);
         email = findViewById(R.id.signup_email);
         password = findViewById(R.id.signup_password);
         confirmPw = findViewById(R.id.signup_confirm_password);
-        
-        signUpBtn = findViewById(R.id.signup_btn);
+
+        Button signUpBtn = findViewById(R.id.signup_btn);
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +54,12 @@ public class SignUpActivity extends AppCompatActivity {
                             "Email field is empty", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 if (TextUtils.isEmpty(passStr)) {
                     Toast.makeText(getApplicationContext(), "Password field is empty",
                             Toast.LENGTH_SHORT).show();
                 }
+
                 if (TextUtils.isEmpty(nameStr)) {
                     Toast.makeText(getApplicationContext(), "Please enter your name",
                             Toast.LENGTH_SHORT).show();
@@ -82,36 +75,29 @@ public class SignUpActivity extends AppCompatActivity {
                             "Passwords do not match. Please try again.", Toast.LENGTH_SHORT).show();
                 }
 
-                mAuth.createUserWithEmailAndPassword(emailStr,passStr)
+                mAuth.createUserWithEmailAndPassword(emailStr, passStr)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     User newUser = new User(nameStr, "");
-                                    String user_id = mAuth.getCurrentUser().getUid();
+                                    String user_id = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+                                    String path = String.join("/", "users", user_id, "basicInfo");
+                                    FirebaseDatabase.getInstance().getReference(path).setValue(newUser);
 
-
-                                    Task setValueTask = myRef.child(user_id).child("basicInfo").setValue(newUser);
-
-                                    startActivity(new Intent(getApplicationContext(),MainActivity.class));
                                     finish();
-                                }
-                                else{
+                                } else {
                                     Toast.makeText(getApplicationContext(),
                                             "E-mail or password is wrong",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
-
             }
         });
 
-
-        if(mAuth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+        if (mAuth.getCurrentUser() != null) {
+            finish();
         }
-
     }
-
 }

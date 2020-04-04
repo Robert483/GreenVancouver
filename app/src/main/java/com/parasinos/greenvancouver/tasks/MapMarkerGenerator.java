@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.parasinos.greenvancouver.fragments.MapFragment;
-import com.parasinos.greenvancouver.handlers.HttpHandler;
 import com.parasinos.greenvancouver.models.APIRetrieval;
 import com.parasinos.greenvancouver.models.Project;
 
@@ -65,10 +64,5 @@ public class MapMarkerGenerator extends AsyncTask<Void, Void, List<Project>> {
     protected void onPostExecute(List<Project> result) {
         super.onPostExecute(result);
         this.fragment.get().updateMarkers(result);
-
     }
 }
-
-
-
-

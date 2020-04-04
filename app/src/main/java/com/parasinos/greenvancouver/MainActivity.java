@@ -1,25 +1,15 @@
 package com.parasinos.greenvancouver;
 
-import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.InputType;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,9 +20,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.parasinos.greenvancouver.misc.CircleTransform;
+import com.parasinos.greenvancouver.models.User;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,16 +37,12 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class MainActivity extends AppCompatActivity {
-
+    SharedPreferences sharedPreferences;
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth mAuth;
     private DatabaseReference database;
     private FirebaseUser user;
-    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Button logoutBtn = headerView.findViewById(R.id.main_logout);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 onStart();
             }
         });
-
-
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -121,14 +107,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        user = mAuth.getCurrentUser();
         NavigationView navigationView = findViewById(R.id.navview_menu);
 
         View headerView = navigationView.getHeaderView(0);
 
-
         mAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance().getReference("users");
 
         Button loginBtn = headerView.findViewById(R.id.main_login);
         Button logoutBtn = headerView.findViewById(R.id.main_logout);
@@ -136,46 +120,41 @@ public class MainActivity extends AppCompatActivity {
         final TextView tvEmail = headerView.findViewById(R.id.txtv_email);
         final ImageView profilePic = headerView.findViewById(R.id.imgv_profilepicture);
 
-        if(currentUser == null){
+        if (user == null) {
             loginBtn.setVisibility(View.VISIBLE);
             logoutBtn.setVisibility(View.GONE);
-            tvUsername.setText("Not logged in");
+            tvUsername.setText("");
             tvEmail.setVisibility(View.GONE);
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                profilePic.setImageDrawable(getApplicationContext().getDrawable(R.drawable.app_im_placeholder));
-            } else {
-                profilePic.setImageDrawable(getResources().getDrawable(R.drawable.app_im_placeholder));
-            }
+            profilePic.setVisibility(View.INVISIBLE);
+        } else {
+            String path = String.join("/", "users", user.getUid(), "basicInfo");
+            database = FirebaseDatabase.getInstance().getReference(path);
 
-        }else{
-            user = mAuth.getCurrentUser();
-
-            database.addListenerForSingleValueEvent(new ValueEventListener() {
+            database.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    DataSnapshot basicInfo = dataSnapshot.child(user.getUid()).child("basicInfo");
-                    for (DataSnapshot value : basicInfo.getChildren()) {
-                        if (value.getKey().equals("name")) {
-                            String name = value.getValue().toString();
-                            tvUsername.setText(name);
-                        } else if (value.getKey().equals("profilePicture")) {
-                            Picasso.get().load(value.getValue().toString()).into(profilePic);
-                        }
+                    User user = Objects.requireNonNull(dataSnapshot.getValue(User.class));
+                    tvUsername.setText(user.getName());
+                    if (TextUtils.isEmpty(user.getProfilePicture())) {
+                        return;
                     }
 
+                    Picasso.get()
+                            .load(user.getProfilePicture())
+                            .resize(500, 0)
+                            .transform(new CircleTransform())
+                            .into(profilePic);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                    // Do nothing
                 }
             });
             loginBtn.setVisibility(View.GONE);
             logoutBtn.setVisibility(View.VISIBLE);
             tvEmail.setVisibility(View.VISIBLE);
             tvEmail.setText(user.getEmail());
-
-
         }
 
         ImageButton editPic = headerView.findViewById(R.id.edit_pc_btn);
@@ -187,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Edit your profile picture");
                 // set the custom layout
-                final View customLayout = getLayoutInflater().inflate(R.layout.profile_picture_edit, null);
+                final View customLayout = View.inflate(MainActivity.this, R.layout.profile_picture_edit, null);
                 builder.setView(customLayout);
                 // create and show the alert dialog
                 final AlertDialog dialog = builder.create();
@@ -206,21 +185,16 @@ public class MainActivity extends AppCompatActivity {
                         user = mAuth.getCurrentUser();
                         EditText url = customLayout.findViewById(R.id.profile_url);
                         if (!TextUtils.isEmpty(url.getText()) || user != null) {
-                            Picasso.get().load(url.getText().toString()).into(profilePic);
-
-                            DatabaseReference info = database.child(user.getUid()).child("basicInfo");
-                            info.child("profilePicture").setValue(url.getText().toString());
-
+                            User user = new User(tvUsername.getText().toString(), url.getText().toString());
+                            database.setValue(user);
                         } else {
                             Toast.makeText(MainActivity.this, "URL is empty", Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
                 dialog.show();
             }
         });
     }
-
 }
 

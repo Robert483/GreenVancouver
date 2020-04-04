@@ -26,10 +26,12 @@
         <menu>
             <item
                 android:id="@+id/item_share"
+                android:enabled="false"
                 android:icon="@drawable/main_menu_share"
                 android:title="@string/main_share" />
             <item
                 android:id="@+id/item_send"
+                android:enabled="false"
                 android:icon="@drawable/main_menu_send"
                 android:title="@string/app_send" />
         </menu>

@@ -18,10 +18,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -35,13 +31,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.parasinos.greenvancouver.Bookmark;
 import com.parasinos.greenvancouver.ProjectInfoActivity;
 import com.parasinos.greenvancouver.R;
 import com.parasinos.greenvancouver.adapters.ProjectWindowAdapter;
+import com.parasinos.greenvancouver.models.Bookmark;
 import com.parasinos.greenvancouver.models.Project;
 import com.parasinos.greenvancouver.tasks.MapMarkerGenerator;
 import com.squareup.picasso.Picasso;
@@ -51,10 +46,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener,
         View.OnClickListener, EditText.OnEditorActionListener {
-
     private GoogleMap googleMap;
     private List<Marker> markers;
     private List<String> mapIdList;
@@ -106,31 +103,31 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 if (!selectMapId.equals("")) {
                     Intent intent = new Intent(getActivity(), ProjectInfoActivity.class);
                     intent.putExtra("mapId", selectMapId);
+                    intent.putExtra("projectName", target.marker.getTitle());
                     startActivity(intent);
                 }
                 break;
             case R.id.bookMark:
                 if (!selectMapId.equals("")) {
                     if (user != null) {
-                        Marker mark;
-                        DatabaseReference bookmarks = database.getReference("users").child(user.getUid());
                         for (int i = 0; i < markers.size(); i++) {
                             if (selectMapId.equals(mapIdList.get(i))) {
-                                mark = markers.get(i);
-                                String name = mark.getTitle();
-                                String address = mark.getSnippet();
-                                Bookmark bookmark = new Bookmark(address, name, selectMapId);
-                                bookmarks.child("bookmarks").child(selectMapId).setValue(bookmark);
+                                Marker mark = markers.get(i);
+                                Bookmark bookmark = new Bookmark();
+                                bookmark.setAddress(mark.getSnippet());
+                                bookmark.setName(mark.getTitle());
+                                bookmark.setMapid(selectMapId);
+
+                                String path = String.join("/", "users", user.getUid(), "bookmarks", selectMapId);
+                                database.getReference(path).setValue(bookmark);
                             }
                         }
-
 
                         Toast.makeText(getActivity(), "Bookmarked " + selectMapId,
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(getActivity(), "Please log in first", Toast.LENGTH_SHORT).show();
                     }
-
                 }
                 break;
             case R.id.btnChangeMapType:
@@ -167,7 +164,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         return false; // pass on to other listeners.
     }
 
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -190,9 +186,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         String service_url = getString(R.string.map_api_url, query, numRecords);
         new MapMarkerGenerator(this, service_url).execute();
-
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -203,7 +197,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
             this.googleMap.setInfoWindowAdapter(this.windowAdapter);
             this.googleMap.setOnMarkerClickListener(this);
 
-
             // Initialize Camera focus on Vancouver City Hall
             LatLng vancouver = new LatLng(49.2827, -123.1207);
             this.googleMap.moveCamera(CameraUpdateFactory.newLatLng(vancouver));
@@ -211,7 +204,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                     = CameraPosition.builder().target(vancouver).zoom(10).bearing(0).tilt(0).build();
             this.googleMap.moveCamera(CameraUpdateFactory.newCameraPosition(initPosition));
         }
-
     }
 
     @Override
@@ -235,7 +227,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
                 Toast.makeText(getActivity(), imgUrl, Toast.LENGTH_SHORT).show();
                 target.setMarker(marker);
-                Picasso.get().load(imgUrl).into(target);
+                Picasso.get()
+                        .load(imgUrl)
+                        .resize(300, 0)
+                        .noFade()
+                        .into(target);
             }
 
             @Override
@@ -281,13 +277,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
 
         @Override
         public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-
+            // Do nothing
         }
 
         @Override
         public void onPrepareLoad(Drawable placeHolderDrawable) {
-
+            // Do nothing
         }
     }
-
 }

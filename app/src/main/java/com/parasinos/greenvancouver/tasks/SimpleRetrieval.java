@@ -6,7 +6,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.parasinos.greenvancouver.fragments.DetailsFragment;
-import com.parasinos.greenvancouver.handlers.HttpHandler;
 import com.parasinos.greenvancouver.models.APIRetrieval;
 import com.parasinos.greenvancouver.models.Project;
 
@@ -14,7 +13,6 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 
 public class SimpleRetrieval extends AsyncTask<Void, Void, List<Project>> {
-
     private WeakReference<DetailsFragment> fragment;
     private String url;
 
@@ -63,6 +61,5 @@ public class SimpleRetrieval extends AsyncTask<Void, Void, List<Project>> {
     protected void onPostExecute(List<Project> result) {
         super.onPostExecute(result);
         this.fragment.get().updateProjectInfo(result);
-
     }
 }
