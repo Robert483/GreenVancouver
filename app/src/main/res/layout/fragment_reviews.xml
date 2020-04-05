@@ -211,7 +211,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/activity_margin"
             android:layout_marginVertical="@dimen/widget_margin"
-            android:text="@string/reviews_others"
+            android:text="@string/reviews_all"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2" />
 
         <TextView

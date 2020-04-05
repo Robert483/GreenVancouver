@@ -69,7 +69,7 @@
 
     <!-- For Reviews fragment -->
     <string name="reviews_yours">Your review</string>
-    <string name="reviews_others">Other reviews</string>
+    <string name="reviews_all">All reviews</string>
     <string name="reviews_reviewhint">Share your feedback with the project owner</string>
     <string name="reviews_noreviews">There are no reviews currently.\nBe the first to do so.</string>
     <string name="reviews_nouser">You haven\'t signed in yet.\nSign in to submit your review.</string>
