@@ -9,7 +9,7 @@ Many "green" initiatives exist in Vancouver, but citizens aren’t aware of all 
 This app allows users to browse through countless green projects in the app, bookmark their favourites, leave reviews, and apply to volunteer for certain projects, all in one convenient location.
 
 ## Prerequists
-Android 8.0 or later
+* Android 8.0 or later
 
 ## Using the App
 ### Features
@@ -20,7 +20,6 @@ This app allows users to bookmark favourite projects, rate and review favourite 
 #### Apply to Volunteer
 This app features voluntary job applications of Greenest City Projects to improve users' awareness and involvements.
 
-! Users can view projects or search for them in our map, bookmark their favourite ones, rate and review individual projects, and apply to volunteer for any project. 
 ## Built With
 * [Search API v1](https://help.opendatasoft.com/apis/ods-search-v1/#search-api-v1) - project data consumption
 * [Google Map](https://developers.google.com/maps/documentation/android-sdk/intro) - project geom parameters interpretation
