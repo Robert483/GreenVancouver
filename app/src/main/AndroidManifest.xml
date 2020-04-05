@@ -40,7 +40,9 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".ProjectInfoActivity" />
+        <activity
+            android:name=".ProjectInfoActivity"
+            android:label="Project Information" />
 
     </application>
 
