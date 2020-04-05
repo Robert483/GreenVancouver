@@ -1,5 +1,6 @@
 package com.parasinos.greenvancouver;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -86,6 +87,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     FirebaseDatabase.getInstance().getReference(path).setValue(newUser);
 
                                     finish();
+                                    Intent i = new Intent(SignUpActivity.this, MainActivity.class);
+                                    startActivity(i);
                                 } else {
                                     Toast.makeText(getApplicationContext(),
                                             "E-mail or password is wrong",
