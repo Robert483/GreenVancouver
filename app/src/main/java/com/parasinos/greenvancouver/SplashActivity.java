@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -15,20 +14,6 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-
-        findViewById(R.id.imgv_city).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SplashActivity.this, MainActivity.class));
-            }
-        });
-
-        findViewById(R.id.imgv_car).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SplashActivity.this, ProjectInfoActivity.class));
-            }
-        });
 
         findViewById(R.id.constrl_container).post(new Runnable() {
             @Override

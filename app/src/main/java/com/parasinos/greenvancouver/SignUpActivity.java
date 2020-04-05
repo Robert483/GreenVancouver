@@ -86,9 +86,8 @@ public class SignUpActivity extends AppCompatActivity {
                                     String path = String.join("/", "users", user_id, "basicInfo");
                                     FirebaseDatabase.getInstance().getReference(path).setValue(newUser);
 
+                                    setResult(1, new Intent());
                                     finish();
-                                    Intent i = new Intent(SignUpActivity.this, MainActivity.class);
-                                    startActivity(i);
                                 } else {
                                     Toast.makeText(getApplicationContext(),
                                             "E-mail or password is wrong",

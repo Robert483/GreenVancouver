@@ -64,7 +64,8 @@
             android:elevation="8dp"
             android:gravity="center"
             android:paddingStart="2dp"
-            android:paddingEnd="13dp" />
+            android:paddingEnd="13dp"
+            android:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnChangeMapType"

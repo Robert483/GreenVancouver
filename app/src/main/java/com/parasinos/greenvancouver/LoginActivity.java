@@ -45,7 +45,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -70,12 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(),
-                                    "Login successful!", Toast.LENGTH_LONG).show();
-
+                            setResult(1, new Intent());
                             finish();
-                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(i);
                         } else {
                             Toast.makeText(getApplicationContext(),
                                     "Login failed! Please try again later", Toast.LENGTH_LONG).show();

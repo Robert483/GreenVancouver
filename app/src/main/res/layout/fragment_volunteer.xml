@@ -46,15 +46,14 @@
             android:textSize="@dimen/bookmarks_project_title" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtv_volunteername"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="150dp"
-            android:id="@+id/txtv_volunteername"
             android:layout_marginBottom="@dimen/widget_margin">
 
             <com.google.android.material.textfield.TextInputEditText
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -65,15 +64,14 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtv_volunteerphone"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
-            android:id="@+id/txtv_volunteerphone"
             android:layout_height="wrap_content"
             android:layout_marginEnd="150dp"
             android:layout_marginBottom="@dimen/widget_margin">
 
             <com.google.android.material.textfield.TextInputEditText
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -84,14 +82,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtv_volunteeremail"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtv_volunteeremail"
             android:layout_marginEnd="150dp">
 
             <com.google.android.material.textfield.TextInputEditText
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -109,13 +106,12 @@
             android:text="@string/volunteer_message" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/txtv_volunteermessage"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

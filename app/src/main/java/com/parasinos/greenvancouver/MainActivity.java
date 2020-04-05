@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,6 +22,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.parasinos.greenvancouver.fragments.BookmarksFragmentDirections;
+import com.parasinos.greenvancouver.fragments.MapFragmentDirections;
+import com.parasinos.greenvancouver.fragments.MyReviewsFragmentDirections;
 import com.parasinos.greenvancouver.misc.CircleTransform;
 import com.parasinos.greenvancouver.models.User;
 import com.squareup.picasso.Picasso;
@@ -30,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import java.util.Objects;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -50,6 +53,23 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvEmail;
     private ImageView profilePic;
     private ImageButton editPic;
+    private NavController navController;
+
+    private void recreateFragment(int currentId) {
+        switch (currentId) {
+            case R.id.item_map:
+                navController.navigate(MapFragmentDirections.actionMapSelf());
+                break;
+            case R.id.item_bookmarks:
+                navController.navigate(BookmarksFragmentDirections.actionBookmarksSelf());
+                break;
+            case R.id.item_myreviews:
+                navController.navigate(MyReviewsFragmentDirections.actionMyreviewsSelf());
+                break;
+            default:
+                // Do nothing
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loginIntent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(loginIntent);
+                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivityForResult(loginIntent, 0);
             }
         });
 
@@ -79,15 +99,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Toast.makeText(getApplicationContext(), "LOGGED OUT", Toast.LENGTH_SHORT).show();
                 loginBtn.setVisibility(View.VISIBLE);
                 logoutBtn.setVisibility(View.GONE);
                 tvUsername.setText("");
                 tvEmail.setText("");
                 profilePic.setImageDrawable(null);
                 editPic.setVisibility(View.GONE);
-                finish();
-                startActivity(getIntent());
+                recreateFragment(Objects.requireNonNull(navController.getCurrentDestination()).getId());
             }
         });
 
@@ -100,11 +118,8 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavHostFragment navHost = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.fragcontainerv_host);
-        if (navHost == null) {
-            return;
-        }
 
-        NavController navController = navHost.getNavController();
+        navController = Objects.requireNonNull(navHost).getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
@@ -212,5 +227,15 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Logged in
+        if (resultCode == 1) {
+            recreateFragment(Objects.requireNonNull(navController.getCurrentDestination()).getId());
+        }
     }
 }

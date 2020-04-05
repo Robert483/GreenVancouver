@@ -6,16 +6,13 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.parasinos.greenvancouver.ProjectInfoActivity;
@@ -99,15 +96,15 @@ public class VolunteerFragment extends Fragment {
                         projectDetails.getShortDescription()));
 
                 subject = "Volunteer Application for " + projectDetails.getName();
-                body = "Hello, \nMy name is " + volName.getEditText().getText().toString() + " and I would love "
+                body = "Hello, \nMy name is " + Objects.requireNonNull(volName.getEditText()).getText().toString() + " and I would love "
                         + "an opportunity to help out with the " + projectDetails.getName()
-                        + " project." + "\nReasons/Qualifications:\n" + volMsg.getEditText().getText().toString();
+                        + " project." + "\nReasons/Qualifications:\n" + Objects.requireNonNull(volMsg.getEditText()).getText().toString();
 
-                if (!TextUtils.isEmpty(volEmail.getEditText().getText())) {
+                if (!TextUtils.isEmpty(Objects.requireNonNull(volEmail.getEditText()).getText())) {
                     contact += "\n" + volEmail.getEditText().getText().toString();
                 }
 
-                if (!TextUtils.isEmpty(volPhone.getEditText().getText())) {
+                if (!TextUtils.isEmpty(Objects.requireNonNull(volPhone.getEditText()).getText())) {
                     contact += "\n" + volPhone.getEditText().getText().toString();
                 }
 

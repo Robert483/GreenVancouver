@@ -79,6 +79,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
         Button bBookMark = v.findViewById(R.id.bookMark);
         bBookMark.setOnClickListener(this);
 
+        if (user != null) {
+            bBookMark.setVisibility(View.VISIBLE);
+        }
+
         // fragment EditText editor action handling
         EditText etQuery = v.findViewById(R.id.searchText);
         etQuery.setOnEditorActionListener(this);
@@ -109,7 +113,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 break;
             case R.id.bookMark:
                 if (!selectMapId.equals("")) {
-                    if (user != null && getActivity() != null) {
+                    if (user != null) {
                         for (int i = 0; i < markers.size(); i++) {
                             if (selectMapId.equals(mapIdList.get(i))) {
                                 Marker mark = markers.get(i);
@@ -126,7 +130,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                         Toast.makeText(getActivity(), "Bookmarked " + selectMapId,
                                 Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), "Could not add bookmark.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Please log in first.", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
