@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.parasinos.greenvancouver.ProjectInfoActivity;
 import com.parasinos.greenvancouver.R;
@@ -86,30 +89,30 @@ public class VolunteerFragment extends Fragment {
             if (v != null) {
                 TextView orgName = v.findViewById(R.id.txtv_orgname);
                 TextView orgDetails = v.findViewById(R.id.txtv_orgdetails);
-                EditText volEmail = v.findViewById(R.id.txtv_volunteeremail);
-                EditText volName = v.findViewById(R.id.txtv_volunteername);
-                EditText volPhone = v.findViewById(R.id.txtv_volunteerphone);
-                EditText volMsg = v.findViewById(R.id.txtv_volunteermessage);
+                TextInputLayout volEmail = v.findViewById(R.id.txtv_volunteeremail);
+                TextInputLayout volName = v.findViewById(R.id.txtv_volunteername);
+                TextInputLayout volPhone = v.findViewById(R.id.txtv_volunteerphone);
+                TextInputLayout volMsg = v.findViewById(R.id.txtv_volunteermessage);
 
                 orgName.setText(projectDetails.getName());
                 orgDetails.setText(String.join("\n", projectDetails.getCategory1(),
                         projectDetails.getShortDescription()));
 
                 subject = "Volunteer Application for " + projectDetails.getName();
-                body = "Hello, \nMy name is " + volName.getText().toString() + " and I would love "
+                body = "Hello, \nMy name is " + volName.getEditText().getText().toString() + " and I would love "
                         + "an opportunity to help out with the " + projectDetails.getName()
-                        + " project." + "\nReasons/Qualifications:\n" + volMsg.getText().toString();
+                        + " project." + "\nReasons/Qualifications:\n" + volMsg.getEditText().getText().toString();
 
-                if (!TextUtils.isEmpty(volEmail.getText())) {
-                    contact += "\n" + volEmail.getText().toString();
+                if (!TextUtils.isEmpty(volEmail.getEditText().getText())) {
+                    contact += "\n" + volEmail.getEditText().getText().toString();
                 }
 
-                if (!TextUtils.isEmpty(volPhone.getText())) {
-                    contact += "\n" + volPhone.getText().toString();
+                if (!TextUtils.isEmpty(volPhone.getEditText().getText())) {
+                    contact += "\n" + volPhone.getEditText().getText().toString();
                 }
 
                 body += contact;
-                body += "\n\nThank you,\n" + volName.getText().toString();
+                body += "\n\nThank you,\n" + volName.getEditText().getText().toString();
             }
         }
     }

@@ -109,7 +109,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                 break;
             case R.id.bookMark:
                 if (!selectMapId.equals("")) {
-                    if (user != null) {
+                    if (user != null && getActivity() != null) {
                         for (int i = 0; i < markers.size(); i++) {
                             if (selectMapId.equals(mapIdList.get(i))) {
                                 Marker mark = markers.get(i);
@@ -126,7 +126,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, GoogleM
                         Toast.makeText(getActivity(), "Bookmarked " + selectMapId,
                                 Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getActivity(), "Please log in first", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Could not add bookmark.", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;

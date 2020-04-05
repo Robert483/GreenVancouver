@@ -1,6 +1,7 @@
 package com.parasinos.greenvancouver.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -76,12 +77,13 @@ public class BookmarksFragment extends Fragment {
 
             @Override
             public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                int index = 0;
                 if (item.getItemId() == R.id.action_delete) {
                     for (Bookmark i : toDelete) {
                         adapter.remove(i);
                         databaseBookmarks.child(i.getMapid()).removeValue();
+                        adapter.notifyDataSetChanged();
                     }
-                    adapter.notifyDataSetChanged();
                     mode.finish();
                     return true;
                 }
@@ -110,8 +112,14 @@ public class BookmarksFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         toDelete = new ArrayList<>();
-        if (user != null) {
+        if (user != null && getActivity() != null) {
             databaseBookmarks.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -123,7 +131,11 @@ public class BookmarksFragment extends Fragment {
                         }
                     }
 
-                    if (!bookmarkList.isEmpty()) {
+                    if (!bookmarkList.isEmpty() && getActivity() != null) {
+                        for (Bookmark i : bookmarkList) {
+                            Log.d("Bookmarks", i.getMapid());
+                        }
+
                         adapter = new BookmarksAdapter(getActivity(), bookmarkList);
                         lvBookmarks.setAdapter(adapter);
                         txtvMessage.setVisibility(View.GONE);
