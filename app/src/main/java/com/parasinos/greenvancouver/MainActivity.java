@@ -86,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 tvEmail.setText("");
                 profilePic.setImageDrawable(null);
                 editPic.setVisibility(View.GONE);
+                finish();
+                startActivity(getIntent());
             }
         });
 
