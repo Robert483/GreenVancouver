@@ -45,7 +45,7 @@ public class SettingsFragment extends Fragment implements NumberPicker.OnValueCh
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://firebasestorage.googleapis.com/v0/b/greenvancouver.appspot.com/o/about_us.txt?alt=media&token=222f78a1-392f-4c1d-be3d-f8e02e0b24ef"));
+                        Uri.parse("https://firebasestorage.googleapis.com/v0/b/greenvancouver.appspot.com/o/about_us.txt?alt=media&token=ecaf5021-4f6e-4d27-84f6-fee275894cdc"));
                 startActivity(intent);
             }
         });
